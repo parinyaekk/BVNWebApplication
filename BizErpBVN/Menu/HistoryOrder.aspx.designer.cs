@@ -11,34 +11,43 @@ namespace BizErpBVN.Menu
 {
 
 
-    public partial class Confirm_Purchase
+    public partial class HistoryOrder
     {
 
         /// <summary>
-        /// GridView5 control.
+        /// txtSearh control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView GridView5;
+        protected global::System.Web.UI.WebControls.TextBox txtSearh;
 
         /// <summary>
-        /// btnSaves control.
+        /// btnSearch control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton btnSaves;
+        protected global::System.Web.UI.WebControls.LinkButton btnSearch;
 
         /// <summary>
-        /// LinkButton1 control.
+        /// ButtonClear control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton LinkButton1;
+        protected global::System.Web.UI.WebControls.LinkButton ButtonClear;
+
+        /// <summary>
+        /// GridView7 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView GridView7;
     }
 }
