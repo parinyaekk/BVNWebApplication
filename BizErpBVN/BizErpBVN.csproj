@@ -365,7 +365,6 @@
     </Compile>
     <Compile Include="Models\DBCompany.cs" />
     <Compile Include="Models\DBSys.cs" />
-    <Compile Include="Models\Insert_mt_cust.cs" />
     <Compile Include="Models\SysUtils.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service1.svc.cs">

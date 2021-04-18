@@ -13,7 +13,7 @@ namespace BizErpBVN.Menu
 {
     public partial class WebUserControl2 : System.Web.UI.UserControl
     {
-        NpgsqlConnection conn = new NpgsqlConnection("Server = 27.254.173.130; Port = 5432; Database = bz_boonvanit; User Id = postgres; Password = bizcorp@2021;");
+        NpgsqlConnection conn = DBCompany.gCnnObj;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!Page.IsPostBack)

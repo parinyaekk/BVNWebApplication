@@ -34,7 +34,7 @@ namespace BizErpBVN.Menu
 
         protected void LoadDepartMent()
         {
-            NpgsqlCommand com = new NpgsqlCommand("select *from mt_pymt", conn);
+            NpgsqlCommand com = new NpgsqlCommand("select mt_name , mt_code from mt_pymt", conn);
             NpgsqlDataAdapter da = new NpgsqlDataAdapter(com);
             DataSet ds = new DataSet();
             da.Fill(ds);  // fill dataset  
@@ -62,7 +62,7 @@ namespace BizErpBVN.Menu
 
         protected void Transportation()
         {
-            NpgsqlCommand com = new NpgsqlCommand("select *from en_saledelry_type", conn);
+            NpgsqlCommand com = new NpgsqlCommand("select en_name , en_code from en_saledelry_type", conn);
             NpgsqlDataAdapter da = new NpgsqlDataAdapter(com);
             DataSet ds = new DataSet();
             da.Fill(ds);  // fill dataset  
@@ -76,7 +76,7 @@ namespace BizErpBVN.Menu
 
         protected void Employee()
         {
-            NpgsqlCommand com = new NpgsqlCommand("select *from mt_emp", conn);
+            NpgsqlCommand com = new NpgsqlCommand("select mt_name,mt_code from mt_emp", conn);
             NpgsqlDataAdapter da = new NpgsqlDataAdapter(com);
             DataSet ds = new DataSet();
             da.Fill(ds);  // fill dataset  
@@ -90,7 +90,7 @@ namespace BizErpBVN.Menu
 
         protected void LoadTaxcalc()
         {
-            NpgsqlCommand com = new NpgsqlCommand("select * from en_taxcalc", conn);
+            NpgsqlCommand com = new NpgsqlCommand("select en_name ,en_code from en_taxcalc", conn);
             NpgsqlDataAdapter da = new NpgsqlDataAdapter(com);
             DataSet ds = new DataSet();
             da.Fill(ds);  // fill dataset  
@@ -104,7 +104,7 @@ namespace BizErpBVN.Menu
 
         protected void LoadStatus()
         {
-            NpgsqlCommand com = new NpgsqlCommand("select * from en_txn_status", conn);
+            NpgsqlCommand com = new NpgsqlCommand("select en_name, en_code from en_txn_status", conn);
             NpgsqlDataAdapter da = new NpgsqlDataAdapter(com);
             DataSet ds = new DataSet();
             da.Fill(ds);  // fill dataset  

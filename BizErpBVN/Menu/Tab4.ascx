@@ -54,7 +54,7 @@
 <script type="text/javascript">  
     function ConfirmCancel() {
     
-            var selectedvalue = confirm("Do you want to save data?");
+            var selectedvalue = confirm("คุณต้องการอนุมัติรายการใช่หรือไม่ ?");
             if (selectedvalue) {
                 document.getElementById('<%=txtconformmessageValue.ClientID %>').value = "Yes";
               } else {
@@ -139,6 +139,5 @@
             </asp:GridView>
         </div>
     <asp:HiddenField ID="txtconformmessageValue" runat="server" />
-
     </form>
 </body>
