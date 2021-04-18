@@ -85,7 +85,7 @@ namespace BizErpBVN.Menu
         {
             LinkButton btn = (LinkButton)sender;
             var oid = btn.CommandArgument.ToString();
-            NpgsqlCommand cmd = new NpgsqlCommand("SELECT TO_CHAR(txn_date, 'YYYY-MM-DD') as txn_date,td.txn_memo,td.depos_amt, mac.mt_name,mac.mt_code FROM txn_so_depos td inner join mt_acct_cashin mac on td.acct_cashin_oid = mac.oid WHERE td.oid = '" + oid + "' order by txn_date", conn);
+            NpgsqlCommand cmd = new NpgsqlCommand("SELECT TO_CHAR(txn_date, 'YYYY-MM-DD') as txn_date,td.txn_memo,cast(td.depos_amt as decimal(10,2)) AS depos_amt, mac.mt_name,mac.mt_code FROM txn_so_depos td inner join mt_acct_cashin mac on td.acct_cashin_oid = mac.oid WHERE td.oid = '" + oid + "' order by txn_date", conn);
             NpgsqlDataAdapter da = new NpgsqlDataAdapter(cmd);
             DataSet ds = new DataSet();
             da.Fill(ds);

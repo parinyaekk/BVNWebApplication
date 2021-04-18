@@ -94,7 +94,7 @@
                 <div class="row">
                     <div class="col-sm-12">
                         <asp:LinkButton ID="LinkButton2" runat="server" CssClass="btn btn-info form-control" Style="height: 38px; width: 120px;">
-             <i class="glyphicon glyphicon-plus"></i> เพิ่ม</asp:LinkButton>
+             <i class="glyphicon glyphicon-plus"></i> Update ข้อมูล</asp:LinkButton>
                         </div>
                 </div>
             </div>

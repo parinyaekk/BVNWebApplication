@@ -655,3 +655,4 @@ C:\Users\sakawrat\OneDrive\เดสก์ท็อป\BVNWebApplication\BizErpB
 C:\Users\sakawrat\OneDrive\เดสก์ท็อป\BVNWebApplication\BizErpBVN\bin\Microsoft.AI.Web.xml
 C:\Users\sakawrat\OneDrive\เดสก์ท็อป\BVNWebApplication\BizErpBVN\obj\Debug\BizErpBVN.dll
 C:\Users\sakawrat\OneDrive\เดสก์ท็อป\BVNWebApplication\BizErpBVN\obj\Debug\BizErpBVN.pdb
+C:\Users\sakawrat\OneDrive\เดสก์ท็อป\BVNWebApplication\BizErpBVN\obj\Debug\BizErpBVN.csprojResolveAssemblyReference.cache
