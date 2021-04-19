@@ -722,7 +722,36 @@ namespace BizErpBVN.Menu
 
         protected void ButtonAdd_Click(object sender, EventArgs e)
         {
+            //contname 0
+            //street 1
+            //addr1 2
+            //phn1 3
+            //phn2 4
+            //prov_code 5
+            //amphur_code 6
+            //locat_code 7
+            //zipcode 8
+            //email 9
+            //fax1 10
+            //fax2 11
             DataTable table = Session["dttable"] as DataTable;
+            //foreach (GridViewRow gvr in GridViewTdd1.Rows)
+            //{
+            //    DataRow dr = dt.NewRow();
+            //    dr["contname"] = gvr.Cells[0].Text;
+            //    dr["street"] = gvr.Cells[1].Text;
+            //    dr["addr1"] = gvr.Cells[2].Text;
+            //    dr["phn1"] = gvr.Cells[3].Text;
+            //    dr["phn2"] = gvr.Cells[4].Text;
+            //    dr["prov_code"] = gvr.Cells[5].Text;
+            //    dr["amphur_code"] = gvr.Cells[6].Text;
+            //    dr["locat_code"] = gvr.Cells[7].Text;
+            //    dr["zipcode"] = gvr.Cells[8].Text;
+            //    dr["email"] = gvr.Cells[9].Text;
+            //    dr["fax1"] = gvr.Cells[10].Text;
+            //    dr["fax2"] = gvr.Cells[11].Text;
+            //    dt.Rows.Add(dr);
+            //}
             DataRow drNew = table.NewRow();
             drNew["contname"] = TextBox2.Text;
             drNew["street"] = txtAddress.Text;

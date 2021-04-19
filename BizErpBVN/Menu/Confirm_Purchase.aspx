@@ -1,48 +1,47 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Menu/MainMenu.Master" AutoEventWireup="true" CodeBehind="Confirm_Purchase.aspx.cs" Inherits="BizErpBVN.Menu.Confirm_Purchase" %>
-
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-    <style type="text/css">
-        table {
-            max-width: none;
-            background-color: transparent;
-            border-collapse: collapse;
-            border-spacing: 0;
-        }
+<style type="text/css">
+    table {
+        max-width: none;
+        background-color: transparent;
+        border-collapse: collapse;
+        border-spacing: 0;
+    }
 
-        .table {
+    .table {
+        width: auto;
+        height: auto;
+        margin-bottom: 20px;
+    }
+
+        .table th, .table td {
             width: auto;
             height: auto;
-            margin-bottom: 20px;
+            padding: 8px;
+            line-height: 20px;
+            text-align: left;
+            vertical-align: top;
+            border-top: 1px solid #dddddd;
         }
 
-            .table th, .table td {
-                width: auto;
-                height: auto;
-                padding: 8px;
-                line-height: 20px;
-                text-align: left;
-                vertical-align: top;
-                border-top: 1px solid #dddddd;
-            }
-
-            .table th {
-                width: auto;
-                height: auto;
-                font-weight: bold;
-            }
-
-            .table thead th {
-                vertical-align: bottom;
-            }
-    </style>
-    <script>
-        function closeWin() {
-            window.close();
+        .table th {
+            width: auto;
+            height: auto;
+            font-weight: bold;
         }
-    </script>
+
+        .table thead th {
+            vertical-align: bottom;
+        }
+</style>
+<script>
+    function closeWin() {
+        window.close();
+    }
+</script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <div id="tab2_page1" class="col-md-12 text-center" style="padding-left: 10%">
+        <div id="tab2_page1" class="col-md-12 text-center" style="padding-left: 10%">
 
         <div class="form-group">
             <label for="title" class="col-md-2 control-label">วันที่</label>
@@ -93,8 +92,8 @@
             <div class="col-md-4">
                 <div class="row">
                     <div class="col-sm-12">
-                        <asp:LinkButton ID="LinkButton2" runat="server" CssClass="btn btn-info form-control" Style="height: 38px; width: 120px;">
-                          <i class="glyphicon glyphicon-plus"></i> Update ข้อมูล</asp:LinkButton>
+                        <asp:LinkButton ID="LinkButton2" runat="server" OnClick="AddData" CssClass="btn btn-info form-control" Style="height: 38px; width: 120px;">
+             <i class="glyphicon glyphicon-plus"></i> Update ข้อมูล</asp:LinkButton>
                         </div>
                 </div>
             </div>
@@ -112,8 +111,12 @@
                 <asp:BoundField DataField="depos_amt" HeaderText="จำนวนเงิน" />
                 <asp:BoundField DataField="mt_name" HeaderText="บัญชีโอนเงิน" />
                 <asp:BoundField DataField="txn_memo" HeaderText="คำอธิบายรายการ" />
-               <asp:ImageField DataImageUrlField="img_file" HeaderText="Image"></asp:ImageField> 
-                
+               <%--<asp:ImageField  DataImageUrlField="img_file" HeaderText="Image"></asp:ImageField>--%> 
+                <asp:TemplateField ShowHeader="False" HeaderStyle-Width="130px" HeaderText="รูปภาพ">
+                    <ItemTemplate>
+                            <img src='data:image/jpg;base64,<%# Eval("img_value") != System.DBNull.Value ? Convert.ToBase64String((byte[])Eval("img_value")) : null %>' alt="image" height="100" width="200"/>
+                    </ItemTemplate>
+                </asp:TemplateField>
                 <asp:TemplateField ShowHeader="False" HeaderStyle-Width="130px">
                     <ItemTemplate>
                         <asp:LinkButton ID="btnSaves" runat="server" CssClass="btn btn-labeled btn-warning" Style="height: 45px; width: 100px;" CommandArgument='<%#Eval("oid") %>' OnClick="btnSaves_Click">

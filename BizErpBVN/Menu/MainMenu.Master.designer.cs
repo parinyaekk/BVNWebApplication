@@ -51,6 +51,15 @@ namespace BizErpBVN.Menu
         protected global::System.Web.UI.HtmlControls.HtmlAnchor agotoOrder;
 
         /// <summary>
+        /// agotoHistory control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor agotoHistory;
+
+        /// <summary>
         /// agotoConfirm control.
         /// </summary>
         /// <remarks>

@@ -10,7 +10,7 @@ using System.Web.UI.WebControls;
 
 namespace BizErpBVN.Menu
 {
-    public partial class Home : System.Web.UI.Page
+    public partial class HistoryOrder : System.Web.UI.Page
     {
         NpgsqlConnection conn = DBCompany.gCnnObj;
         protected void Page_Load(object sender, EventArgs e)
@@ -19,65 +19,49 @@ namespace BizErpBVN.Menu
             {
                 Response.Redirect("../");
             }
-
             if (!Page.IsPostBack)
             {
                 this.refreshdata1();
             }
-
         }
-
         protected void GridView1_RowCommand(object sender, GridViewCommandEventArgs e)
         {
             var arr = e.CommandArgument.ToString().Split(';');
             conn.Close();
-            if (arr[0] == "delete" || arr[0] == "edit")
+            if (arr[0] == "edit")
             {
                 GridViewRow row = (GridViewRow)(((LinkButton)e.CommandSource).NamingContainer);
 
-                if (arr[0] == "delete")
-                {
-                    string confirmValue = Request.Form["confirm_value"];
-                    if (confirmValue == "Yes")
-                    {
-                        Guid ggcustid = Guid.Parse(arr[1].ToString());
-                        NpgsqlCommand cmd = new NpgsqlCommand(@"DELETE FROM mt_cust WHERE oid = @oid", conn);
-                        conn.Open();
-                        cmd.Parameters.AddWithValue("@oid", ggcustid); //1
-                        cmd.ExecuteNonQuery();
-                        conn.Close();
-
-                        ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Delete Record Customer Successfully.')", true);
-                        //Response.Redirect("Home.aspx");
-                        refreshdata1();
-                    }
-                }
                 if (arr[0] == "edit")
                 {
-                    Response.Redirect("EditCustomer.aspx?ggid=" + arr[1].ToString());
+                    Response.Redirect("EditOrder.aspx?ggid=" + arr[1].ToString());
                 }
             }
         }
 
         protected void refreshdata1()
         {
-            NpgsqlCommand cmd = new NpgsqlCommand("SELECT oid, mt_code, mt_name FROM mt_cust where salerep_oid::text = @salerep_oid", conn);
-            cmd.Parameters.AddWithValue("@salerep_oid", DBCompany.gSaleRepOid);
+            //NpgsqlCommand cmd = new NpgsqlCommand("SELECT oid, mt_code, mt_name FROM mt_cust where oid::text = @oid", conn);
+            //cmd.Parameters.AddWithValue("@oid", DBSys.gUsrOid
+            DateTime date = DateTime.Now.AddYears(-3);
+            //NpgsqlCommand cmd = new NpgsqlCommand("SELECT oid, txn_date, txn_num, mt_name as cust_name, txn_total, txn_status_name FROM qtxn_so WHERE txn_date BETWEEN @pDATE1 AND @pDATE2 ORDER BY txn_date DESC,txn_num DESC", conn);
+            NpgsqlCommand cmd = new NpgsqlCommand("SELECT * FROM qtxn_so where salerep_oid = @salerep_oid and (txn_date >= Date(@pDATE1) and txn_date <= Date(@pDATE2))", conn);
+            cmd.Parameters.AddWithValue("@salerep_oid", Guid.Parse(DBCompany.gSaleRepOid));
+            cmd.Parameters.AddWithValue("@pDATE1", date.ToString("yyyy/MM/dd"));
+            cmd.Parameters.AddWithValue("@pDATE2", DateTime.Now.ToString("yyyy/MM/dd"));
+
             NpgsqlDataAdapter sda = new NpgsqlDataAdapter(cmd);
             DataSet ds = new DataSet();
 
-            if (ds != null)
-            {
-                sda.Fill(ds);
-                GridView1.DataSource = ds;
-                GridView1.DataBind();
-            }
-            return;
+            sda.Fill(ds);
+            GridView7.DataSource = ds;
+            GridView7.DataBind();
         }
+
 
         protected void GridView1_PageIndexChanged(object sender, GridViewPageEventArgs e)
         {
-            GridView1.PageIndex = e.NewPageIndex;
+            GridView7.PageIndex = e.NewPageIndex;
             this.refreshdata1();
         }
 
@@ -91,25 +75,20 @@ namespace BizErpBVN.Menu
         //ค้นหาข้อมูล
         protected void btnSearch_Click(object sender, EventArgs e)
         {
-            NpgsqlCommand cmdSearch = new NpgsqlCommand("Select oid, mt_code, mt_name  from mt_cust where mt_code like'%" + txtSearh.Text.Trim() + "%' or mt_name like'%" + txtSearh.Text.Trim() + "%' ", conn);
+            NpgsqlCommand cmdSearch = new NpgsqlCommand("Select oid, mt_code, mt_name  from mt_cust where mt_code= '" + txtSearh.Text + "' or mt_name ='" + txtSearh.Text + "' ", conn);
             DataTable dt = new DataTable();
             using (NpgsqlDataAdapter sda = new NpgsqlDataAdapter(cmdSearch))
             {
                 if (txtSearh.Text != "")
                 {
                     sda.Fill(dt);
-                    GridView1.DataSource = dt;
-                    GridView1.DataBind();
-
-
+                    GridView7.DataSource = dt;
+                    GridView7.DataBind();
                 }
                 else
                 {
-
                     refreshdata1();
-
                 }
-
             }
         }
 
@@ -117,10 +96,12 @@ namespace BizErpBVN.Menu
         {
             try
             {
-
                 using (var cmd = conn.CreateCommand())
                 {
-
+                    //conn.Open();
+                    //cmd.CommandText = "DELETE FROM excludes WHERE word = @word";
+                    //cmd.Parameters.AddWithValue("@word", word);
+                    //cmd.ExecuteNonQuery();
                 }
             }
 
@@ -130,5 +111,6 @@ namespace BizErpBVN.Menu
                 DBSys.gErrorMsg = ex.Message;
             }
         }
+
     }
 }

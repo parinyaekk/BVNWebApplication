@@ -319,6 +319,7 @@
                     <div class="row">
                         <div class="col-sm-12">
                             <asp:TextBox ID="txtMail2" runat="server" class="form-control"></asp:TextBox>
+
                         </div>
                     </div>
                 </div>

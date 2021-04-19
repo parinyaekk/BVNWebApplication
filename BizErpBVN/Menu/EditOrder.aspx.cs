@@ -3,7 +3,6 @@ using Npgsql;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -11,7 +10,7 @@ using System.Web.UI.WebControls;
 
 namespace BizErpBVN.Menu
 {
-    public partial class Order : System.Web.UI.Page
+    public partial class EditOrder : System.Web.UI.Page
     {
         NpgsqlConnection conn = DBCompany.gCnnObj;
         protected void Page_Load(object sender, EventArgs e)
@@ -23,6 +22,9 @@ namespace BizErpBVN.Menu
 
             if (!Page.IsPostBack)
             {
+                Guid GGID = Guid.Parse(Request.QueryString["ggid"]);
+                cbbStatus.Enabled = false;
+                cbbStatus.CssClass = "form-control";
                 this.LoadDepartMent();
                 this.CustomerGroup();
                 this.Transportation();
@@ -30,13 +32,49 @@ namespace BizErpBVN.Menu
                 this.LoadTaxcalc();
                 this.refreshdataT2();
                 this.LoadStatus();
-                this.LoadItem();
+                getEditData(GGID);
             }
+        }
+
+        protected void getEditData(Guid ggid)
+        {
+            try
+            {
+                NpgsqlCommand sqCommand = new NpgsqlCommand("SELECT * FROM qtxn_so WHERE oid = @oid", conn);
+                sqCommand.Parameters.AddWithValue("@oid", ggid);
+                NpgsqlDataAdapter da = new NpgsqlDataAdapter(sqCommand);
+                DataSet ds = new DataSet();
+                da.Fill(ds);
+                if (ds.Tables[0].Rows.Count > 0)
+                {
+                    txn_num.Text = ds.Tables[0].Rows[0]["txn_num"].ToString();
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
+        protected void gotoHistory(Object sender, EventArgs e)
+        {
+            Response.Redirect("HistoryOrder.aspx");
+        }
+        protected void gotoOrder(Object sender, EventArgs e)
+        {
+            Response.Redirect("Order.aspx");
+        }
+        protected void Cancel(Object sender, EventArgs e)
+        {
+            ScriptManager.RegisterStartupScript(Page, this.GetType(), "Action", string.Format("alert('{1}', '{0}');", "Cancel", Title), true);
+        }
+        protected void Confirm(Object sender, EventArgs e)
+        {
+            ScriptManager.RegisterStartupScript(Page, this.GetType(), "Action", string.Format("alert('{1}', '{0}');", "Confirm", Title), true);
         }
 
         protected void LoadDepartMent()
         {
-            NpgsqlCommand com = new NpgsqlCommand("select mt_name , mt_code from mt_pymt", conn);
+            NpgsqlCommand com = new NpgsqlCommand("select *from mt_pymt", conn);
             NpgsqlDataAdapter da = new NpgsqlDataAdapter(com);
             DataSet ds = new DataSet();
             da.Fill(ds);  // fill dataset  
@@ -50,21 +88,21 @@ namespace BizErpBVN.Menu
 
         protected void CustomerGroup()
         {
-            NpgsqlCommand com = new NpgsqlCommand("select mt_name,mt_code from mt_cust", conn);
+            NpgsqlCommand com = new NpgsqlCommand("select *from mt_custgrp", conn);
             NpgsqlDataAdapter da = new NpgsqlDataAdapter(com);
             DataSet ds = new DataSet();
             da.Fill(ds);  // fill dataset  
 
-            cbbCustgrp.DataTextField = ds.Tables[0].Columns["mt_name"].ToString();
-            cbbCustgrp.DataValueField = ds.Tables[0].Columns["mt_code"].ToString();
-            cbbCustgrp.DataSource = ds.Tables[0];
-            cbbCustgrp.DataBind();
-            cbbCustgrp.Items.Insert(0, "----------เลือก----------");
+            mt_custgrp.DataTextField = ds.Tables[0].Columns["mt_name"].ToString();
+            mt_custgrp.DataValueField = ds.Tables[0].Columns["mt_code"].ToString();
+            mt_custgrp.DataSource = ds.Tables[0];
+            mt_custgrp.DataBind();
+            mt_custgrp.Items.Insert(0, "----------เลือก----------");
         }
 
         protected void Transportation()
         {
-            NpgsqlCommand com = new NpgsqlCommand("select en_name , en_code from en_saledelry_type", conn);
+            NpgsqlCommand com = new NpgsqlCommand("select *from en_saledelry_type", conn);
             NpgsqlDataAdapter da = new NpgsqlDataAdapter(com);
             DataSet ds = new DataSet();
             da.Fill(ds);  // fill dataset  
@@ -78,7 +116,7 @@ namespace BizErpBVN.Menu
 
         protected void Employee()
         {
-            NpgsqlCommand com = new NpgsqlCommand("select mt_name,mt_code from mt_emp", conn);
+            NpgsqlCommand com = new NpgsqlCommand("select *from mt_emp", conn);
             NpgsqlDataAdapter da = new NpgsqlDataAdapter(com);
             DataSet ds = new DataSet();
             da.Fill(ds);  // fill dataset  
@@ -92,7 +130,7 @@ namespace BizErpBVN.Menu
 
         protected void LoadTaxcalc()
         {
-            NpgsqlCommand com = new NpgsqlCommand("select en_name ,en_code from en_taxcalc", conn);
+            NpgsqlCommand com = new NpgsqlCommand("select * from en_taxcalc", conn);
             NpgsqlDataAdapter da = new NpgsqlDataAdapter(com);
             DataSet ds = new DataSet();
             da.Fill(ds);  // fill dataset  
@@ -102,11 +140,14 @@ namespace BizErpBVN.Menu
             cbbTaxcalc.DataSource = ds.Tables[0];
             cbbTaxcalc.DataBind();
             cbbTaxcalc.Items.Insert(0, "----------เลือก----------");
+            cbbTaxcalc.SelectedValue = "TAXINC";
+            cbbTaxcalc.Enabled = false;
+            cbbTaxcalc.CssClass = "form-control";
         }
 
         protected void LoadStatus()
         {
-            NpgsqlCommand com = new NpgsqlCommand("select en_name, en_code from en_txn_status", conn);
+            NpgsqlCommand com = new NpgsqlCommand("select * from en_txn_status", conn);
             NpgsqlDataAdapter da = new NpgsqlDataAdapter(com);
             DataSet ds = new DataSet();
             da.Fill(ds);  // fill dataset  
@@ -135,60 +176,5 @@ namespace BizErpBVN.Menu
             GridView6.PageIndex = e.NewPageIndex;
             this.refreshdataT2();
         }
-
-        public void LoadItem()
-        {
-            try
-            {
-                NpgsqlCommand sqCommand = new NpgsqlCommand("SELECT mt_name,mt_code FROM mt_item ORDER BY mt_name", conn);
-                NpgsqlDataAdapter da = new NpgsqlDataAdapter(sqCommand);
-                DataSet ds = new DataSet();
-
-                da.Fill(ds);
-                cbbItem.DataTextField = ds.Tables[0].Columns["mt_name"].ToString();
-                cbbItem.DataValueField = ds.Tables[0].Columns["mt_code"].ToString();
-
-                cbbItem.DataSource = ds.Tables[0];
-                cbbItem.DataBind();
-                cbbItem.Items.Insert(0, new ListItem("----------เลือก----------"));
-            }
-            catch (Exception ex)
-            {
-                Response.Write(ex.Message);
-            }
-        }
-
-
-        public void GetItem()
-        {
-            try
-            {
-       
-                NpgsqlCommand cmd = new NpgsqlCommand("select * from  txn_so_line tl inner join mt_item mi on tl.line_item_oid = mi.oid   where mi.mt_code = @mt_code", conn);
-                cmd.Parameters.AddWithValue("@mt_code", cbbItem.SelectedValue);
-                NpgsqlDataAdapter da = new NpgsqlDataAdapter(cmd);
-                DataSet ds = new DataSet();
-                da.Fill(ds);
-                txtItem_dest.Value = ds.Tables[0].Rows[0]["line_item_dest"].ToString();
-                txtPrice.Text = ds.Tables[0].Rows[0]["line_price"].ToString();
-                txtDisc1_price.Text = ds.Tables[0].Rows[0]["line_disc1_price"].ToString();
-                txtUnt_oid.Text = ds.Tables[0].Columns["line_unt_oid"].ToString();
-                txtNetprice_amt.Text = ds.Tables[0].Columns["mt_code"].ToString();
-                txtMemo.Value = ds.Tables[0].Columns["line_memo"].ToString();
-
-            }
-            catch (Exception ex)
-            {
-
-                Response.Write(ex.Message);
-            }
-        }
-
-
-        protected void cbbItem_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            GetItem();
-        }
-
     }
 }

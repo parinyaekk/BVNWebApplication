@@ -35,9 +35,34 @@ namespace BizErpBVN.Menu
                 createDataTable();
 
                 DataRow drNew = dt.NewRow();
+                //drNew["contname"] = null;
+                //drNew["street"] = null;
+                //drNew["phn"] = null;
+                //drNew["prov_code"] = null;
+                //drNew["prov_txt"] = null;
+                //drNew["amphur_code"] = null;
+                //drNew["amphur_txt"] = null;
+                //drNew["locat_code"] = null;
+                //drNew["locat_txt"] = null;
+                //drNew["zipcode"] = null;
+                //drNew["email"] = null;
+                //drNew["fax"] = null;
                 dt.Rows.Add(drNew);
+                //this.GridViewTdd1.DataSource = dt;
+                //GridViewTdd1.DataBind();
                 Session["dttable"] = dt;
-
+                //DTable.Columns.Add("contname", System.Type.GetType("System.String"));
+                //DTable.Columns.Add("street", System.Type.GetType("System.String"));
+                //DTable.Columns.Add("addr1", System.Type.GetType("System.String"));
+                //DTable.Columns.Add("phn1", System.Type.GetType("System.String"));
+                //DTable.Columns.Add("phn2", System.Type.GetType("System.String"));
+                //DTable.Columns.Add("prov_code", System.Type.GetType("System.String"));
+                //DTable.Columns.Add("amphur_code", System.Type.GetType("System.String"));
+                //DTable.Columns.Add("locat_code", System.Type.GetType("System.String"));
+                //DTable.Columns.Add("zipcode", System.Type.GetType("System.String"));
+                //DTable.Columns.Add("email", System.Type.GetType("System.String"));
+                //DTable.Columns.Add("fax1", System.Type.GetType("System.String"));
+                //DTable.Columns.Add("fax2", System.Type.GetType("System.String"));
             }
         }
 

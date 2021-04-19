@@ -45,7 +45,6 @@
                 </div>
 
             </div>
-                <br />
             <div class="col-md-12 text-center">
                 <div class="form-group">
                     <label for="description" class="col-md-2 control-label">รหัสลูกค้า</label>
@@ -67,12 +66,10 @@
                 </div>
             </div>
             <br />
-              <br />
             <hr />
             <h2>รายละเอียด</h2>
             <hr />
             <br />
-              <br />
             <div class="form-group">
                 <label for="title" class="col-md-2 control-label">ประเภทองค์กร</label>
                 <div class="col-md-4">
@@ -163,12 +160,9 @@
                 </div>
             </div>
             <br />
-                <br />
             <hr />
             <h2>ที่อยู่หลัก</h2>
             <hr />
-                        <br />
-                        <br />
             <div class="form-group">
                 <label for="title" class="col-md-2 control-label">ชื่อผู้ติดต่อ</label>
                 <div class="col-md-4">
@@ -249,8 +243,6 @@
             <hr />
             <h2>ที่อยู่อื่นๆ</h2>
             <hr />
-            <br />
-                        <br />
             <div class="form-group">
                 <label for="title" class="col-md-2 control-label">ชื่อผู้ติดต่อ</label>
                 <div class="col-md-4">
@@ -330,6 +322,14 @@
                     <div class="row">
                         <div class="col-sm-12">
                             <asp:TextBox ID="txtMail2" runat="server" class="form-control"></asp:TextBox>
+<%--                            <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server"
+                                ControlToValidate="txtMail2" ErrorMessage="Email is required"
+                                SetFocusOnError="True"></asp:RequiredFieldValidator>
+                            <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server"
+                                ErrorMessage="Invalid Email" ControlToValidate="txtMail2"
+                                SetFocusOnError="True"
+                                ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*">
+                            </asp:RegularExpressionValidator>--%>
                         </div>
                     </div>
                 </div>

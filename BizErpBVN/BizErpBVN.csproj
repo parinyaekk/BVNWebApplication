@@ -56,6 +56,7 @@
     <Reference Include="Npgsql, Version=4.1.8.0, Culture=neutral, PublicKeyToken=5d8b90d52f46fda7, processorArchitecture=MSIL">
       <HintPath>..\packages\Npgsql.4.1.8\lib\net461\Npgsql.dll</HintPath>
     </Reference>
+    <Reference Include="PresentationFramework" />
     <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Buffers.4.5.0\lib\netstandard1.1\System.Buffers.dll</HintPath>
     </Reference>
@@ -90,6 +91,7 @@
       <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net461\System.ValueTuple.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
@@ -177,14 +179,12 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\action_delete.gif" />
-    <Content Include="Images\cancel.gif" />
-    <Content Include="Images\edit_pen.gif" />
-    <Content Include="Images\grant.gif" />
-    <Content Include="Images\green-ok.gif" />
+    <Content Include="Images\edit.png" />
     <Content Include="Menu\Confirm_Purchase.aspx" />
     <Content Include="Menu\EditCustomer.aspx" />
     <Content Include="Menu\AddCustomer.aspx" />
+    <Content Include="Menu\HistoryOrder.aspx" />
+    <Content Include="Menu\EditOrder.aspx" />
     <Content Include="Menu\Order.aspx" />
     <Content Include="Menu\Home.aspx" />
     <Content Include="Menu\Tab2.ascx" />
@@ -286,6 +286,20 @@
     <Compile Include="Menu\AddCustomer.aspx.designer.cs">
       <DependentUpon>AddCustomer.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Menu\HistoryOrder.aspx.cs">
+      <DependentUpon>HistoryOrder.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Menu\HistoryOrder.aspx.designer.cs">
+      <DependentUpon>HistoryOrder.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Menu\EditOrder.aspx.cs">
+      <DependentUpon>EditOrder.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Menu\EditOrder.aspx.designer.cs">
+      <DependentUpon>EditOrder.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Menu\Order.aspx.cs">
       <DependentUpon>Order.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -365,6 +379,7 @@
     </Compile>
     <Compile Include="Models\DBCompany.cs" />
     <Compile Include="Models\DBSys.cs" />
+    <Compile Include="Models\Insert_mt_cust.cs" />
     <Compile Include="Models\SysUtils.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service1.svc.cs">

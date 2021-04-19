@@ -19,12 +19,17 @@ namespace BizErpBVN.Menu
             agotoHome.ServerClick += new EventHandler(gotoHome);
             agotoApprove.ServerClick += new EventHandler(gotoApprove);
             agotoOrder.ServerClick += new EventHandler(gotoOrder);
+            agotoHistory.ServerClick += new EventHandler(gotoHistory);
             agotoConfirm.ServerClick += new EventHandler(gotoConfirm);
         }
 
         protected void gotoApprove(Object sender, EventArgs e)
         {
             Response.Redirect("Approve_Purchase.aspx");
+        }
+        protected void gotoHistory(Object sender, EventArgs e)
+        {
+            Response.Redirect("HistoryOrder.aspx");
         }
         protected void gotoOrder(Object sender, EventArgs e)
         {

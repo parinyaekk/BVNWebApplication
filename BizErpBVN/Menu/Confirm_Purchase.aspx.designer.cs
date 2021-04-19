@@ -7,11 +7,13 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BizErpBVN.Menu {
-    
-    
-    public partial class Confirm_Purchase {
-        
+namespace BizErpBVN.Menu
+{
+
+
+    public partial class Confirm_Purchase
+    {
+
         /// <summary>
         /// txtDate control.
         /// </summary>
@@ -20,7 +22,7 @@ namespace BizErpBVN.Menu {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl txtDate;
-        
+
         /// <summary>
         /// txtDepos_amt control.
         /// </summary>
@@ -29,7 +31,7 @@ namespace BizErpBVN.Menu {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtDepos_amt;
-        
+
         /// <summary>
         /// cbbAcct_cashin control.
         /// </summary>
@@ -38,7 +40,7 @@ namespace BizErpBVN.Menu {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList cbbAcct_cashin;
-        
+
         /// <summary>
         /// txtTxn_memo control.
         /// </summary>
@@ -47,7 +49,7 @@ namespace BizErpBVN.Menu {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlTextArea txtTxn_memo;
-        
+
         /// <summary>
         /// fileupload control.
         /// </summary>
@@ -56,7 +58,7 @@ namespace BizErpBVN.Menu {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.FileUpload fileupload;
-        
+
         /// <summary>
         /// frmConfirmation control.
         /// </summary>
@@ -65,7 +67,7 @@ namespace BizErpBVN.Menu {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel frmConfirmation;
-        
+
         /// <summary>
         /// lblUploadResult control.
         /// </summary>
@@ -74,7 +76,7 @@ namespace BizErpBVN.Menu {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblUploadResult;
-        
+
         /// <summary>
         /// LinkButton2 control.
         /// </summary>
@@ -83,7 +85,7 @@ namespace BizErpBVN.Menu {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton LinkButton2;
-        
+
         /// <summary>
         /// GridView5 control.
         /// </summary>
@@ -92,7 +94,7 @@ namespace BizErpBVN.Menu {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView GridView5;
-        
+
         /// <summary>
         /// btnSaves control.
         /// </summary>
@@ -101,7 +103,7 @@ namespace BizErpBVN.Menu {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton btnSaves;
-        
+
         /// <summary>
         /// LinkButton1 control.
         /// </summary>
