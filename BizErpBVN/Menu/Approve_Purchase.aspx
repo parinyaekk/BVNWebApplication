@@ -112,7 +112,6 @@
                     <asp:LinkButton ID="btnCancel" runat="server" CommandArgument='<%# Eval("oid")%>' OnClick="Reject" Text="ยกเลิก" CssClass="btn btn-danger" OnClientClick="ConfirmCancel()" >
                       <i class="glyphicon glyphicon-remove"></i>&nbsp;ยกเลิก
                     </asp:LinkButton>
-
                         </ItemTemplate>
                     </asp:TemplateField>
                 </Columns>

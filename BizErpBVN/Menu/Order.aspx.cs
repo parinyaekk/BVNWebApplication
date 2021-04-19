@@ -29,6 +29,7 @@ namespace BizErpBVN.Menu
                 this.LoadTaxcalc();
                 this.refreshdataT2();
                 this.LoadStatus();
+                this.LoadItem();
             }
         }
 
@@ -48,16 +49,16 @@ namespace BizErpBVN.Menu
 
         protected void CustomerGroup()
         {
-            NpgsqlCommand com = new NpgsqlCommand("select *from mt_custgrp", conn);
+            NpgsqlCommand com = new NpgsqlCommand("select mt_name,mt_code from mt_cust", conn);
             NpgsqlDataAdapter da = new NpgsqlDataAdapter(com);
             DataSet ds = new DataSet();
             da.Fill(ds);  // fill dataset  
 
-            mt_custgrp.DataTextField = ds.Tables[0].Columns["mt_name"].ToString();
-            mt_custgrp.DataValueField = ds.Tables[0].Columns["mt_code"].ToString();
-            mt_custgrp.DataSource = ds.Tables[0];
-            mt_custgrp.DataBind();
-            mt_custgrp.Items.Insert(0, "----------เลือก----------");
+            cbbCustgrp.DataTextField = ds.Tables[0].Columns["mt_name"].ToString();
+            cbbCustgrp.DataValueField = ds.Tables[0].Columns["mt_code"].ToString();
+            cbbCustgrp.DataSource = ds.Tables[0];
+            cbbCustgrp.DataBind();
+            cbbCustgrp.Items.Insert(0, "----------เลือก----------");
         }
 
         protected void Transportation()
@@ -132,6 +133,58 @@ namespace BizErpBVN.Menu
         {
             GridView6.PageIndex = e.NewPageIndex;
             this.refreshdataT2();
+        }
+
+        public void LoadItem()
+        {
+            try
+            {
+                NpgsqlCommand sqCommand = new NpgsqlCommand("SELECT mt_name,mt_code FROM mt_item ORDER BY mt_name", conn);
+                NpgsqlDataAdapter da = new NpgsqlDataAdapter(sqCommand);
+                DataSet ds = new DataSet();
+
+                da.Fill(ds);
+                cbbItem.DataTextField = ds.Tables[0].Columns["mt_name"].ToString();
+                cbbItem.DataValueField = ds.Tables[0].Columns["mt_code"].ToString();
+
+                cbbItem.DataSource = ds.Tables[0];
+                cbbItem.DataBind();
+                cbbItem.Items.Insert(0, new ListItem("----------เลือก----------"));
+            }
+            catch (Exception ex)
+            {
+                Response.Write(ex.Message);
+            }
+        }
+
+
+        public void GetItem()
+        {
+            try
+            {
+                NpgsqlCommand cmd = new NpgsqlCommand("select * from  txn_so_line tl inner join mt_item mi on tl.line_item_oid = mi.oid   where mi.mt_code = @mt_code", conn);
+                cmd.Parameters.AddWithValue("@mt_code", cbbItem.SelectedValue);
+                NpgsqlDataAdapter da = new NpgsqlDataAdapter(cmd);
+                DataSet ds = new DataSet();
+                da.Fill(ds);
+                txtDate.Value = ds.Tables[0].Rows[0]["txn_date"].ToString();
+                txtTxn_memo.Value = ds.Tables[0].Rows[0]["txn_memo"].ToString();
+                txtDepos_amt.Text = ds.Tables[0].Rows[0]["depos_amt"].ToString();
+                cbbAcct_cashin.DataTextField = ds.Tables[0].Columns["mt_name"].ToString();
+                cbbAcct_cashin.DataValueField = ds.Tables[0].Columns["mt_code"].ToString();
+
+            }
+            catch (Exception ex)
+            {
+
+                Response.Write(ex.Message);
+            }
+        }
+
+
+        protected void cbbItem_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            GetItem();
         }
     }
 }
