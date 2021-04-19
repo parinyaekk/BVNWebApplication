@@ -19,19 +19,9 @@
     </style>
     <script>
         $(document).ready(function () {
-            $('#tab2_page2').hide();
-            $('#tab2_page1').show();
-
             $('#buttonEdit').click(function () {
-                $('#tab2_page2').show();
-                $('#tab2_page1').hide();
+                window.location.href = "HistoryOrder.aspx";
             });
-
-            $('#buttonBack').click(function () {
-                $('#tab2_page2').hide();
-                $('#tab2_page1').show();
-            });
-
         });
 
         function test() {
@@ -190,6 +180,7 @@
             </div>
             <br />
             <br />
+              <br />
             <hr />
             <br />
             <br />
@@ -304,7 +295,7 @@
                 </div>
                 <label for="title" class="col-md-2 control-label">อธิบายรายการ</label>
                 <div class="col-md-4">
-                    <textarea data-ng-model="tutorial.description" rows="2" cols="50"
+                    <textarea data-ng-model="tutorial.description" rows="1" cols="50"
                         name="description" class="form-control">
                         </textarea>
                 </div>
@@ -317,20 +308,13 @@
                     <input type="text" data-ng-model="tutorial.title"
                         name="title" class="form-control" />
                 </div>
-                <label />
-                <label />
-            </div>
-            <br />
-            <br />
-            <div class="form-group">
-                <label for="title" class="col-md-2 control-label">ยอดเงินที่รับชำระแล้ว</label>
+                             <label for="title" class="col-md-2 control-label">ยอดเงินที่รับชำระแล้ว</label>
                 <div class="col-md-4">
                     <input type="number" style="text-align: right" class="form-control"
                         required name="price" min="0" value="0.00" step="0.01" />
                 </div>
-                <label />
-                <label />
-            </div>
+            </div>   
+
             <br />
             <br />
             <div class="form-group">
@@ -373,18 +357,6 @@
             </div>
             <br />
             <br />
-        </div>
-    </div>
-    <div id="tab2_page2" class="col-md-12 text-center" style="padding-left: 10%">
-        <div class="form-group" style="padding-left: 10%">
-            <div class="col-md-12">
-                <button id="buttonBack" type="button" class="btn btn-labeled btn-primary">
-                    <span class="btn-label"><i class="glyphicon glyphicon-circle-arrow-left"></i></span>กลับหน้าหลัก
-                </button>
-                <button type="button" class="btn btn-labeled btn-success">
-                    <span class="btn-label"><i class="glyphicon glyphicon-floppy-save"></i></span>บันทึก
-                </button>
-            </div>
         </div>
     </div>
 </asp:Content>

@@ -13,10 +13,9 @@
             border-top: 1px dotted;
         }
 
-        .hidden
-         {
-             display:none;
-         }
+        .hidden {
+            display: none;
+        }
     </style>
     <script>
         $(document).ready(function () {
@@ -38,8 +37,10 @@
                         <span class="btn-label"><i class="glyphicon glyphicon-floppy-save"></i></span>บันทึก
                     </asp:LinkButton>
                     &nbsp;
+                   
                     <button id="btnBack" type="button" class="btn btn-primary">
                         <span class="btn-label"><i class="glyphicon glyphicon-circle-arrow-left"></i></span>กลับหน้าหลัก
+                   
                     </button>
 
                 </div>
@@ -63,9 +64,11 @@
                 </div>
             </div>
             <br />
+            <br />
             <hr />
             <h2>รายละเอียด</h2>
             <hr />
+            <br />
             <br />
             <div class="form-group">
                 <label for="title" class="col-md-2 control-label">ประเภทองค์กร</label>
@@ -157,9 +160,12 @@
                 </div>
             </div>
             <br />
+            <br />
             <hr />
             <h2>ที่อยู่หลัก</h2>
             <hr />
+            <br />
+            <br />
             <div class="form-group">
                 <label for="title" class="col-md-2 control-label">ชื่อผู้ติดต่อ</label>
                 <div class="col-md-4">
@@ -240,6 +246,8 @@
             <hr />
             <h2>ที่อยู่อื่นๆ</h2>
             <hr />
+            <br />
+            <br />
             <div class="form-group">
                 <label for="title" class="col-md-2 control-label">ชื่อผู้ติดต่อ</label>
                 <div class="col-md-4">
@@ -345,11 +353,11 @@
                     <asp:BoundField DataField="contname" HeaderText="ผู้ติดต่อ" />
                     <asp:BoundField DataField="street" HeaderText="ที่อยู่" />
                     <asp:BoundField DataField="phn" HeaderText="โทรศัพท์" />
-                    <asp:BoundField DataField="prov_code" HeaderText="จังหวัด" HeaderStyle-CssClass="hidden" ItemStyle-CssClass="hidden"/>
+                    <asp:BoundField DataField="prov_code" HeaderText="จังหวัด" HeaderStyle-CssClass="hidden" ItemStyle-CssClass="hidden" />
                     <asp:BoundField DataField="prov_txt" HeaderText="ชื่อจังหวัด" />
-                    <asp:BoundField DataField="amphur_code" HeaderText="อำเภอ" HeaderStyle-CssClass="hidden" ItemStyle-CssClass="hidden"/>
+                    <asp:BoundField DataField="amphur_code" HeaderText="อำเภอ" HeaderStyle-CssClass="hidden" ItemStyle-CssClass="hidden" />
                     <asp:BoundField DataField="amphur_txt" HeaderText="ชื่ออำเภอ" />
-                    <asp:BoundField DataField="locat_code" HeaderText="ตำบล" HeaderStyle-CssClass="hidden" ItemStyle-CssClass="hidden"/>
+                    <asp:BoundField DataField="locat_code" HeaderText="ตำบล" HeaderStyle-CssClass="hidden" ItemStyle-CssClass="hidden" />
                     <asp:BoundField DataField="locat_txt" HeaderText="ชื่อตำบล" />
                     <asp:BoundField DataField="zipcode" HeaderText="รหัสไปรษณีย์" />
                     <asp:BoundField DataField="email" HeaderText="E-Mail" />
