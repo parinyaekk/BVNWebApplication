@@ -180,6 +180,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\edit.png" />
+    <Content Include="Images\image.png" />
     <Content Include="Menu\Confirm_Purchase.aspx" />
     <Content Include="Menu\EditCustomer.aspx" />
     <Content Include="Menu\AddCustomer.aspx" />
