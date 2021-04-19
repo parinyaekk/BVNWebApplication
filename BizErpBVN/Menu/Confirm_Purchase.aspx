@@ -119,7 +119,7 @@
                 </asp:TemplateField>
                 <asp:TemplateField ShowHeader="False" HeaderStyle-Width="130px">
                     <ItemTemplate>
-                        <asp:LinkButton ID="btnSaves" runat="server" CssClass="btn btn-labeled btn-warning" Style="height: 45px; width: 100px;" CommandArgument='<%#Eval("oid") %>' OnClick="btnSaves_Click">
+                        <asp:LinkButton ID="btnSaves" runat="server" CssClass="btn btn-labeled btn-warning" Style="height: 45px; width: 100px;" CommandArgument='<%#Eval("oid") %>' OnClick="btnEdit_Click">
                                 <i class="glyphicon glyphicon-wrench" style="padding-top:8px"></i> แก้ไข</asp:LinkButton>
                     </ItemTemplate>
                     <FooterStyle HorizontalAlign="Right" />
@@ -135,7 +135,7 @@
             <asp:LinkButton ID="btnSaves" runat="server" CssClass="btn btn-success form-control" Style="height: 38px; width: 120px;">
              <i class="glyphicon glyphicon-floppy-saved"></i> บันทึก</asp:LinkButton>
             &nbsp;
-                        <asp:LinkButton ID="LinkButton1" runat="server" CssClass="btn btn-danger form-control" Style="height: 38px; width: 120px;">
+            <asp:LinkButton ID="LinkButton1" runat="server" OnClick="btnBack" CssClass="btn btn-danger form-control" Style="height: 38px; width: 120px;">
              <i class="glyphicon glyphicon-remove"></i> ยกเลิก</asp:LinkButton>
         </div>
     </div>

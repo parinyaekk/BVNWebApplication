@@ -13,6 +13,7 @@ namespace BizErpBVN.Menu
     public partial class EditOrder : System.Web.UI.Page
     {
         NpgsqlConnection conn = DBCompany.gCnnObj;
+        public Guid GGID;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (String.IsNullOrEmpty(DBCompany.gSaleRepOid))
@@ -22,7 +23,8 @@ namespace BizErpBVN.Menu
 
             if (!Page.IsPostBack)
             {
-                Guid GGID = Guid.Parse(Request.QueryString["ggid"]);
+                GGID = Guid.Parse(Request.QueryString["ggid"]);
+                Session["parent_oid"] = GGID;
                 cbbStatus.Enabled = false;
                 cbbStatus.CssClass = "form-control";
                 this.LoadDepartMent();
@@ -48,6 +50,45 @@ namespace BizErpBVN.Menu
                 if (ds.Tables[0].Rows.Count > 0)
                 {
                     txn_num.Text = ds.Tables[0].Rows[0]["txn_num"].ToString();
+                    cbbStatus.Text = ds.Tables[0].Rows[0]["txn_status"].ToString();
+                    ButtonConfirm.Visible = cbbStatus.Text == "SOF_SUBMIT" ? true : false;
+                    tax_num.Text = ds.Tables[0].Rows[0]["tax_num"].ToString();
+                    txn_date.Text = Convert.ToDateTime(ds.Tables[0].Rows[0]["txn_date"].ToString()).ToString("MM/dd/yyyy");
+
+                    NpgsqlCommand com = new NpgsqlCommand("select mt_code from mt_pymt where oid = @oid", conn);
+                    com.Parameters.AddWithValue("@oid", Guid.Parse(ds.Tables[0].Rows[0]["pymt_oid"].ToString()));
+                    NpgsqlDataAdapter da2 = new NpgsqlDataAdapter(com);
+                    DataSet ds2 = new DataSet();
+                    da2.Fill(ds2);
+                    if (ds2.Tables[0].Rows.Count > 0)
+                    {
+                        mt_pymt.Text = ds2.Tables[0].Rows[0]["mt_code"].ToString();
+                    }
+
+                    NpgsqlCommand com3 = new NpgsqlCommand("select mt_code from mt_cust where oid = @oid", conn);
+                    com3.Parameters.AddWithValue("@oid", Guid.Parse(ds.Tables[0].Rows[0]["cust_oid"].ToString()));
+                    NpgsqlDataAdapter da3 = new NpgsqlDataAdapter(com3);
+                    DataSet ds3 = new DataSet();
+                    da3.Fill(ds3);
+                    if (ds3.Tables[0].Rows.Count > 0)
+                    {
+                        cbbCustgrp.Text = ds3.Tables[0].Rows[0]["mt_code"].ToString();
+                    }
+
+                    en_saledelry_type.Text = ds.Tables[0].Rows[0]["saledelry_type"].ToString();
+
+                    NpgsqlCommand com4 = new NpgsqlCommand("select mt_code from mt_emp where oid = @oid", conn);
+                    com4.Parameters.AddWithValue("@oid", Guid.Parse(ds.Tables[0].Rows[0]["salerep_oid"].ToString()));
+                    NpgsqlDataAdapter da4 = new NpgsqlDataAdapter(com4);
+                    DataSet ds4 = new DataSet();
+                    da4.Fill(ds4);
+                    if (ds4.Tables[0].Rows.Count > 0)
+                    {
+                        mt_emp.Text = ds4.Tables[0].Rows[0]["mt_code"].ToString();
+                    }
+
+                    addr_text.Text = ds.Tables[0].Rows[0]["addr_text"].ToString();
+                    ship_addr_text.Text = ds.Tables[0].Rows[0]["ship_addr_text"].ToString();
                 }
             }
             catch (Exception ex)
@@ -63,11 +104,15 @@ namespace BizErpBVN.Menu
         {
             Response.Redirect("Order.aspx");
         }
+        protected void Confirm(Object sender, EventArgs e)
+        {
+            Response.Redirect("Confirm_Purchase.aspx?parent_oid=" + Session["parent_oid"]);
+        }
         protected void Cancel(Object sender, EventArgs e)
         {
             ScriptManager.RegisterStartupScript(Page, this.GetType(), "Action", string.Format("alert('{1}', '{0}');", "Cancel", Title), true);
         }
-        protected void Confirm(Object sender, EventArgs e)
+        protected void Submit(Object sender, EventArgs e)
         {
             ScriptManager.RegisterStartupScript(Page, this.GetType(), "Action", string.Format("alert('{1}', '{0}');", "Confirm", Title), true);
         }
@@ -88,16 +133,16 @@ namespace BizErpBVN.Menu
 
         protected void CustomerGroup()
         {
-            NpgsqlCommand com = new NpgsqlCommand("select *from mt_custgrp", conn);
+            NpgsqlCommand com = new NpgsqlCommand("select mt_name,mt_code from mt_cust", conn);
             NpgsqlDataAdapter da = new NpgsqlDataAdapter(com);
             DataSet ds = new DataSet();
             da.Fill(ds);  // fill dataset  
 
-            mt_custgrp.DataTextField = ds.Tables[0].Columns["mt_name"].ToString();
-            mt_custgrp.DataValueField = ds.Tables[0].Columns["mt_code"].ToString();
-            mt_custgrp.DataSource = ds.Tables[0];
-            mt_custgrp.DataBind();
-            mt_custgrp.Items.Insert(0, "----------เลือก----------");
+            cbbCustgrp.DataTextField = ds.Tables[0].Columns["mt_name"].ToString();
+            cbbCustgrp.DataValueField = ds.Tables[0].Columns["mt_code"].ToString();
+            cbbCustgrp.DataSource = ds.Tables[0];
+            cbbCustgrp.DataBind();
+            cbbCustgrp.Items.Insert(0, "----------เลือก----------");
         }
 
         protected void Transportation()
@@ -175,6 +220,35 @@ namespace BizErpBVN.Menu
         {
             GridView6.PageIndex = e.NewPageIndex;
             this.refreshdataT2();
+        }
+        protected void cbbItem_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            GetItem();
+        }
+
+        public void GetItem()
+        {
+            try
+            {
+
+                NpgsqlCommand cmd = new NpgsqlCommand("select * from  txn_so_line tl inner join mt_item mi on tl.line_item_oid = mi.oid   where mi.mt_code = @mt_code", conn);
+                cmd.Parameters.AddWithValue("@mt_code", cbbItem.SelectedValue);
+                NpgsqlDataAdapter da = new NpgsqlDataAdapter(cmd);
+                DataSet ds = new DataSet();
+                da.Fill(ds);
+                txtItem_dest.Value = ds.Tables[0].Rows[0]["line_item_dest"].ToString();
+                txtPrice.Text = ds.Tables[0].Rows[0]["line_price"].ToString();
+                txtDisc1_price.Text = ds.Tables[0].Rows[0]["line_disc1_price"].ToString();
+                txtUnt_oid.Text = ds.Tables[0].Columns["line_unt_oid"].ToString();
+                txtNetprice_amt.Text = ds.Tables[0].Columns["mt_code"].ToString();
+                txtMemo.Value = ds.Tables[0].Columns["line_memo"].ToString();
+
+            }
+            catch (Exception ex)
+            {
+
+                Response.Write(ex.Message);
+            }
         }
     }
 }

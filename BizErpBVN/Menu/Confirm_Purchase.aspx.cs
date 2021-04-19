@@ -32,7 +32,9 @@ namespace BizErpBVN.Menu
 
             if (!Page.IsPostBack)
             {
-                Session["oid"] = null;
+                Session["oid"] = "";
+                Session["parent_oid"] = "";
+                Session["parent_oid"] = Guid.Parse(Request.QueryString["parent_oid"]);
                 this.refreshGrid5();
                 this.LoadAcctCashin();
 
@@ -44,8 +46,8 @@ namespace BizErpBVN.Menu
 
             try
             {
-                NpgsqlCommand cmd = new NpgsqlCommand("SELECT *, mac.mt_name FROM txn_so_depos td inner join mt_acct_cashin mac on td.acct_cashin_oid = mac.oid WHERE txn_status = 'SOF_SUBMIT' and parent_oid = @so_oid order by txn_date ", conn);
-                cmd.Parameters.AddWithValue("@so_oid", ggcustid);
+                NpgsqlCommand cmd = new NpgsqlCommand("SELECT *, mac.mt_name FROM txn_so_depos td inner join mt_acct_cashin mac on td.acct_cashin_oid = mac.oid WHERE parent_oid = @parent_oid order by txn_date ", conn);
+                cmd.Parameters.AddWithValue("@parent_oid", Guid.Parse(Session["parent_oid"].ToString()));
                 NpgsqlDataAdapter sda = new NpgsqlDataAdapter(cmd);
                 DataSet ds = new DataSet();
 
@@ -84,7 +86,7 @@ namespace BizErpBVN.Menu
             cbbAcct_cashin.Items.Insert(0, new ListItem("----------เลือก----------"));
         }
 
-        protected void btnSaves_Click(object sender, EventArgs e)
+        protected void btnEdit_Click(object sender, EventArgs e)
         {
             LinkButton btn = (LinkButton)sender;
             var oid = btn.CommandArgument.ToString();
@@ -100,6 +102,12 @@ namespace BizErpBVN.Menu
             cbbAcct_cashin.DataSource = ds.Tables[0];
             cbbAcct_cashin.DataBind();
             Session["oid"] = oid;
+        }
+
+        protected void btnBack(object sender, EventArgs e)
+        {
+            Session["parent_oid"] = "";
+            Response.Redirect("HistoryOrder.aspx");
         }
 
 
@@ -121,6 +129,7 @@ namespace BizErpBVN.Menu
             conn.Close(); 
             string txn_so = "";
             string oid = Convert.ToString(Session["oid"]);
+            string parent_oid = Convert.ToString(Session["parent_oid"]);
             Stream fs = fileupload.PostedFile.InputStream;
             BinaryReader br = new BinaryReader(fs);
             byte[] bytes = br.ReadBytes((Int32)fs.Length);
@@ -183,8 +192,8 @@ namespace BizErpBVN.Menu
                 //cmd.Parameters.AddWithValue("@txn_so", txn_so); //0
                 cmd.Parameters.AddWithValue("@txn_date", Date); //1
                 cmd.Parameters.AddWithValue("@txn_type", "SOFD"); //2
-                cmd.Parameters.AddWithValue("@txn_status", "SOF_SUBMIT"); //3
-                cmd.Parameters.AddWithValue("@parent_oid", Guid.Parse("260af79f-fcf8-4264-a3b8-d307036d60ac")); //4
+                cmd.Parameters.AddWithValue("@txn_status", "NEW"); //3
+                cmd.Parameters.AddWithValue("@parent_oid", Guid.Parse(parent_oid)); //4
                 cmd.Parameters.AddWithValue("@pymet", "CASH"); //5
                 cmd.Parameters.AddWithValue("@depos_amt", Depos_amt); //6
                 cmd.Parameters.AddWithValue("@txn_memo", Txn_memo); //7
@@ -198,26 +207,33 @@ namespace BizErpBVN.Menu
             }
             else //Update
             {
-                NpgsqlCommand cmd = new NpgsqlCommand(@"UPDATE txn_so_depos SET --txn_so = @txn_so, --0
+                string query = @"UPDATE txn_so_depos SET --txn_so = @txn_so, --0
                                                     txn_date = Date(@txn_date),--1
                                                     txn_type = @txn_type,  --2
                                                     txn_status = @txn_status, --3
                                                     parent_oid = @parent_oid, --4
                                                     pymet = @pymet, --5
                                                     depos_amt = @depos_amt::DECIMAL, --6
-                                                    txn_memo = @txn_memo, --7
-                                                    img_value = @img_value, --8
-                                                    edit_seq = @edit_seq, --9
-                                                    acct_cashin_oid = @acct_cashin_oid --10
-                                                    WHERE oid = @oid", conn);
+                                                    txn_memo = @txn_memo, 
+                                                    ";
+                                                    
+                if (bytes.Length > 0)
+                {
+                    query += @"img_value = @img_value, --8 
+                                ";
+                }
+                query += @"edit_seq = @edit_seq, --9
+                            acct_cashin_oid = @acct_cashin_oid--10
+                            WHERE oid = @oid";
+                NpgsqlCommand cmd = new NpgsqlCommand(query, conn);
                 //('SOFD','SOF_SUBMIT','','CASH',"
                 conn.Open();
                 cmd.Parameters.AddWithValue("@oid", Guid.Parse(oid)); //0
                 //cmd.Parameters.AddWithValue("@txn_so", txn_so); //0
                 cmd.Parameters.AddWithValue("@txn_date", Date); //1
                 cmd.Parameters.AddWithValue("@txn_type", "SOFD"); //2
-                cmd.Parameters.AddWithValue("@txn_status", "SOF_SUBMIT"); //3
-                cmd.Parameters.AddWithValue("@parent_oid", Guid.Parse("260af79f-fcf8-4264-a3b8-d307036d60ac")); //4
+                cmd.Parameters.AddWithValue("@txn_status", "NEW"); //3
+                cmd.Parameters.AddWithValue("@parent_oid", Guid.Parse(parent_oid)); //4
                 cmd.Parameters.AddWithValue("@pymet", "CASH"); //5
                 cmd.Parameters.AddWithValue("@depos_amt", Depos_amt); //6
                 cmd.Parameters.AddWithValue("@txn_memo", Txn_memo); //7
