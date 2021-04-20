@@ -1,9 +1,9 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Menu/MainMenu.Master" AutoEventWireup="true" CodeBehind="Order.aspx.cs" Inherits="BizErpBVN.Menu.Order" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-    <link href="jquery-ui.css" rel="stylesheet" type="text/css" />  
-    <script src="jquery.min.js" type="text/javascript"></script>  
-    <script src="jquery-ui.min.js" type="text/javascript"></script> 
+    <link href="jquery-ui.css" rel="stylesheet" type="text/css" />
+    <script src="jquery.min.js" type="text/javascript"></script>
+    <script src="jquery-ui.min.js" type="text/javascript"></script>
     <style type="text/css">
         hr {
             display: block;
@@ -69,29 +69,26 @@
                 <div class="col-md-12">
                     <button type="button" class="btn btn-labeled btn-success">
                         <span class="btn-label"><i class="glyphicon glyphicon-floppy-save"></i></span>บันทึก
+                   
                     </button>
                     <button type="button" class="btn btn-labeled alert-info">
                         <span class="btn-label"><i class="glyphicon glyphicon-plus-sign"></i></span>สร้างใหม่
+                   
                     </button>
                     <button id="buttonEdit" type="button" class="btn btn-labeled btn-warning">
                         <span class="btn-label"><i class="glyphicon glyphicon-wrench"></i></span>แก้ไข
+                   
                     </button>
                     <button id="ButtonCancel" type="button" class="btn btn-labeled btn-danger">
                         <span class="btn-label"><i class="glyphicon glyphicon-remove"></i></span>ยกเลิกรายการ
+                   
                     </button>
                     <button type="button" class="btn btn-labeled btn-success">
                         <span class="btn-label"><i class="glyphicon glyphicon-ok"></i></span>ยืนยันรายการ
+                   
                     </button>
                 </div>
             </div>
-             <%--<table  style="border: solid 15px Green; background-color: SkyBlue;" >  
-        <tr>  
-            <td>  
-                <span style="color: Red; font-weight: bold; font-size: 18pt;">Enter Employee Name:</span>   
-                <asp:TextBox ID="txtEmpName" runat="server" Width="160px" />  
-            </td>  
-        </tr>  
-    </table> --%>
             <div class="form-group">
                 <label for="title" class="col-md-2 control-label">เลขที่เอกสาร</label>
                 <div class="col-md-4">
@@ -449,7 +446,7 @@
                         <Columns>
                             <asp:TemplateField ItemStyle-Width="10%" ItemStyle-HorizontalAlign="Center" ItemStyle-Font-Names="Tahoma">
                                 <ItemTemplate>
-                                    <asp:RadioButton ID="RadioButton1" runat="server" OnClick="javascript:SelectSingleRadiobutton(this.id)"/>
+                                    <asp:RadioButton ID="RadioButton1" runat="server" OnClick="javascript:SelectSingleRadiobutton(this.id)" ToolTip='<%# Eval("oid")%>' />
                                 </ItemTemplate>
                             </asp:TemplateField>
                             <asp:BoundField DataField="addr_text" HeaderText="ที่อยู่" />
@@ -461,7 +458,7 @@
                     </asp:GridView>
                 </div>
                 <div class="col-md-12 text-center">
-                    <asp:Button ID="Button1" runat="server" Text="ตกลง" CssClass="btn btn-primary"/>
+                    <asp:Button ID="Button1" runat="server" Text="ตกลง" CssClass="btn btn-primary" OnClick="Button1_Click"/>
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                 </div>
             </div>
@@ -484,7 +481,7 @@
                         <Columns>
                             <asp:TemplateField ItemStyle-Width="10%" ItemStyle-HorizontalAlign="Center" ItemStyle-Font-Names="Tahoma">
                                 <ItemTemplate>
-                                    <asp:RadioButton ID="RadioButton2" runat="server"  OnClick="javascript:SelectSingleRadiobutton(this.id)"/>
+                                    <asp:RadioButton ID="RadioButton2" runat="server" OnClick="javascript:SelectSingleRadiobutton(this.id)" ToolTip='<%# Eval("oid") %>' />
                                 </ItemTemplate>
                             </asp:TemplateField>
                             <asp:BoundField DataField="addr_text" HeaderText="ที่อยู่" />
@@ -496,7 +493,7 @@
                     </asp:GridView>
                 </div>
                 <div class="col-md-12 text-center">
-                    <button type="button" class="btn btn-primary">ตกลง</button>
+                    <asp:Button ID="Button2" runat="server" Text="ตกลง" CssClass="btn btn-primary" />
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                 </div>
             </div>
