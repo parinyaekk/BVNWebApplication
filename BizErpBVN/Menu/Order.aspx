@@ -20,10 +20,24 @@
             display: none;
         }
     </style>
-    <script type="text/javascript">  
+    <script>
         $(document).ready(function () {
+            $('#buttonEdit').click(function () {
+                window.location.href = "HistoryOrder.aspx";
+            });
             SearchText();
         });
+
+        function SelectSingleRadiobutton(rdbtnid) {
+            var rdBtn = document.getElementById(rdbtnid);
+            var rdBtnList = document.getElementsByTagName("input");
+            for (i = 0; i < rdBtnList.length; i++) {
+                if (rdBtnList[i].type == "radio" && rdBtnList[i].id != rdBtn.id) {
+                    rdBtnList[i].checked = false;
+                }
+            }
+        };
+
         function SearchText() {
             $("#txtEmpName").autocomplete({
                 source: function (request, response) {
@@ -42,23 +56,6 @@
                     });
                 }
             });
-        }
-    </script> 
-    <script>
-        $(document).ready(function () {
-            $('#buttonEdit').click(function () {
-                window.location.href = "HistoryOrder.aspx";
-            });
-        });
-
-        function SelectSingleRadiobutton(rdbtnid) {
-            var rdBtn = document.getElementById(rdbtnid);
-            var rdBtnList = document.getElementsByTagName("input");
-            for (i = 0; i < rdBtnList.length; i++) {
-                if (rdBtnList[i].type == "radio" && rdBtnList[i].id != rdBtn.id) {
-                    rdBtnList[i].checked = false;
-                }
-            }
         }
 
     </script>
@@ -87,14 +84,14 @@
                     </button>
                 </div>
             </div>
-            <%-- <table  style="border: solid 15px Green; background-color: SkyBlue;" >  
+             <table  style="border: solid 15px Green; background-color: SkyBlue;" >  
         <tr>  
             <td>  
                 <span style="color: Red; font-weight: bold; font-size: 18pt;">Enter Employee Name:</span>   
                 <asp:TextBox ID="txtEmpName" runat="server" Width="160px" />  
             </td>  
         </tr>  
-    </table> --%>
+    </table> 
             <div class="form-group">
                 <label for="title" class="col-md-2 control-label">เลขที่เอกสาร</label>
                 <div class="col-md-4">
