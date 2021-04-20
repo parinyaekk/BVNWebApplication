@@ -111,7 +111,6 @@
                 <asp:BoundField DataField="depos_amt" HeaderText="จำนวนเงิน" />
                 <asp:BoundField DataField="mt_name" HeaderText="บัญชีโอนเงิน" />
                 <asp:BoundField DataField="txn_memo" HeaderText="คำอธิบายรายการ" />
-               <%--<asp:ImageField  DataImageUrlField="img_file" HeaderText="Image"></asp:ImageField>--%> 
                 <asp:TemplateField ShowHeader="False" HeaderStyle-Width="130px" HeaderText="รูปภาพ">
                     <ItemTemplate>
                             <img src='data:image/jpg;base64,<%# Eval("img_value") != System.DBNull.Value ? Convert.ToBase64String((byte[])Eval("img_value")) : null %>' alt="image" height="100" width="200"/>

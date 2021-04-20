@@ -190,5 +190,25 @@ namespace BizErpBVN.Menu
             GetItem();
         }
 
+
+
+        protected void LoadAddress()
+        {
+            NpgsqlCommand cmd = new NpgsqlCommand("SELECT * FROM txn_so_line where parent_oid::text = @oid", conn);
+            cmd.Parameters.AddWithValue("@oid", DBCompany.gSaleRepOid);
+            NpgsqlDataAdapter sda = new NpgsqlDataAdapter(cmd);
+            DataSet ds = new DataSet();
+
+            sda.Fill(ds);
+            GvOrder.DataSource = ds;
+            GvOrder.DataBind();
+        }
+
+
+        protected void GvOrder_PageIndexChanged(object sender, GridViewPageEventArgs e)
+        {
+            GvOrder.PageIndex = e.NewPageIndex;
+            LoadAddress();
+        }
     }
 }

@@ -322,14 +322,6 @@
                     <div class="row">
                         <div class="col-sm-12">
                             <asp:TextBox ID="txtMail2" runat="server" class="form-control"></asp:TextBox>
-<%--                            <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server"
-                                ControlToValidate="txtMail2" ErrorMessage="Email is required"
-                                SetFocusOnError="True"></asp:RequiredFieldValidator>
-                            <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server"
-                                ErrorMessage="Invalid Email" ControlToValidate="txtMail2"
-                                SetFocusOnError="True"
-                                ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*">
-                            </asp:RegularExpressionValidator>--%>
                         </div>
                     </div>
                 </div>
