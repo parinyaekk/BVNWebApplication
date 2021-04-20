@@ -46,7 +46,7 @@
         <div class="form-group">
             <label for="title" class="col-md-2 control-label">วันที่</label>
             <div class="col-md-4">
-                <input type="date" class="form-control" id="txtDate" runat="server">
+                <input type="datetime-local" class="form-control" id="txtDate" runat="server">
             </div>
             <label for="title" class="col-md-2 control-label">จำนวนเงิน</label>
             <div class="col-md-4">

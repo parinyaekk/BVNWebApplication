@@ -1,12 +1,18 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Menu/MainMenu.Master" AutoEventWireup="true" CodeBehind="EditOrder.aspx.cs" Inherits="BizErpBVN.Menu.EditOrder" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <style>
+        .hidden
+         {
+             display:none;
+         }
+    </style>
     <script>
         function ConfirmCancel() {
             var confirm_value = document.createElement("INPUT");
             confirm_value.type = "hidden";
             confirm_value.name = "confirm_value";
-            if (confirm("Do you want to delete data?")) {
+            if (confirm("Do you want to reject data?")) {
                 confirm_value.value = "Yes";
             }
             else {
@@ -99,7 +105,7 @@
                 <div class="col-md-4">
                     <div class="row">
                         <div class="col-sm-12">
-                            <asp:DropDownList ID="en_saledelry_type" runat="server" class="form-control"></asp:DropDownList>
+                            <asp:DropDownList ID="en_saledelry_type" runat="server" class="form-control" readonlu></asp:DropDownList>
                         </div>
                     </div>
                 </div>
@@ -119,7 +125,7 @@
                 <div class="col-md-4">
                     <div class="row">
                         <div class="col-sm-12">
-                            <asp:DropDownList ID="mt_emp" runat="server" class="form-control"></asp:DropDownList>
+                            <asp:DropDownList ID="mt_emp" runat="server" class="form-control" readonly></asp:DropDownList>
                         </div>
                     </div>
                 </div>
@@ -136,7 +142,7 @@
             <div class="form-group">
                 <label for="description" class="col-md-2 control-label">ที่อยู่</label>
                 <div class="col-md-4">
-                    <asp:TextBox ID="addr_text" runat="server" TextMode="multiline" Columns="50" Rows="2" class="form-control" Readonly="true"></asp:TextBox>
+                    <asp:TextBox ID="addr_text" runat="server" TextMode="multiline" Columns="50" Rows="2" class="form-control"></asp:TextBox>
                 </div>
                 <div class="col-md-1">
                     <img src="../Images/edit.png" style="width: 25px; height: 20px" />
@@ -155,7 +161,7 @@
             <div class="form-group">
                 <label for="description" class="col-md-2 control-label">ที่อยู่จัดส่ง</label>
                 <div class="col-md-4">
-                    <asp:TextBox ID="ship_addr_text" runat="server" TextMode="multiline" Columns="50" Rows="2" class="form-control" Readonly="true"></asp:TextBox>
+                    <asp:TextBox ID="ship_addr_text" runat="server" TextMode="multiline" Columns="50" Rows="2" class="form-control"></asp:TextBox>
                 </div>
                 <div class="col-md-1">
                     <img src="../Images/edit.png" style="width: 25px; height: 20px" />
@@ -174,10 +180,10 @@
             <hr />
             <br />
             <br />
-            <div class="form-group">
+            <div class="form-group hidden">
                 <label for="description" class="col-md-2 control-label">รายการสินค้า</label>
                 <div class="col-md-4">
-                    <asp:DropDownList ID="cbbItem" runat="server" class="form-control" OnSelectedIndexChanged="cbbItem_SelectedIndexChanged"></asp:DropDownList>
+                    <asp:DropDownList ID="cbbItem" runat="server" class="form-control" OnSelectedIndexChanged="cbbItem_SelectedIndexChanged" AutoPostBack="True" ></asp:DropDownList>
                 </div>
                 <label for="title" class="col-md-2 control-label">รายละเอียดสินค้า</label>
                 <div class="col-md-4">
@@ -194,41 +200,41 @@
                     </div>
                 </div>
             </div>
-            <br />
-            <br />
-            <div class="form-group">
+<%--            <br />
+            <br />--%>
+            <div class="form-group hidden">
                 <label for="description" class="col-md-2 control-label">ราคาต่อหน่วย</label>
                 <div class="col-md-4">
-                    <asp:TextBox ID="txtPrice" runat="server" class="form-control" TextMode="Number"></asp:TextBox>
+                    <asp:TextBox ID="txtPrice" runat="server" class="form-control" TextMode="Number" ReadOnly></asp:TextBox>
                 </div>
                 <label for="title" class="col-md-2 control-label">ส่วนลดต่อหน่วย</label>
                 <div class="col-md-4">
                     <div class="row">
                         <div class="col-sm-12">
-                            <asp:TextBox ID="txtDisc1_price" runat="server" class="form-control" TextMode="Number"></asp:TextBox>
+                            <asp:TextBox ID="txtDisc1_price" runat="server" class="form-control" TextMode="Number" AutoPostBack="true" OnTextChanged="dist_price_Change"></asp:TextBox>
                         </div>
                     </div>
                 </div>
             </div>
-            <br />
-            <br />
-            <div class="form-group">
+<%--            <br />
+            <br />--%>
+            <div class="form-group hidden">
                 <label for="description" class="col-md-2 control-label">หน่วยนับ</label>
                 <div class="col-md-4">
-                    <asp:TextBox ID="txtUnt_oid" runat="server" class="form-control" TextMode="Number"></asp:TextBox>
+                    <asp:TextBox ID="txtline_qty" runat="server" class="form-control" TextMode="Number" AutoPostBack="true" OnTextChanged="line_qty_Change"></asp:TextBox>
                 </div>
                 <label for="title" class="col-md-2 control-label">รวมมูลค่า</label>
                 <div class="col-md-4">
                     <div class="row">
                         <div class="col-sm-12">
-                            <asp:TextBox ID="txtNetprice_amt" runat="server" class="form-control" TextMode="Number"></asp:TextBox>
+                            <asp:TextBox ID="txtNetprice_amt" runat="server" class="form-control" TextMode="Number" ReadOnly></asp:TextBox>
                         </div>
                     </div>
                 </div>
             </div>
-            <br />
-            <br />
-            <div class="form-group">
+<%--            <br />
+            <br />--%>
+            <div class="form-group hidden">
                 <label for="description" class="col-md-2 control-label">อธิบายเพิ่มเติม</label>
                 <div class="col-md-4">
                     <textarea data-ng-model="tutorial.description" rows="2" id="txtMemo" runat="server"
@@ -239,27 +245,27 @@
                 <div class="col-md-4">
                     <div class="row">
                         <div class="col-sm-12">
-                            <asp:LinkButton ID="LinkButton2" runat="server" CssClass="btn btn-info form-control" Style="height: 38px; width: 120px;">
+                            <asp:LinkButton ID="AddItem" runat="server" OnClick="ButtonAdd_Click" CssClass="btn btn-info form-control" Style="height: 38px; width: 120px;">
                           <i class="glyphicon glyphicon-plus"></i>&nbsp;เพิ่ม</asp:LinkButton>
                         </div>
                     </div>
                 </div>
             </div>
+<%--            <br />
             <br />
-            <br />
-            <br />
-            <asp:GridView ID="GridView6" runat="server" AutoGenerateColumns="false" AllowPaging="true" PageSize="10" HeaderStyle-HorizontalAlign="Center" CssClass="table table-bordered table-striped" Width="100%" ShowFooter="true" ShowHeader="true"
+            <br />--%>
+            <asp:GridView ID="GridView6" runat="server" AutoGenerateColumns="false" AllowPaging="true" PageSize="10" HeaderStyle-HorizontalAlign="Center" CssClass="table table-bordered table-striped" Width="100%" ShowFooter="false" ShowHeader="true"
                 ShowHeaderWhenEmpty="true" GridLines="None" CellPadding="4" OnPageIndexChanging="GridView6_PageIndexChanged">
                 <EmptyDataTemplate>ไม่พบข้อมูล</EmptyDataTemplate>
                 <Columns>
-                    <asp:BoundField DataField="txn_date" HeaderText="รายการสินค้า" />
-                    <asp:BoundField DataField="" HeaderText="รายละเอียดสินค้า" />
-                    <asp:BoundField DataField="txn_num" HeaderText="ราคาต่อหน่วย" />
-                    <asp:BoundField DataField="cust_oid" HeaderText="ส่วนลดต่อหน่วย" />
-                    <asp:BoundField DataField="txn_num" HeaderText="ส่วนลดต่อหน่วย - กรณีลูกค้ารับสินค้าเอง " />
-                    <asp:BoundField DataField="sodepos_type" HeaderText="หน่วยนับ" />
-                    <asp:BoundField DataField="sodepos_amt" HeaderText="รวมมูลค่า" />
-                    <asp:BoundField DataField="depos_amt" HeaderText="อธิบายเพิ่มเติม" />
+                    <asp:BoundField DataField="mt_name" HeaderText="รายการสินค้า" />
+                    <asp:BoundField DataField="line_item_dest" HeaderText="รายละเอียดสินค้า" />
+                    <asp:BoundField DataField="line_price" HeaderText="ราคาต่อหน่วย" />
+                    <asp:BoundField DataField="line_disc1_price" HeaderText="ส่วนลดต่อหน่วย" />
+                    <asp:BoundField DataField="line_disc2_price" HeaderText="ส่วนลดต่อหน่วย - กรณีลูกค้ารับสินค้าเอง " />
+                    <asp:BoundField DataField="line_qty" HeaderText="หน่วยนับ" />
+                    <asp:BoundField DataField="line_netprice_amt" HeaderText="รวมมูลค่า" />
+                    <asp:BoundField DataField="line_memo" HeaderText="อธิบายเพิ่มเติม" />
                 </Columns>
                 <RowStyle BackColor="#EFF3FB" />
                 <EditRowStyle BackColor="#2461BF" />
@@ -268,21 +274,20 @@
                 <AlternatingRowStyle BackColor="White" />
             </asp:GridView>
             <br />
+            <hr />
             <br />
             <div class="form-group">
                 <label for="title" class="col-md-2 control-label">การชำระเงินมัดจำ</label>
                 <div class="col-md-4">
                     <div class="row">
                         <div class="col-md-12">
-                            <input type="number" style="text-align: right" class="form-control"
-                                required name="price" min="0" value="0.00" step="0.01" />
-
+                            <asp:DropDownList ID="en_sodepos_type" runat="server" class="form-control"></asp:DropDownList>
                         </div>
                     </div>
                 </div>
                 <label for="title" class="col-md-2 control-label">อธิบายรายการ</label>
                 <div class="col-md-4">
-                    <asp:TextBox ID="txn_memo" runat="server" TextMode="multiline" Columns="50" Rows="2" class="form-control" Readonly="true"></asp:TextBox>
+                    <asp:TextBox ID="txn_memo" runat="server" TextMode="multiline" Columns="50" Rows="2" class="form-control"></asp:TextBox>
                 </div>
             </div>
             <br />
@@ -290,8 +295,7 @@
             <div class="form-group">
                 <label for="title" class="col-md-2 control-label">จำนวนเงินมัดจำ</label>
                 <div class="col-md-4">
-                    <input type="number" style="text-align: right" class="form-control"
-                        required name="price" min="0" value="0.00" step="0.01" />
+                    <asp:TextBox ID="sodepos_amt" style="text-align: right" runat="server" class="form-control"></asp:TextBox>
                 </div>
                 <label />
                 <label />
@@ -301,7 +305,7 @@
             <div class="form-group">
                 <label for="title" class="col-md-2 control-label">ยอดเงินที่รับชำระแล้ว</label>
                 <div class="col-md-4">
-                    <asp:TextBox ID="depos_amt" runat="server" class="form-control" Readonly="true"></asp:TextBox>
+                    <asp:TextBox ID="depos_amt" style="text-align: right" runat="server" class="form-control" Readonly="true"></asp:TextBox>
                 </div>
                 <label />
                 <label />
@@ -311,12 +315,11 @@
             <div class="form-group">
                 <label for="title" class="col-md-2 control-label">ส่วนลดท้ายบิล</label>
                 <div class="col-md-4">
-                    <asp:TextBox ID="disc2_amt" runat="server" class="form-control" Readonly="true"></asp:TextBox>
+                    <asp:TextBox ID="disc2_amt" runat="server" style="text-align: right" class="form-control" Readonly="true"></asp:TextBox>
                 </div>
                 <label for="title" class="col-md-2 control-label">ส่วนลด</label>
                 <div class="col-md-4">
-                    <input type="number" style="text-align: right" class="form-control" id="disc1_amt"
-                        required name="price" min="0" value="0.00" step="0.01" readonly />
+                    <asp:TextBox ID="disc1_amt" style="text-align: right" runat="server" class="form-control" Readonly="true"></asp:TextBox>
                 </div>
             </div>
             <br />
@@ -329,8 +332,7 @@
                 </div>
                 <label for="title" class="col-md-2 control-label">มูลค่าภาษี</label>
                 <div class="col-md-4">
-                    <input type="number" style="text-align: right" class="form-control" id="tax_amt"
-                        required name="price" min="0" value="0.00" step="0.01" readonly />
+                    <asp:TextBox ID="tax_amt" style="text-align: right" runat="server" class="form-control" Readonly="true"></asp:TextBox>
                 </div>
             </div>
             <br />
@@ -341,8 +343,7 @@
                 </div>
                 <label for="title" class="col-md-2 control-label">รวมทั้งสิ้น</label>
                 <div class="col-md-4">
-                    <input type="number" style="text-align: right" class="form-control" id="txn_total"
-                        required name="price" min="0" value="0.00" step="0.01" readonly />
+                    <asp:TextBox ID="txn_total" style="text-align: right" runat="server" class="form-control" Readonly="true"></asp:TextBox>
                 </div>
             </div>
             <br />
@@ -355,9 +356,9 @@
                 <button id="buttonBack" type="button" class="btn btn-labeled btn-primary">
                     <span class="btn-label"><i class="glyphicon glyphicon-circle-arrow-left"></i></span>กลับหน้าหลัก
                 </button>
-                <button type="button" class="btn btn-labeled btn-success">
+                <asp:LinkButton ID="LinkButton1" runat="server" OnClick="SaveData" class="btn btn-labeled btn-success">
                     <span class="btn-label"><i class="glyphicon glyphicon-floppy-save"></i></span>บันทึก
-                </button>
+                </asp:LinkButton>
             </div>
         </div>
     </div>
