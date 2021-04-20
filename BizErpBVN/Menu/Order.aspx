@@ -1,6 +1,9 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Menu/MainMenu.Master" AutoEventWireup="true" CodeBehind="Order.aspx.cs" Inherits="BizErpBVN.Menu.Order" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <link href="jquery-ui.css" rel="stylesheet" type="text/css" />  
+    <script src="jquery.min.js" type="text/javascript"></script>  
+    <script src="jquery-ui.min.js" type="text/javascript"></script> 
     <style type="text/css">
         hr {
             display: block;
@@ -17,6 +20,30 @@
             display: none;
         }
     </style>
+    <script type="text/javascript">  
+        $(document).ready(function () {
+            SearchText();
+        });
+        function SearchText() {
+            $("#txtEmpName").autocomplete({
+                source: function (request, response) {
+                    $.ajax({
+                        type: "POST",
+                        contentType: "application/json; charset=utf-8",
+                        url: "Order.aspx/GetCustomerName",
+                        data: "{ 'en_name': '" + request.term + "'}",
+                        dataType: "json",
+                        success: function (data) {
+                            response(data.d);
+                        },
+                        error: function (result) {
+                            alert("No Match");
+                        }
+                    });
+                }
+            });
+        }
+    </script> 
     <script>
         $(document).ready(function () {
             $('#buttonEdit').click(function () {
@@ -60,6 +87,14 @@
                     </button>
                 </div>
             </div>
+            <%-- <table  style="border: solid 15px Green; background-color: SkyBlue;" >  
+        <tr>  
+            <td>  
+                <span style="color: Red; font-weight: bold; font-size: 18pt;">Enter Employee Name:</span>   
+                <asp:TextBox ID="txtEmpName" runat="server" Width="160px" />  
+            </td>  
+        </tr>  
+    </table> --%>
             <div class="form-group">
                 <label for="title" class="col-md-2 control-label">เลขที่เอกสาร</label>
                 <div class="col-md-4">

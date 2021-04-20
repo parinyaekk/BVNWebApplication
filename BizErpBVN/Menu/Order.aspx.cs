@@ -8,6 +8,9 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Web.Services;
+using System.Configuration;
+using System.Data.SqlClient;
 
 namespace BizErpBVN.Menu
 {
@@ -231,6 +234,7 @@ namespace BizErpBVN.Menu
             LoadAddress();
         }
 
+<<<<<<< Updated upstream
 
         protected void LoadAddress1()
         {
@@ -245,6 +249,25 @@ namespace BizErpBVN.Menu
             {
 
                 Response.Write(ex.Message);
+=======
+        [WebMethod]
+        public List<string> GetCustomerName(string en_name)
+        {
+            
+            List<string> CustomerNames = new List<string>();
+            {
+                NpgsqlConnection conn = DBCompany.gCnnObj;
+                NpgsqlCommand cmd = new NpgsqlCommand("select en_name, en_code from en_txn_status like'%" + en_name + "%'", conn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                conn.Open();
+                NpgsqlDataReader rdr = cmd.ExecuteReader();
+                while (rdr.Read())
+                {
+                    CustomerNames.Add(rdr["en_name"].ToString());
+                }
+                return CustomerNames;
+
+>>>>>>> Stashed changes
             }
         }
 
