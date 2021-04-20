@@ -143,9 +143,14 @@
             <div class="form-group">
                 <label for="description" class="col-md-2 control-label">ที่อยู่</label>
                 <div class="col-md-4">
-                    <textarea data-ng-model="tutorial.description" rows="2"
+
+                           <asp:UpdatePanel ID="UpdatePanel22" runat="server">
+                        <ContentTemplate>
+                    <textarea data-ng-model="tutorial.description" rows="2" runat="server" id="txt_Addr1"
                         name="description" class="form-control">
                         </textarea>
+                                </ContentTemplate>
+                    </asp:UpdatePanel>
                 </div>
                 <div class="col-md-1">
                                         <asp:UpdatePanel ID="UpdatePanel1" runat="server">
@@ -168,7 +173,7 @@
           <div class="form-group">
                 <label for="description" class="col-md-2 control-label">ที่อยู่จัดส่ง</label>
                 <div class="col-md-4">
-                    <textarea data-ng-model="tutorial.description" rows="2"
+                    <textarea data-ng-model="tutorial.description" rows="2"  runat="server" id="txt_Addr2"
                         name="description" class="form-control">
                         </textarea>
                 </div>
@@ -392,13 +397,13 @@
                   <asp:BoundField DataField="addr_text" HeaderText="ที่อยู่" />
               </Columns>
               <RowStyle BackColor="#EFF3FB" />
-              <EditRowStyle BackColor="#2461BF" />
+              <EditRowStyle BackColor="#2461BF" HorizontalAlign="Left" />
               <PagerStyle BackColor="#D9DABF" ForeColor="#3B3B37" HorizontalAlign="Center" />
               <HeaderStyle BackColor="Salmon" Font-Bold="True" ForeColor="#3B3B37" Width="400px" />
           </asp:GridView>
       </div>
            <div class="col-md-12 text-center">
-       <button type="button" class="btn btn-primary" >บันทึก</button>
+       <button type="button" class="btn btn-primary" >ตกลง</button>
         <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
       </div>
     </div>
@@ -433,7 +438,7 @@
           </asp:GridView>
       </div>
         <div class="col-md-12 text-center">
-       <button type="button" class="btn btn-primary" >บันทึก</button>
+       <button type="button" class="btn btn-primary" >ตกลง</button>
         <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
       </div>
     </div>

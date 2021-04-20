@@ -31,7 +31,6 @@ namespace BizErpBVN.Menu
                 this.refreshdataT2();
                 this.LoadStatus();
                 this.LoadItem();
-                this.LoadAddress();
 
             }
         }
@@ -198,7 +197,7 @@ namespace BizErpBVN.Menu
         {
             try { 
 
-            NpgsqlCommand cmd1 = new NpgsqlCommand("select addr_text from mt_nameaddr where name_oid::text = @oid and seq<> 0 order by seq", conn);
+            NpgsqlCommand cmd1 = new NpgsqlCommand("select addr_text from mt_nameaddr where name_oid::text = @oid order by seq", conn);
             cmd1.Parameters.AddWithValue("@oid", cbbCustgrp.SelectedValue);
             NpgsqlDataAdapter sda = new NpgsqlDataAdapter(cmd1);
             DataSet ds1 = new DataSet();
@@ -206,6 +205,7 @@ namespace BizErpBVN.Menu
             sda.Fill(ds1);
             GvOrder.DataSource = ds1;
             GvOrder.DataBind();
+            txt_Addr1.Value = ds1.Tables[0].Rows[0]["addr_text"].ToString();
 
 
             NpgsqlCommand cmd2 = new NpgsqlCommand("select addr_text from mt_nameaddr where name_oid::text = @oid and seq<> 0 order by seq", conn);
