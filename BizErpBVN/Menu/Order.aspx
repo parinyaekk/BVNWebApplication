@@ -94,7 +94,7 @@
                 <div class="col-md-4">
                     <div class="row">
                         <div class="col-sm-12">
-                            <asp:DropDownList ID="cbbCustgrp" runat="server" class="form-control"></asp:DropDownList>
+                            <asp:DropDownList ID="cbbCustgrp" runat="server" class="form-control" OnSelectedIndexChanged="cbbCustgrp_SelectedIndexChanged" AutoPostBack="true"></asp:DropDownList>
                         </div>
                     </div>
                 </div>
@@ -172,17 +172,17 @@
                         name="description" class="form-control">
                         </textarea>
                 </div>
-                <div class="col-md-1">
-                                                <asp:UpdatePanel ID="UpdatePanel4" runat="server">
-                                <ContentTemplate>
-                    <img src="../Images/edit.png" style="width: 25px; height: 25px" data-toggle="modal" data-target="#exampleModalCenter"/>
-                                                       </ContentTemplate>
-                    </asp:UpdatePanel>
-                </div>
-                <label for="title" class="col-md-2 control-label"></label>
-                <div class="col-md-4">
-                    <div class="row">
-                        <div class="col-sm-12">
+              <div class="col-md-1">
+                  <asp:UpdatePanel ID="UpdatePanel4" runat="server">
+                      <ContentTemplate>
+                          <img src="../Images/edit.png" style="width: 25px; height: 25px" data-toggle="modal" data-target="#exampleModalCenter" />
+                      </ContentTemplate>
+                  </asp:UpdatePanel>
+              </div>
+              <label for="title" class="col-md-2 control-label"></label>
+              <div class="col-md-4">
+                  <div class="row">
+                      <div class="col-sm-12">
                         </div>
                     </div>
                 </div>
@@ -196,7 +196,7 @@
             <div class="form-group">
                 <label for="description" class="col-md-2 control-label">รายการสินค้า</label>
                 <div class="col-md-4">
-                    <asp:DropDownList ID="cbbItem" runat="server" class="form-control" OnSelectedIndexChanged="cbbItem_SelectedIndexChanged"></asp:DropDownList>
+                    <asp:DropDownList ID="cbbItem" runat="server" class="form-control" OnSelectedIndexChanged="cbbItem_SelectedIndexChanged" AutoPostBack="true"></asp:DropDownList>
                 </div>
                 <label for="title" class="col-md-2 control-label">รายละเอียดสินค้า</label>
                 <div class="col-md-4">
@@ -381,7 +381,7 @@
       </div>
       <div class="modal-body">
           <asp:GridView ID="GvOrder" runat="server" AutoGenerateColumns="false" AllowPaging="true" PageSize="10" HeaderStyle-HorizontalAlign="Center" CssClass="table table-bordered table-striped text-center" Width="110%" ShowHeader="true"
-              ShowHeaderWhenEmpty="true" GridLines="None" CellPadding="4" OnPageIndexChanging="GvOrder_PageIndexChanged" >
+              ShowHeaderWhenEmpty="true" GridLines="None" CellPadding="4" >
               <EmptyDataTemplate>ไม่พบข้อมูล</EmptyDataTemplate>
               <Columns>
                   <asp:TemplateField ItemStyle-Width="10%" ItemStyle-HorizontalAlign="Center" ItemStyle-Font-Names="Tahoma">
@@ -416,7 +416,7 @@
       </div>
       <div class="modal-body">
           <asp:GridView ID="GvOrder1" runat="server" AutoGenerateColumns="false" AllowPaging="true" PageSize="10" HeaderStyle-HorizontalAlign="Center" CssClass="table table-bordered table-striped text-center" Width="110%" ShowHeader="true"
-              ShowHeaderWhenEmpty="true" GridLines="None" CellPadding="4"  OnPageIndexChanging="GvOrder1_PageIndexChanged">
+              ShowHeaderWhenEmpty="true" GridLines="None" CellPadding="4">
               <EmptyDataTemplate>ไม่พบข้อมูล</EmptyDataTemplate>
               <Columns>
                   <asp:TemplateField ItemStyle-Width="10%" ItemStyle-HorizontalAlign="Center" ItemStyle-Font-Names="Tahoma">

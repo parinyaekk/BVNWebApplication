@@ -32,7 +32,6 @@ namespace BizErpBVN.Menu
                 this.LoadStatus();
                 this.LoadItem();
                 this.LoadAddress();
-                this.LoadAddress1();
 
             }
         }
@@ -53,13 +52,13 @@ namespace BizErpBVN.Menu
 
         protected void CustomerGroup()
         {
-            NpgsqlCommand com = new NpgsqlCommand("select mt_name,mt_code from mt_cust where mt_name <>'' order by mt_name", conn);
+            NpgsqlCommand com = new NpgsqlCommand("select mt_name,oid from mt_cust where mt_name <>'' order by mt_name", conn);
             NpgsqlDataAdapter da = new NpgsqlDataAdapter(com);
             DataSet ds = new DataSet();
             da.Fill(ds);  // fill dataset  
 
             cbbCustgrp.DataTextField = ds.Tables[0].Columns["mt_name"].ToString();
-            cbbCustgrp.DataValueField = ds.Tables[0].Columns["mt_code"].ToString();
+            cbbCustgrp.DataValueField = ds.Tables[0].Columns["oid"].ToString();
             cbbCustgrp.DataSource = ds.Tables[0];
             cbbCustgrp.DataBind();
             cbbCustgrp.Items.Insert(0, "----------เลือก----------");
@@ -197,43 +196,38 @@ namespace BizErpBVN.Menu
 
         protected void LoadAddress()
         {
-            NpgsqlCommand cmd = new NpgsqlCommand("select addr_text from mt_nameaddr where name_oid::text = @oid and seq<> 0 order by seq", conn);
-            cmd.Parameters.AddWithValue("@oid", cbbCustgrp.SelectedValue);
-            NpgsqlDataAdapter sda = new NpgsqlDataAdapter(cmd);
-            DataSet ds = new DataSet();
+            try { 
 
-            sda.Fill(ds);
-            GvOrder.DataSource = ds;
+            NpgsqlCommand cmd1 = new NpgsqlCommand("select addr_text from mt_nameaddr where name_oid::text = @oid and seq<> 0 order by seq", conn);
+            cmd1.Parameters.AddWithValue("@oid", cbbCustgrp.SelectedValue);
+            NpgsqlDataAdapter sda = new NpgsqlDataAdapter(cmd1);
+            DataSet ds1 = new DataSet();
+
+            sda.Fill(ds1);
+            GvOrder.DataSource = ds1;
             GvOrder.DataBind();
-        }
 
 
-        protected void GvOrder_PageIndexChanged(object sender, GridViewPageEventArgs e)
-        {
-            GvOrder.PageIndex = e.NewPageIndex;
-            LoadAddress();
-        }
+            NpgsqlCommand cmd2 = new NpgsqlCommand("select addr_text from mt_nameaddr where name_oid::text = @oid and seq<> 0 order by seq", conn);
+            cmd2.Parameters.AddWithValue("@oid", cbbCustgrp.SelectedValue);
+            NpgsqlDataAdapter sda1 = new NpgsqlDataAdapter(cmd2);
+            DataSet ds2 = new DataSet();
 
-
-        protected void LoadAddress1()
-        {
-            
-          NpgsqlCommand cmd = new NpgsqlCommand("select addr_text from mt_nameaddr where name_oid::text = @oid and seq<> 0 order by seq", conn);
-            cmd.Parameters.AddWithValue("@oid", cbbCustgrp.SelectedValue);
-            NpgsqlDataAdapter sda = new NpgsqlDataAdapter(cmd);
-            DataSet ds = new DataSet();
-
-            sda.Fill(ds);
-            GvOrder1.DataSource = ds;
+            sda.Fill(ds2);
+            GvOrder1.DataSource = ds2;
             GvOrder1.DataBind();
+
+            }
+            catch (Exception ex)
+            {
+
+                Response.Write(ex.Message);
+            }
         }
 
-
-        protected void GvOrder1_PageIndexChanged(object sender, GridViewPageEventArgs e)
+        protected void cbbCustgrp_SelectedIndexChanged(object sender, EventArgs e)
         {
-            GvOrder1.PageIndex = e.NewPageIndex;
             LoadAddress();
         }
-
     }
 }
