@@ -389,7 +389,7 @@
               <HeaderStyle BackColor="Salmon" Font-Bold="True" ForeColor="#3B3B37" Width="400px" />
           </asp:GridView>
       </div>
-      <div class="modal-footer">
+           <div class="col-md-12 text-center">
        <button type="button" class="btn btn-primary" >บันทึก</button>
         <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
       </div>
@@ -424,7 +424,7 @@
               <HeaderStyle BackColor="Salmon" Font-Bold="True" ForeColor="#3B3B37" Width="400px" />
           </asp:GridView>
       </div>
-      <div class="modal-footer">
+        <div class="col-md-12 text-center">
        <button type="button" class="btn btn-primary" >บันทึก</button>
         <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
       </div>
