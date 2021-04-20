@@ -446,7 +446,7 @@
                         <Columns>
                             <asp:TemplateField ItemStyle-Width="10%" ItemStyle-HorizontalAlign="Center" ItemStyle-Font-Names="Tahoma">
                                 <ItemTemplate>
-                                    <asp:RadioButton ID="RadioButton1" runat="server" OnClick="javascript:SelectSingleRadiobutton(this.id)" Text='<%# Eval("oid")%>' />
+                                    <asp:RadioButton ID="RadioButton1" runat="server" OnClick="javascript:SelectSingleRadiobutton(this.id)" ToolTip='<%# Eval("oid")%>' />
                                 </ItemTemplate>
                             </asp:TemplateField>
                             <asp:BoundField DataField="addr_text" HeaderText="ที่อยู่" />
@@ -481,7 +481,7 @@
                         <Columns>
                             <asp:TemplateField ItemStyle-Width="10%" ItemStyle-HorizontalAlign="Center" ItemStyle-Font-Names="Tahoma">
                                 <ItemTemplate>
-                                    <asp:RadioButton ID="RadioButton2" runat="server" OnClick="javascript:SelectSingleRadiobutton(this.id)" Text='<%# Eval("oid") %>' />
+                                    <asp:RadioButton ID="RadioButton2" runat="server" OnClick="javascript:SelectSingleRadiobutton(this.id)" ToolTip='<%# Eval("oid") %>' />
                                 </ItemTemplate>
                             </asp:TemplateField>
                             <asp:BoundField DataField="addr_text" HeaderText="ที่อยู่" />
