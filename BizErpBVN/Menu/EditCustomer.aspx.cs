@@ -13,6 +13,7 @@ namespace BizErpBVN.Menu
     public partial class EditCustomer : System.Web.UI.Page
     {
         NpgsqlConnection conn = DBCompany.gCnnObj;
+        DataTable dt;
         public int Zipcode { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -42,7 +43,6 @@ namespace BizErpBVN.Menu
             }
         }
 
-        DataTable dt;
         private void createDataTable()
         {
             dt = new DataTable();

@@ -6,6 +6,7 @@ using System.Data;
 using System.IO;
 using System.Linq;
 using System.Web;
+using System.Web.Services;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -23,7 +24,6 @@ namespace BizErpBVN.Menu
 
             if (!Page.IsPostBack)
             {
-                Session["oid"] = "";
                 this.LoadDepartMent();
                 this.CustomerGroup();
                 this.Transportation();
@@ -198,7 +198,7 @@ namespace BizErpBVN.Menu
         {
             try { 
 
-            NpgsqlCommand cmd1 = new NpgsqlCommand("select oid, addr_text from mt_nameaddr where name_oid::text = @oid order by seq", conn);
+            NpgsqlCommand cmd1 = new NpgsqlCommand("select addr_text from mt_nameaddr where name_oid::text = @oid order by seq", conn);
             cmd1.Parameters.AddWithValue("@oid", cbbCustgrp.SelectedValue);
             NpgsqlDataAdapter sda = new NpgsqlDataAdapter(cmd1);
             DataSet ds1 = new DataSet();
@@ -206,10 +206,10 @@ namespace BizErpBVN.Menu
             sda.Fill(ds1);
             GvOrder.DataSource = ds1;
             GvOrder.DataBind();
-                txt_Addr1.Value = ds1.Tables[0].Rows[0]["addr_text"].ToString();
+            txt_Addr1.Value = ds1.Tables[0].Rows[0]["addr_text"].ToString();
 
 
-            NpgsqlCommand cmd2 = new NpgsqlCommand("select oid, addr_text from mt_nameaddr where name_oid::text = @oid and seq <> 0 order by seq", conn);
+            NpgsqlCommand cmd2 = new NpgsqlCommand("select addr_text from mt_nameaddr where name_oid::text = @oid and seq<> 0 order by seq", conn);
             cmd2.Parameters.AddWithValue("@oid", cbbCustgrp.SelectedValue);
             NpgsqlDataAdapter sda1 = new NpgsqlDataAdapter(cmd2);
             DataSet ds2 = new DataSet();
@@ -231,37 +231,24 @@ namespace BizErpBVN.Menu
             LoadAddress();
         }
 
-
-        protected void Button1_Click(object sender, EventArgs e)
+        [WebMethod]
+        public List<string> GetCustomerName(string en_name)
         {
-            try
-            {
 
-                foreach (GridViewRow gvr in GvOrder.Rows)
+            List<string> CustomerNames = new List<string>();
+            {
+                NpgsqlConnection conn = DBCompany.gCnnObj;
+                NpgsqlCommand cmd = new NpgsqlCommand("select en_name, en_code from en_txn_status like'%" + en_name + "%'", conn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                conn.Open();
+                NpgsqlDataReader rdr = cmd.ExecuteReader();
+                while (rdr.Read())
                 {
-                    RadioButton rd = (RadioButton)gvr.FindControl("RadioButton1");
-                    NpgsqlCommand cmd = new NpgsqlCommand("select * from  txn_so_line tl inner join mt_item mi on tl.line_item_oid = mi.oid   where tl.parent_oid::text = @oid and mi.oid::text = @oid1", conn);
-                    cmd.Parameters.AddWithValue("@oid", cbbCustgrp.SelectedValue);
-                    if (rd.Checked) {
-                        cmd.Parameters.AddWithValue("@oid1", rd.Text);
-
-                    }
-                    NpgsqlDataAdapter da = new NpgsqlDataAdapter(cmd);
-                    DataSet ds = new DataSet();
-                    da.Fill(ds);
-
-                    if (ds.Tables.Count > 0)
-                    {
-                        txt_Addr1.Value = ds.Tables[0].Rows[0]["addr_text"].ToString();
-
-                    }
+                    CustomerNames.Add(rdr["en_name"].ToString());
                 }
+                return CustomerNames;
 
-            }
-            catch (Exception ex)
-            {
 
-                Response.Write(ex.Message);
             }
         }
     }

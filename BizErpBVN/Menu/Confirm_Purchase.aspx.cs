@@ -90,11 +90,11 @@ namespace BizErpBVN.Menu
         {
             LinkButton btn = (LinkButton)sender;
             var oid = btn.CommandArgument.ToString();
-            NpgsqlCommand cmd = new NpgsqlCommand("SELECT td.oid,img_value,TO_CHAR(txn_date, 'YYYY-MM-DD') as txn_date,td.txn_memo,cast(td.depos_amt as decimal(10,2)) AS depos_amt, mac.mt_name,mac.mt_code FROM txn_so_depos td inner join mt_acct_cashin mac on td.acct_cashin_oid = mac.oid WHERE td.oid = '" + oid + "' order by txn_date", conn);
+            NpgsqlCommand cmd = new NpgsqlCommand("SELECT td.oid,img_value,TO_CHAR(txn_date, 'YYYY-MM-DD hh12:mi:ss AM') as txn_date,td.txn_memo,cast(td.depos_amt as decimal(10,2)) AS depos_amt, mac.mt_name,mac.mt_code FROM txn_so_depos td inner join mt_acct_cashin mac on td.acct_cashin_oid = mac.oid WHERE td.oid = '" + oid + "' order by txn_date", conn);
             NpgsqlDataAdapter da = new NpgsqlDataAdapter(cmd);
             DataSet ds = new DataSet();
             da.Fill(ds);
-            txtDate.Value = ds.Tables[0].Rows[0]["txn_date"].ToString();
+            txtDate.Value = Convert.ToDateTime(ds.Tables[0].Rows[0]["txn_date"].ToString()).ToString("yyyy-MM-ddThh:mm");
             txtTxn_memo.Value = ds.Tables[0].Rows[0]["txn_memo"].ToString();
             txtDepos_amt.Text = ds.Tables[0].Rows[0]["depos_amt"].ToString();
             cbbAcct_cashin.DataTextField = ds.Tables[0].Columns["mt_name"].ToString();
@@ -176,7 +176,7 @@ namespace BizErpBVN.Menu
                                                     ) VALUES 
                                                     (
                                                     --@txn_so, --0
-                                                    Date(@txn_date), --1
+                                                    @txn_date, --1
                                                     @txn_type, --2
                                                     @txn_status, --3
                                                     @parent_oid, --4
@@ -190,7 +190,7 @@ namespace BizErpBVN.Menu
                 //('SOFD','SOF_SUBMIT','','CASH',"
                 conn.Open();
                 //cmd.Parameters.AddWithValue("@txn_so", txn_so); //0
-                cmd.Parameters.AddWithValue("@txn_date", Date); //1
+                cmd.Parameters.AddWithValue("@txn_date", Convert.ToDateTime(Date)); //1
                 cmd.Parameters.AddWithValue("@txn_type", "SOFD"); //2
                 cmd.Parameters.AddWithValue("@txn_status", "NEW"); //3
                 cmd.Parameters.AddWithValue("@parent_oid", Guid.Parse(parent_oid)); //4
@@ -208,7 +208,7 @@ namespace BizErpBVN.Menu
             else //Update
             {
                 string query = @"UPDATE txn_so_depos SET --txn_so = @txn_so, --0
-                                                    txn_date = Date(@txn_date),--1
+                                                    txn_date = @txn_date,--1
                                                     txn_type = @txn_type,  --2
                                                     txn_status = @txn_status, --3
                                                     parent_oid = @parent_oid, --4
@@ -230,7 +230,7 @@ namespace BizErpBVN.Menu
                 conn.Open();
                 cmd.Parameters.AddWithValue("@oid", Guid.Parse(oid)); //0
                 //cmd.Parameters.AddWithValue("@txn_so", txn_so); //0
-                cmd.Parameters.AddWithValue("@txn_date", Date); //1
+                cmd.Parameters.AddWithValue("@txn_date", Convert.ToDateTime(Date)); //1
                 cmd.Parameters.AddWithValue("@txn_type", "SOFD"); //2
                 cmd.Parameters.AddWithValue("@txn_status", "NEW"); //3
                 cmd.Parameters.AddWithValue("@parent_oid", Guid.Parse(parent_oid)); //4
