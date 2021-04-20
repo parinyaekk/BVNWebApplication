@@ -20,7 +20,7 @@ namespace BizErpBVN.Menu
             agotoApprove.ServerClick += new EventHandler(gotoApprove);
             agotoOrder.ServerClick += new EventHandler(gotoOrder);
             agotoHistory.ServerClick += new EventHandler(gotoHistory);
-            agotoConfirm.ServerClick += new EventHandler(gotoConfirm);
+            //agotoConfirm.ServerClick += new EventHandler(gotoConfirm);
         }
 
         protected void gotoApprove(Object sender, EventArgs e)
@@ -35,10 +35,10 @@ namespace BizErpBVN.Menu
         {
             Response.Redirect("Order.aspx");
         }
-        protected void gotoConfirm(Object sender, EventArgs e)
-        {
-            Response.Redirect("Confirm_Purchase.aspx");
-        }
+        //protected void gotoConfirm(Object sender, EventArgs e)
+        //{
+        //    Response.Redirect("Confirm_Purchase.aspx");
+        //}
         protected void gotoHome(Object sender, EventArgs e)
         {
             Response.Redirect("Home.aspx");

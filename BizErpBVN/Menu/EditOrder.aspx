@@ -17,9 +17,11 @@
     </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+    <asp:ScriptManager ID="ScriptManager1" runat="server">
+    </asp:ScriptManager>
     <div id="tab2_page1" class="col-md-12 text-center" style="padding-left: 10%">
         <div class="container">
-            <div class="form-group" style="padding-left: 10%">
+            <div class="form-group" style="">
                 <div class="col-md-12">
                     <asp:LinkButton ID="ButtonAdd1" runat="server" OnClick="gotoOrder" class="btn btn-labeled alert-info">
                         <span class="btn-label"><i class="glyphicon glyphicon-plus-sign"></i></span>สร้างใหม่
@@ -30,8 +32,11 @@
                     <asp:LinkButton ID="ButtonCancel" runat="server" OnClick="Cancel" OnClientClick="ConfirmCancel()" class="btn btn-labeled btn-danger">
                         <span class="btn-label"><i class="glyphicon glyphicon-remove"></i></span>ยกเลิกรายการ
                     </asp:LinkButton>
-                    <asp:LinkButton ID="ButtonConfirm" runat="server" OnClick="Confirm" class="btn btn-labeled btn-success">
+                    <asp:LinkButton ID="ButtonSubmit" runat="server" OnClick="Submit" class="btn btn-labeled btn-success">
                         <span class="btn-label"><i class="glyphicon glyphicon-ok"></i></span>ยืนยันรายการ
+                    </asp:LinkButton>
+                    <asp:LinkButton ID="ButtonConfirm" runat="server" OnClick="Confirm" class="btn btn-labeled btn-primary">
+                        <span class="btn-label"><i class="glyphicon glyphicon-usd"></i></span>รับชำระ
                     </asp:LinkButton>
                 </div>
             </div>
@@ -74,7 +79,7 @@
                 <div class="col-md-4">
                     <div class="row">
                         <div class="col-sm-12">
-                            <asp:DropDownList ID="mt_custgrp" runat="server" class="form-control"></asp:DropDownList>
+                            <asp:DropDownList ID="cbbCustgrp" runat="server" class="form-control"></asp:DropDownList>
                         </div>
                     </div>
                 </div>
@@ -90,10 +95,6 @@
             <br />
             <br />
             <div class="form-group">
-                <label for="description" class="col-md-2 control-label">ที่อยู่</label>
-                <div class="col-md-4">
-                    <asp:TextBox ID="addr_text" runat="server" TextMode="multiline" Columns="50" Rows="2" class="form-control" Readonly="true"></asp:TextBox>
-                </div>
                 <label for="title" class="col-md-2 control-label">การส่งสินค้า</label>
                 <div class="col-md-4">
                     <div class="row">
@@ -101,13 +102,6 @@
                             <asp:DropDownList ID="en_saledelry_type" runat="server" class="form-control"></asp:DropDownList>
                         </div>
                     </div>
-                </div>
-            </div>
-            <br />
-            <br />
-            <div class="form-group">
-                <label for="title" class="col-md-2 control-label"></label>
-                <div class="col-md-4">
                 </div>
                 <label for="title" class="col-md-2 control-label">การคำนวนภาษี</label>
                 <div class="col-md-4">
@@ -121,10 +115,6 @@
             <br />
             <br />
             <div class="form-group">
-                <label for="description" class="col-md-2 control-label">ที่อยู่จัดส่ง</label>
-                <div class="col-md-4">
-                    <asp:TextBox ID="ship_addr_text" runat="server" TextMode="multiline" Columns="50" Rows="2" class="form-control" Readonly="true"></asp:TextBox>
-                </div>
                 <label for="title" class="col-md-2 control-label">พนักงานขาย</label>
                 <div class="col-md-4">
                     <div class="row">
@@ -133,8 +123,128 @@
                         </div>
                     </div>
                 </div>
+                <label for="title" class="col-md-2 control-label"></label>
+                <div class="col-md-4">
+                    <div class="row">
+                        <div class="col-sm-12">
+                        </div>
+                    </div>
+                </div>
             </div>
             <br />
+            <br />
+            <div class="form-group">
+                <label for="description" class="col-md-2 control-label">ที่อยู่</label>
+                <div class="col-md-4">
+                    <asp:TextBox ID="addr_text" runat="server" TextMode="multiline" Columns="50" Rows="2" class="form-control" Readonly="true"></asp:TextBox>
+                </div>
+                <div class="col-md-1">
+                    <img src="../Images/edit.png" style="width: 25px; height: 20px" />
+                </div>
+                <label for="title" class="col-md-2 control-label"></label>
+                <div class="col-md-4">
+                    <div class="row">
+                        <div class="col-sm-12">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br />
+            <br />
+            <br />
+            <div class="form-group">
+                <label for="description" class="col-md-2 control-label">ที่อยู่จัดส่ง</label>
+                <div class="col-md-4">
+                    <asp:TextBox ID="ship_addr_text" runat="server" TextMode="multiline" Columns="50" Rows="2" class="form-control" Readonly="true"></asp:TextBox>
+                </div>
+                <div class="col-md-1">
+                    <img src="../Images/edit.png" style="width: 25px; height: 20px" />
+                </div>
+                <label for="title" class="col-md-2 control-label"></label>
+                <div class="col-md-4">
+                    <div class="row">
+                        <div class="col-sm-12">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br />
+            <br />
+            <br />
+            <hr />
+            <br />
+            <br />
+            <div class="form-group">
+                <label for="description" class="col-md-2 control-label">รายการสินค้า</label>
+                <div class="col-md-4">
+                    <asp:DropDownList ID="cbbItem" runat="server" class="form-control" OnSelectedIndexChanged="cbbItem_SelectedIndexChanged"></asp:DropDownList>
+                </div>
+                <label for="title" class="col-md-2 control-label">รายละเอียดสินค้า</label>
+                <div class="col-md-4">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <asp:UpdatePanel ID="UpdatePanel3" runat="server">
+                                <ContentTemplate>
+                                    <textarea data-ng-model="tutorial.description" rows="1" id="txtItem_dest" runat="server"
+                                        name="description" class="form-control">
+                                    </textarea>
+                                </ContentTemplate>
+                            </asp:UpdatePanel>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br />
+            <br />
+            <div class="form-group">
+                <label for="description" class="col-md-2 control-label">ราคาต่อหน่วย</label>
+                <div class="col-md-4">
+                    <asp:TextBox ID="txtPrice" runat="server" class="form-control" TextMode="Number"></asp:TextBox>
+                </div>
+                <label for="title" class="col-md-2 control-label">ส่วนลดต่อหน่วย</label>
+                <div class="col-md-4">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <asp:TextBox ID="txtDisc1_price" runat="server" class="form-control" TextMode="Number"></asp:TextBox>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br />
+            <br />
+            <div class="form-group">
+                <label for="description" class="col-md-2 control-label">หน่วยนับ</label>
+                <div class="col-md-4">
+                    <asp:TextBox ID="txtUnt_oid" runat="server" class="form-control" TextMode="Number"></asp:TextBox>
+                </div>
+                <label for="title" class="col-md-2 control-label">รวมมูลค่า</label>
+                <div class="col-md-4">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <asp:TextBox ID="txtNetprice_amt" runat="server" class="form-control" TextMode="Number"></asp:TextBox>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br />
+            <br />
+            <div class="form-group">
+                <label for="description" class="col-md-2 control-label">อธิบายเพิ่มเติม</label>
+                <div class="col-md-4">
+                    <textarea data-ng-model="tutorial.description" rows="2" id="txtMemo" runat="server"
+                        name="description" class="form-control">
+                        </textarea>
+                </div>
+                <label for="title" class="col-md-2 control-label"></label>
+                <div class="col-md-4">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <asp:LinkButton ID="LinkButton2" runat="server" CssClass="btn btn-info form-control" Style="height: 38px; width: 120px;">
+                          <i class="glyphicon glyphicon-plus"></i>&nbsp;เพิ่ม</asp:LinkButton>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <br />
             <br />
             <br />
