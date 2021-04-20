@@ -23,6 +23,7 @@ namespace BizErpBVN.Menu
 
             if (!Page.IsPostBack)
             {
+                Session["oid"] = "";
                 this.LoadDepartMent();
                 this.CustomerGroup();
                 this.Transportation();
@@ -197,7 +198,7 @@ namespace BizErpBVN.Menu
         {
             try { 
 
-            NpgsqlCommand cmd1 = new NpgsqlCommand("select addr_text from mt_nameaddr where name_oid::text = @oid order by seq", conn);
+            NpgsqlCommand cmd1 = new NpgsqlCommand("select oid, addr_text from mt_nameaddr where name_oid::text = @oid order by seq", conn);
             cmd1.Parameters.AddWithValue("@oid", cbbCustgrp.SelectedValue);
             NpgsqlDataAdapter sda = new NpgsqlDataAdapter(cmd1);
             DataSet ds1 = new DataSet();
@@ -205,10 +206,10 @@ namespace BizErpBVN.Menu
             sda.Fill(ds1);
             GvOrder.DataSource = ds1;
             GvOrder.DataBind();
-            txt_Addr1.Value = ds1.Tables[0].Rows[0]["addr_text"].ToString();
+                txt_Addr1.Value = ds1.Tables[0].Rows[0]["addr_text"].ToString();
 
 
-            NpgsqlCommand cmd2 = new NpgsqlCommand("select addr_text from mt_nameaddr where name_oid::text = @oid and seq <> 0 order by seq", conn);
+            NpgsqlCommand cmd2 = new NpgsqlCommand("select oid, addr_text from mt_nameaddr where name_oid::text = @oid and seq <> 0 order by seq", conn);
             cmd2.Parameters.AddWithValue("@oid", cbbCustgrp.SelectedValue);
             NpgsqlDataAdapter sda1 = new NpgsqlDataAdapter(cmd2);
             DataSet ds2 = new DataSet();
@@ -229,5 +230,23 @@ namespace BizErpBVN.Menu
         {
             LoadAddress();
         }
+
+
+        protected void LoadAddress1()
+        {
+            try
+            {
+
+                var radio = (RadioButton)GvOrder1.FindControl("RadioButton1");
+
+
+            }
+            catch (Exception ex)
+            {
+
+                Response.Write(ex.Message);
+            }
+        }
+
     }
 }
