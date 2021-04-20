@@ -248,5 +248,26 @@ namespace BizErpBVN.Menu
             }
         }
 
+
+
+        public static List<string> LoadStatusAutoComplete(string en_name)
+        {
+            List<string> LoadSAC = new List<string>();
+            {
+
+                NpgsqlCommand cmd3 = new NpgsqlCommand("select en_name, en_code from en_txn_status LIKE ''+@en_name+'%'", conn);
+                cmd3.Parameters.AddWithValue("@en_name", en_name);
+                NpgsqlDataAdapter sda3 = new NpgsqlDataAdapter(cmd3);
+                DataSet ds3 = new DataSet();
+                NpgsqlDataReader dr = cmd3.ExecuteReader();
+                while (dr.Read())
+                {
+                    LoadSAC.Add(dr["en_name"].ToString());
+                }
+                return LoadSAC;
+
+            }
+        }
+
     }
 }
