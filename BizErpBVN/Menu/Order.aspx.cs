@@ -198,7 +198,7 @@ namespace BizErpBVN.Menu
         {
             try { 
 
-            NpgsqlCommand cmd1 = new NpgsqlCommand("select addr_text from mt_nameaddr where name_oid::text = @oid order by seq", conn);
+            NpgsqlCommand cmd1 = new NpgsqlCommand("select addr_text,oid from mt_nameaddr where name_oid::text = @oid order by seq", conn);
             cmd1.Parameters.AddWithValue("@oid", cbbCustgrp.SelectedValue);
             NpgsqlDataAdapter sda = new NpgsqlDataAdapter(cmd1);
             DataSet ds1 = new DataSet();
@@ -209,7 +209,7 @@ namespace BizErpBVN.Menu
             txt_Addr1.Value = ds1.Tables[0].Rows[0]["addr_text"].ToString();
 
 
-            NpgsqlCommand cmd2 = new NpgsqlCommand("select addr_text from mt_nameaddr where name_oid::text = @oid and seq<> 0 order by seq", conn);
+            NpgsqlCommand cmd2 = new NpgsqlCommand("select addr_text,oid from mt_nameaddr where name_oid::text = @oid and seq<> 0 order by seq", conn);
             cmd2.Parameters.AddWithValue("@oid", cbbCustgrp.SelectedValue);
             NpgsqlDataAdapter sda1 = new NpgsqlDataAdapter(cmd2);
             DataSet ds2 = new DataSet();
@@ -231,24 +231,60 @@ namespace BizErpBVN.Menu
             LoadAddress();
         }
 
-        [WebMethod]
-        public List<string> GetCustomerName(string en_name)
+        //[WebMethod]
+        //public List<string> GetCustomerName(string en_name)
+        //{
+
+        //    List<string> CustomerNames = new List<string>();
+        //    {
+        //        NpgsqlConnection conn = DBCompany.gCnnObj;
+        //        NpgsqlCommand cmd = new NpgsqlCommand("select en_name, en_code from en_txn_status like'%" + en_name + "%'", conn);
+        //        cmd.CommandType = CommandType.StoredProcedure;
+        //        conn.Open();
+        //        NpgsqlDataReader rdr = cmd.ExecuteReader();
+        //        while (rdr.Read())
+        //        {
+        //            CustomerNames.Add(rdr["en_name"].ToString());
+        //        }
+        //        return CustomerNames;
+
+
+        //    }
+        //}
+
+        protected void Button1_Click(object sender, EventArgs e)
         {
-
-            List<string> CustomerNames = new List<string>();
+            try
             {
-                NpgsqlConnection conn = DBCompany.gCnnObj;
-                NpgsqlCommand cmd = new NpgsqlCommand("select en_name, en_code from en_txn_status like'%" + en_name + "%'", conn);
-                cmd.CommandType = CommandType.StoredProcedure;
-                conn.Open();
-                NpgsqlDataReader rdr = cmd.ExecuteReader();
-                while (rdr.Read())
+  
+                foreach (GridViewRow gvr in GvOrder.Rows)
                 {
-                    CustomerNames.Add(rdr["en_name"].ToString());
+                    RadioButton rd = (RadioButton)gvr.FindControl("RadioButton1");
+                    if (rd.Checked)
+                    {
+
+                        NpgsqlCommand cmd1 = new NpgsqlCommand("select addr_text, oid from mt_nameaddr where name_oid::text = @name_oid and oid::text = @oid", conn);
+                       cmd1.Parameters.AddWithValue("@name_oid", cbbCustgrp.SelectedValue);
+                       cmd1.Parameters.AddWithValue("@oid", rd.Text);
+                        NpgsqlDataAdapter sda = new NpgsqlDataAdapter(cmd1);
+                        DataSet ds1 = new DataSet();
+
+                        sda.Fill(ds1);
+                        if(ds1.Tables[0].Rows.Count > 0)
+                        {
+                            txt_Addr1.Value = ds1.Tables[0].Rows[0]["addr_text"].ToString();
+
+                        }
+
+                    }
+    
                 }
-                return CustomerNames;
 
+            }
+            catch (Exception ex)
+            {
 
+                Response.Write(ex.Message);
             }
         }
     }
