@@ -208,7 +208,7 @@ namespace BizErpBVN.Menu
             txt_Addr1.Value = ds1.Tables[0].Rows[0]["addr_text"].ToString();
 
 
-            NpgsqlCommand cmd2 = new NpgsqlCommand("select addr_text from mt_nameaddr where name_oid::text = @oid and seq<> 0 order by seq", conn);
+            NpgsqlCommand cmd2 = new NpgsqlCommand("select addr_text from mt_nameaddr where name_oid::text = @oid and seq <> 0 order by seq", conn);
             cmd2.Parameters.AddWithValue("@oid", cbbCustgrp.SelectedValue);
             NpgsqlDataAdapter sda1 = new NpgsqlDataAdapter(cmd2);
             DataSet ds2 = new DataSet();

@@ -24,8 +24,14 @@
             });
         });
 
-        function test() {
-            alert("บันทึกข้อมูลสำเร็จ");
+        function SelectSingleRadiobutton(rdbtnid) {
+            var rdBtn = document.getElementById(rdbtnid);
+            var rdBtnList = document.getElementsByTagName("input");
+            for (i = 0; i < rdBtnList.length; i++) {
+                if (rdBtnList[i].type == "radio" && rdBtnList[i].id != rdBtn.id) {
+                    rdBtnList[i].checked = false;
+                }
+            }
         }
 
     </script>
@@ -37,7 +43,7 @@
         <div class="container">
             <div class="form-group" style="padding-left: 10%">
                 <div class="col-md-12">
-                    <button type="button" class="btn btn-labeled btn-success" onclick="test()">
+                    <button type="button" class="btn btn-labeled btn-success">
                         <span class="btn-label"><i class="glyphicon glyphicon-floppy-save"></i></span>บันทึก
                     </button>
                     <button type="button" class="btn btn-labeled alert-info">
@@ -411,7 +417,7 @@
                         <Columns>
                             <asp:TemplateField ItemStyle-Width="10%" ItemStyle-HorizontalAlign="Center" ItemStyle-Font-Names="Tahoma">
                                 <ItemTemplate>
-                                    <asp:RadioButton ID="RadioButton1" runat="server" />
+                                    <asp:RadioButton ID="RadioButton1" runat="server" OnClick="javascript:SelectSingleRadiobutton(this.id)"/>
                                 </ItemTemplate>
                             </asp:TemplateField>
                             <asp:BoundField DataField="addr_text" HeaderText="ที่อยู่" />
@@ -446,7 +452,7 @@
                         <Columns>
                             <asp:TemplateField ItemStyle-Width="10%" ItemStyle-HorizontalAlign="Center" ItemStyle-Font-Names="Tahoma">
                                 <ItemTemplate>
-                                    <asp:RadioButton ID="RadioButton2" runat="server" />
+                                    <asp:RadioButton ID="RadioButton2" runat="server" Checked="true" OnClick="javascript:SelectSingleRadiobutton(this.id)"/>
                                 </ItemTemplate>
                             </asp:TemplateField>
                             <asp:BoundField DataField="addr_text" HeaderText="ที่อยู่" />
