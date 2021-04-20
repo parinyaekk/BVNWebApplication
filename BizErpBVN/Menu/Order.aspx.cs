@@ -6,6 +6,7 @@ using System.Data;
 using System.IO;
 using System.Linq;
 using System.Web;
+using System.Web.Services;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -31,6 +32,7 @@ namespace BizErpBVN.Menu
                 this.refreshdataT2();
                 this.LoadStatus();
                 this.LoadItem();
+
             }
         }
 
@@ -50,13 +52,13 @@ namespace BizErpBVN.Menu
 
         protected void CustomerGroup()
         {
-            NpgsqlCommand com = new NpgsqlCommand("select mt_name,mt_code from mt_cust", conn);
+            NpgsqlCommand com = new NpgsqlCommand("select mt_name,oid from mt_cust where mt_name <>'' order by mt_name", conn);
             NpgsqlDataAdapter da = new NpgsqlDataAdapter(com);
             DataSet ds = new DataSet();
             da.Fill(ds);  // fill dataset  
 
             cbbCustgrp.DataTextField = ds.Tables[0].Columns["mt_name"].ToString();
-            cbbCustgrp.DataValueField = ds.Tables[0].Columns["mt_code"].ToString();
+            cbbCustgrp.DataValueField = ds.Tables[0].Columns["oid"].ToString();
             cbbCustgrp.DataSource = ds.Tables[0];
             cbbCustgrp.DataBind();
             cbbCustgrp.Items.Insert(0, "----------เลือก----------");
@@ -140,13 +142,13 @@ namespace BizErpBVN.Menu
         {
             try
             {
-                NpgsqlCommand sqCommand = new NpgsqlCommand("SELECT mt_name,mt_code FROM mt_item ORDER BY mt_name", conn);
+                NpgsqlCommand sqCommand = new NpgsqlCommand("SELECT mt_name,oid FROM mt_item ORDER BY mt_name", conn);
                 NpgsqlDataAdapter da = new NpgsqlDataAdapter(sqCommand);
                 DataSet ds = new DataSet();
 
                 da.Fill(ds);
                 cbbItem.DataTextField = ds.Tables[0].Columns["mt_name"].ToString();
-                cbbItem.DataValueField = ds.Tables[0].Columns["mt_code"].ToString();
+                cbbItem.DataValueField = ds.Tables[0].Columns["oid"].ToString();
 
                 cbbItem.DataSource = ds.Tables[0];
                 cbbItem.DataBind();
@@ -164,8 +166,8 @@ namespace BizErpBVN.Menu
             try
             {
        
-                NpgsqlCommand cmd = new NpgsqlCommand("select * from  txn_so_line tl inner join mt_item mi on tl.line_item_oid = mi.oid   where mi.mt_code = @mt_code", conn);
-                cmd.Parameters.AddWithValue("@mt_code", cbbItem.SelectedValue);
+                NpgsqlCommand cmd = new NpgsqlCommand("select * from  txn_so_line tl inner join mt_item mi on tl.line_item_oid = mi.oid   where tl.parent_oid::text = @oid", conn);
+                cmd.Parameters.AddWithValue("@oid", cbbItem.SelectedValue);
                 NpgsqlDataAdapter da = new NpgsqlDataAdapter(cmd);
                 DataSet ds = new DataSet();
                 da.Fill(ds);
@@ -194,21 +196,60 @@ namespace BizErpBVN.Menu
 
         protected void LoadAddress()
         {
-            NpgsqlCommand cmd = new NpgsqlCommand("SELECT * FROM txn_so_line where parent_oid::text = @oid", conn);
-            cmd.Parameters.AddWithValue("@oid", DBCompany.gSaleRepOid);
-            NpgsqlDataAdapter sda = new NpgsqlDataAdapter(cmd);
-            DataSet ds = new DataSet();
+            try { 
 
-            sda.Fill(ds);
-            GvOrder.DataSource = ds;
+            NpgsqlCommand cmd1 = new NpgsqlCommand("select addr_text from mt_nameaddr where name_oid::text = @oid order by seq", conn);
+            cmd1.Parameters.AddWithValue("@oid", cbbCustgrp.SelectedValue);
+            NpgsqlDataAdapter sda = new NpgsqlDataAdapter(cmd1);
+            DataSet ds1 = new DataSet();
+
+            sda.Fill(ds1);
+            GvOrder.DataSource = ds1;
             GvOrder.DataBind();
+            txt_Addr1.Value = ds1.Tables[0].Rows[0]["addr_text"].ToString();
+
+
+            NpgsqlCommand cmd2 = new NpgsqlCommand("select addr_text from mt_nameaddr where name_oid::text = @oid and seq<> 0 order by seq", conn);
+            cmd2.Parameters.AddWithValue("@oid", cbbCustgrp.SelectedValue);
+            NpgsqlDataAdapter sda1 = new NpgsqlDataAdapter(cmd2);
+            DataSet ds2 = new DataSet();
+
+            sda.Fill(ds2);
+            GvOrder1.DataSource = ds2;
+            GvOrder1.DataBind();
+
+            }
+            catch (Exception ex)
+            {
+
+                Response.Write(ex.Message);
+            }
         }
 
-
-        protected void GvOrder_PageIndexChanged(object sender, GridViewPageEventArgs e)
+        protected void cbbCustgrp_SelectedIndexChanged(object sender, EventArgs e)
         {
-            GvOrder.PageIndex = e.NewPageIndex;
             LoadAddress();
+        }
+
+        [WebMethod]
+        public List<string> GetCustomerName(string en_name)
+        {
+
+            List<string> CustomerNames = new List<string>();
+            {
+                NpgsqlConnection conn = DBCompany.gCnnObj;
+                NpgsqlCommand cmd = new NpgsqlCommand("select en_name, en_code from en_txn_status like'%" + en_name + "%'", conn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                conn.Open();
+                NpgsqlDataReader rdr = cmd.ExecuteReader();
+                while (rdr.Read())
+                {
+                    CustomerNames.Add(rdr["en_name"].ToString());
+                }
+                return CustomerNames;
+
+
+            }
         }
     }
 }
