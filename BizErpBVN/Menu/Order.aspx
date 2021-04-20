@@ -84,19 +84,19 @@
                     </button>
                 </div>
             </div>
-             <table  style="border: solid 15px Green; background-color: SkyBlue;" >  
+             <%--<table  style="border: solid 15px Green; background-color: SkyBlue;" >  
         <tr>  
             <td>  
                 <span style="color: Red; font-weight: bold; font-size: 18pt;">Enter Employee Name:</span>   
                 <asp:TextBox ID="txtEmpName" runat="server" Width="160px" />  
             </td>  
         </tr>  
-    </table> 
+    </table> --%>
             <div class="form-group">
                 <label for="title" class="col-md-2 control-label">เลขที่เอกสาร</label>
                 <div class="col-md-4">
                     <input type="text" data-ng-model="tutorial.title"
-                        name="title" class="form-control" />
+                        name="title" class="form-control" readonly/>
                 </div>
                 <label for="title" class="col-md-2 control-label">สถานะ</label>
                 <div class="col-md-4">
@@ -239,7 +239,7 @@
             <div class="form-group">
                 <label for="description" class="col-md-2 control-label">รายการสินค้า</label>
                 <div class="col-md-4">
-                    <asp:DropDownList ID="cbbItem" runat="server" class="form-control" OnSelectedIndexChanged="cbbItem_SelectedIndexChanged"></asp:DropDownList>
+                    <asp:DropDownList ID="cbbItem" runat="server" class="form-control" OnSelectedIndexChanged="cbbItem_SelectedIndexChanged" AutoPostBack="True"></asp:DropDownList>
                 </div>
                 <label for="title" class="col-md-2 control-label">รายละเอียดสินค้า</label>
                 <div class="col-md-4">
@@ -263,7 +263,7 @@
                 <div class="col-md-4">
                     <asp:UpdatePanel ID="UpdatePanel2" runat="server">
                         <ContentTemplate>
-                            <asp:TextBox ID="txtPrice" runat="server" class="form-control" TextMode="Number"></asp:TextBox>
+                            <asp:TextBox ID="txtPrice" runat="server" class="form-control" TextMode="Number" ReadOnly></asp:TextBox>
                         </ContentTemplate>
                     </asp:UpdatePanel>
                 </div>
@@ -273,7 +273,7 @@
                         <div class="col-sm-12">
                             <asp:UpdatePanel ID="UpdatePanel5" runat="server">
                                 <ContentTemplate>
-                                    <asp:TextBox ID="txtDisc1_price" runat="server" class="form-control" TextMode="Number"></asp:TextBox>
+                                    <asp:TextBox ID="txtDisc1_price" runat="server" class="form-control" TextMode="Number" AutoPostBack="true" OnTextChanged="line_qty_Change"></asp:TextBox>
                                 </ContentTemplate>
                             </asp:UpdatePanel>
                         </div>
@@ -287,7 +287,7 @@
                 <div class="col-md-4">
                     <asp:UpdatePanel ID="UpdatePanel6" runat="server">
                         <ContentTemplate>
-                            <asp:TextBox ID="txtUnt_oid" runat="server" class="form-control" TextMode="Number"></asp:TextBox>
+                            <asp:TextBox ID="txtline_qty" runat="server" class="form-control" TextMode="Number" AutoPostBack="true" OnTextChanged="line_qty_Change"></asp:TextBox>
                         </ContentTemplate>
                     </asp:UpdatePanel>
                 </div>
@@ -297,7 +297,7 @@
                         <div class="col-sm-12">
                             <asp:UpdatePanel ID="UpdatePanel7" runat="server">
                                 <ContentTemplate>
-                                    <asp:TextBox ID="txtNetprice_amt" runat="server" class="form-control" TextMode="Number"></asp:TextBox>
+                                    <asp:TextBox ID="txtNetprice_amt" runat="server" class="form-control" TextMode="Number" ReadOnly></asp:TextBox>
                                 </ContentTemplate>
                             </asp:UpdatePanel>
                         </div>
@@ -321,7 +321,7 @@
                 <div class="col-md-4">
                     <div class="row">
                         <div class="col-sm-12">
-                            <asp:LinkButton ID="LinkButton2" runat="server" CssClass="btn btn-info form-control" Style="height: 38px; width: 120px;">
+                            <asp:LinkButton ID="AddItem" runat="server" OnClick="ButtonAdd_Click" CssClass="btn btn-info form-control" Style="height: 38px; width: 120px;">
                           <i class="glyphicon glyphicon-plus"></i>&nbsp;เพิ่ม</asp:LinkButton>
                         </div>
                     </div>
@@ -330,16 +330,16 @@
             <br />
             <br />
             <br />
-            <asp:GridView ID="GridView6" runat="server" AutoGenerateColumns="false" AllowPaging="true" PageSize="10" HeaderStyle-HorizontalAlign="Center" CssClass="table table-bordered table-striped" Width="100%" ShowFooter="true" ShowHeader="true"
+            <asp:GridView ID="GridView6" runat="server" AutoGenerateColumns="false" AllowPaging="true" PageSize="10" HeaderStyle-HorizontalAlign="Center" CssClass="table table-bordered table-striped" Width="100%" ShowFooter="false" ShowHeader="true"
                 ShowHeaderWhenEmpty="true" GridLines="None" CellPadding="4" OnPageIndexChanging="GridView6_PageIndexChanged">
                 <EmptyDataTemplate>ไม่พบข้อมูล</EmptyDataTemplate>
                 <Columns>
-                    <asp:BoundField DataField="line_item_oid" HeaderText="รายการสินค้า" />
+                    <asp:BoundField DataField="mt_name" HeaderText="รายการสินค้า" />
                     <asp:BoundField DataField="line_item_dest" HeaderText="รายละเอียดสินค้า" />
                     <asp:BoundField DataField="line_price" HeaderText="ราคาต่อหน่วย" />
                     <asp:BoundField DataField="line_disc1_price" HeaderText="ส่วนลดต่อหน่วย" />
                     <asp:BoundField DataField="line_disc2_price" HeaderText="ส่วนลดต่อหน่วย - กรณีลูกค้ารับสินค้าเอง " />
-                    <asp:BoundField DataField="line_unt_oid" HeaderText="หน่วยนับ" />
+                    <asp:BoundField DataField="line_qty" HeaderText="หน่วยนับ" />
                     <asp:BoundField DataField="line_netprice_amt" HeaderText="รวมมูลค่า" />
                     <asp:BoundField DataField="line_memo" HeaderText="อธิบายเพิ่มเติม" />
                 </Columns>
@@ -449,7 +449,7 @@
                         <Columns>
                             <asp:TemplateField ItemStyle-Width="10%" ItemStyle-HorizontalAlign="Center" ItemStyle-Font-Names="Tahoma">
                                 <ItemTemplate>
-                                    <asp:RadioButton ID="RadioButton1" runat="server" OnClick="javascript:SelectSingleRadiobutton(this.id)" Visible='<%# Eval("oid") %>'/>
+                                    <asp:RadioButton ID="RadioButton1" runat="server" OnClick="javascript:SelectSingleRadiobutton(this.id)"/>
                                 </ItemTemplate>
                             </asp:TemplateField>
                             <asp:BoundField DataField="addr_text" HeaderText="ที่อยู่" />
@@ -461,7 +461,7 @@
                     </asp:GridView>
                 </div>
                 <div class="col-md-12 text-center">
-                    <asp:Button ID="Button1" runat="server" Text="ตกลง" CssClass="btn btn-primary" OnClick="Button1_Click" />
+                    <asp:Button ID="Button1" runat="server" Text="ตกลง" CssClass="btn btn-primary"/>
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                 </div>
             </div>
@@ -484,7 +484,7 @@
                         <Columns>
                             <asp:TemplateField ItemStyle-Width="10%" ItemStyle-HorizontalAlign="Center" ItemStyle-Font-Names="Tahoma">
                                 <ItemTemplate>
-                                    <asp:RadioButton ID="RadioButton2" runat="server"  OnClick="javascript:SelectSingleRadiobutton(this.id)" Visible='<%# Eval("oid") %>'/>
+                                    <asp:RadioButton ID="RadioButton2" runat="server"  OnClick="javascript:SelectSingleRadiobutton(this.id)"/>
                                 </ItemTemplate>
                             </asp:TemplateField>
                             <asp:BoundField DataField="addr_text" HeaderText="ที่อยู่" />
