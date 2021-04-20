@@ -743,7 +743,7 @@ namespace BizErpBVN.Menu
 
                         NpgsqlCommand cmd1 = new NpgsqlCommand("select addr_text, oid from mt_nameaddr where name_oid::text = @name_oid and oid::text = @oid", conn);
                        cmd1.Parameters.AddWithValue("@name_oid", cbbCustgrp.SelectedValue);
-                       cmd1.Parameters.AddWithValue("@oid", rd.Text);
+                       cmd1.Parameters.AddWithValue("@oid", rd.ToolTip);
                         NpgsqlDataAdapter sda = new NpgsqlDataAdapter(cmd1);
                         DataSet ds1 = new DataSet();
 
@@ -764,6 +764,43 @@ namespace BizErpBVN.Menu
 
                 Response.Write(ex.Message);
             }
+        }
+
+        protected void Button2_Click(object sender, EventArgs e)
+        {
+            try
+            {
+
+                foreach (GridViewRow gvr in GvOrder1.Rows)
+                {
+                    RadioButton rd2 = (RadioButton)gvr.FindControl("RadioButton2");
+                    if (rd2.Checked)
+                    {
+
+                        NpgsqlCommand cmd1 = new NpgsqlCommand("select addr_text,oid from mt_nameaddr where name_oid::text = @name_oid and seq<> 0 and oid::text = @oid order by seq", conn);
+                        cmd1.Parameters.AddWithValue("@name_oid", cbbCustgrp.SelectedValue);
+                        cmd1.Parameters.AddWithValue("@oid", rd2.ToolTip);
+                        NpgsqlDataAdapter sda = new NpgsqlDataAdapter(cmd1);
+                        DataSet ds2 = new DataSet();
+
+                        sda.Fill(ds2);
+                        if (ds2.Tables[0].Rows.Count > 0)
+                        {
+                            txt_Addr2.Value = ds2.Tables[0].Rows[0]["addr_text"].ToString();
+
+                        }
+
+                    }
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+                Response.Write(ex.Message);
+            }
+
         }
     }
 }

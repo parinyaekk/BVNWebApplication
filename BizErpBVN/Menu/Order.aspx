@@ -476,7 +476,7 @@
                     </asp:GridView>
                 </div>
                 <div class="col-md-12 text-center">
-                    <asp:Button ID="Button2" runat="server" Text="ตกลง" CssClass="btn btn-primary" />
+                    <asp:Button ID="Button2" runat="server" Text="ตกลง" CssClass="btn btn-primary" OnClick="Button2_Click" />
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                 </div>
             </div>
