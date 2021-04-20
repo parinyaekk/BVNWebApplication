@@ -141,13 +141,13 @@ namespace BizErpBVN.Menu
         {
             try
             {
-                NpgsqlCommand sqCommand = new NpgsqlCommand("SELECT mt_name,mt_code FROM mt_item ORDER BY mt_name", conn);
+                NpgsqlCommand sqCommand = new NpgsqlCommand("SELECT mt_name,oid FROM mt_item ORDER BY mt_name", conn);
                 NpgsqlDataAdapter da = new NpgsqlDataAdapter(sqCommand);
                 DataSet ds = new DataSet();
 
                 da.Fill(ds);
                 cbbItem.DataTextField = ds.Tables[0].Columns["mt_name"].ToString();
-                cbbItem.DataValueField = ds.Tables[0].Columns["mt_code"].ToString();
+                cbbItem.DataValueField = ds.Tables[0].Columns["oid"].ToString();
 
                 cbbItem.DataSource = ds.Tables[0];
                 cbbItem.DataBind();
@@ -165,8 +165,8 @@ namespace BizErpBVN.Menu
             try
             {
        
-                NpgsqlCommand cmd = new NpgsqlCommand("select * from  txn_so_line tl inner join mt_item mi on tl.line_item_oid = mi.oid   where mi.mt_code = @mt_code", conn);
-                cmd.Parameters.AddWithValue("@mt_code", cbbItem.SelectedValue);
+                NpgsqlCommand cmd = new NpgsqlCommand("select * from  txn_so_line tl inner join mt_item mi on tl.line_item_oid = mi.oid   where tl.parent_oid::text = @oid", conn);
+                cmd.Parameters.AddWithValue("@oid", cbbItem.SelectedValue);
                 NpgsqlDataAdapter da = new NpgsqlDataAdapter(cmd);
                 DataSet ds = new DataSet();
                 da.Fill(ds);

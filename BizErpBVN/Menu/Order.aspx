@@ -144,21 +144,21 @@
                 <label for="description" class="col-md-2 control-label">ที่อยู่</label>
                 <div class="col-md-4">
 
-                           <asp:UpdatePanel ID="UpdatePanel22" runat="server">
+                    <asp:UpdatePanel ID="UpdatePanel22" runat="server">
                         <ContentTemplate>
-                    <textarea data-ng-model="tutorial.description" rows="2" runat="server" id="txt_Addr1"
-                        name="description" class="form-control">
+                            <textarea data-ng-model="tutorial.description" rows="2" runat="server" id="txt_Addr1"
+                                name="description" class="form-control">
                         </textarea>
-                                </ContentTemplate>
+                        </ContentTemplate>
                     </asp:UpdatePanel>
                 </div>
                 <div class="col-md-1">
-                                        <asp:UpdatePanel ID="UpdatePanel1" runat="server">
-                                <ContentTemplate>
-                    <img src="../Images/edit.png" style="width: 25px; height: 25px" data-toggle="modal" data-target="#exampleModalCenter1"//>
-                                                         </ContentTemplate>
+                    <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+                        <ContentTemplate>
+                            <img src="../Images/edit.png" style="width: 25px; height: 25px" data-toggle="modal" data-target="#exampleModalCenter1" />
+                        </ContentTemplate>
                     </asp:UpdatePanel>
-                                    </div>
+                </div>
                 <label for="title" class="col-md-2 control-label"></label>
                 <div class="col-md-4">
                     <div class="row">
@@ -169,32 +169,32 @@
             </div>
             <br />
             <br />
-                  <br />
-          <div class="form-group">
+            <br />
+            <div class="form-group">
                 <label for="description" class="col-md-2 control-label">ที่อยู่จัดส่ง</label>
                 <div class="col-md-4">
-                    <textarea data-ng-model="tutorial.description" rows="2"  runat="server" id="txt_Addr2"
+                    <textarea data-ng-model="tutorial.description" rows="2" runat="server" id="txt_Addr2"
                         name="description" class="form-control">
                         </textarea>
                 </div>
-              <div class="col-md-1">
-                  <asp:UpdatePanel ID="UpdatePanel4" runat="server">
-                      <ContentTemplate>
-                          <img src="../Images/edit.png" style="width: 25px; height: 25px" data-toggle="modal" data-target="#exampleModalCenter" />
-                      </ContentTemplate>
-                  </asp:UpdatePanel>
-              </div>
-              <label for="title" class="col-md-2 control-label"></label>
-              <div class="col-md-4">
-                  <div class="row">
-                      <div class="col-sm-12">
+                <div class="col-md-1">
+                    <asp:UpdatePanel ID="UpdatePanel4" runat="server">
+                        <ContentTemplate>
+                            <img src="../Images/edit.png" style="width: 25px; height: 25px" data-toggle="modal" data-target="#exampleModalCenter" />
+                        </ContentTemplate>
+                    </asp:UpdatePanel>
+                </div>
+                <label for="title" class="col-md-2 control-label"></label>
+                <div class="col-md-4">
+                    <div class="row">
+                        <div class="col-sm-12">
                         </div>
                     </div>
                 </div>
             </div>
             <br />
             <br />
-              <br />
+            <br />
             <hr />
             <br />
             <br />
@@ -223,13 +223,21 @@
             <div class="form-group">
                 <label for="description" class="col-md-2 control-label">ราคาต่อหน่วย</label>
                 <div class="col-md-4">
-                    <asp:TextBox ID="txtPrice" runat="server" class="form-control" TextMode="Number"></asp:TextBox>
+                    <asp:UpdatePanel ID="UpdatePanel2" runat="server">
+                        <ContentTemplate>
+                            <asp:TextBox ID="txtPrice" runat="server" class="form-control" TextMode="Number"></asp:TextBox>
+                        </ContentTemplate>
+                    </asp:UpdatePanel>
                 </div>
                 <label for="title" class="col-md-2 control-label">ส่วนลดต่อหน่วย</label>
                 <div class="col-md-4">
                     <div class="row">
                         <div class="col-sm-12">
-                            <asp:TextBox ID="txtDisc1_price" runat="server" class="form-control" TextMode="Number"></asp:TextBox>
+                            <asp:UpdatePanel ID="UpdatePanel5" runat="server">
+                                <ContentTemplate>
+                                    <asp:TextBox ID="txtDisc1_price" runat="server" class="form-control" TextMode="Number"></asp:TextBox>
+                                </ContentTemplate>
+                            </asp:UpdatePanel>
                         </div>
                     </div>
                 </div>
@@ -239,13 +247,21 @@
             <div class="form-group">
                 <label for="description" class="col-md-2 control-label">หน่วยนับ</label>
                 <div class="col-md-4">
-                    <asp:TextBox ID="txtUnt_oid" runat="server" class="form-control" TextMode="Number"></asp:TextBox>
+                    <asp:UpdatePanel ID="UpdatePanel6" runat="server">
+                        <ContentTemplate>
+                            <asp:TextBox ID="txtUnt_oid" runat="server" class="form-control" TextMode="Number"></asp:TextBox>
+                        </ContentTemplate>
+                    </asp:UpdatePanel>
                 </div>
                 <label for="title" class="col-md-2 control-label">รวมมูลค่า</label>
                 <div class="col-md-4">
                     <div class="row">
                         <div class="col-sm-12">
-                            <asp:TextBox ID="txtNetprice_amt" runat="server" class="form-control" TextMode="Number"></asp:TextBox>
+                            <asp:UpdatePanel ID="UpdatePanel7" runat="server">
+                                <ContentTemplate>
+                                    <asp:TextBox ID="txtNetprice_amt" runat="server" class="form-control" TextMode="Number"></asp:TextBox>
+                                </ContentTemplate>
+                            </asp:UpdatePanel>
                         </div>
                     </div>
                 </div>
@@ -255,9 +271,13 @@
             <div class="form-group">
                 <label for="description" class="col-md-2 control-label">อธิบายเพิ่มเติม</label>
                 <div class="col-md-4">
-                    <textarea data-ng-model="tutorial.description" rows="2" id="txtMemo" runat="server"
-                        name="description" class="form-control">
+                    <asp:UpdatePanel ID="UpdatePanel8" runat="server">
+                        <ContentTemplate>
+                            <textarea data-ng-model="tutorial.description" rows="2" id="txtMemo" runat="server"
+                                name="description" class="form-control">
                         </textarea>
+                        </ContentTemplate>
+                    </asp:UpdatePanel>
                 </div>
                 <label for="title" class="col-md-2 control-label"></label>
                 <div class="col-md-4">
@@ -322,12 +342,12 @@
                     <input type="text" data-ng-model="tutorial.title"
                         name="title" class="form-control" />
                 </div>
-                             <label for="title" class="col-md-2 control-label">ยอดเงินที่รับชำระแล้ว</label>
+                <label for="title" class="col-md-2 control-label">ยอดเงินที่รับชำระแล้ว</label>
                 <div class="col-md-4">
                     <input type="number" style="text-align: right" class="form-control"
                         required name="price" min="0" value="0.00" step="0.01" />
                 </div>
-            </div>   
+            </div>
 
             <br />
             <br />
@@ -375,73 +395,73 @@
     </div>
 
 
-<div class="modal fade" id="exampleModalCenter1" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle1">ที่อยู่</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-          <asp:GridView ID="GvOrder" runat="server" AutoGenerateColumns="false" AllowPaging="true" PageSize="10" HeaderStyle-HorizontalAlign="Center" CssClass="table table-bordered table-striped text-center" Width="110%" ShowHeader="true"
-              ShowHeaderWhenEmpty="true" GridLines="None" CellPadding="4" >
-              <EmptyDataTemplate>ไม่พบข้อมูล</EmptyDataTemplate>
-              <Columns>
-                  <asp:TemplateField ItemStyle-Width="10%" ItemStyle-HorizontalAlign="Center" ItemStyle-Font-Names="Tahoma">
-                      <ItemTemplate>
-                          <asp:RadioButton ID="RadioButton1" runat="server" />
-                      </ItemTemplate>
-                  </asp:TemplateField>
-                  <asp:BoundField DataField="addr_text" HeaderText="ที่อยู่" />
-              </Columns>
-              <RowStyle BackColor="#EFF3FB" />
-              <EditRowStyle BackColor="#2461BF" HorizontalAlign="Left" />
-              <PagerStyle BackColor="#D9DABF" ForeColor="#3B3B37" HorizontalAlign="Center" />
-              <HeaderStyle BackColor="Salmon" Font-Bold="True" ForeColor="#3B3B37" Width="400px" />
-          </asp:GridView>
-      </div>
-           <div class="col-md-12 text-center">
-       <button type="button" class="btn btn-primary" >ตกลง</button>
-        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-      </div>
+    <div class="modal fade" id="exampleModalCenter1" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle1">ที่อยู่</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <asp:GridView ID="GvOrder" runat="server" AutoGenerateColumns="false" AllowPaging="true" PageSize="10" HeaderStyle-HorizontalAlign="Center" CssClass="table table-bordered table-striped text-center" Width="110%" ShowHeader="true"
+                        ShowHeaderWhenEmpty="true" GridLines="None" CellPadding="4">
+                        <EmptyDataTemplate>ไม่พบข้อมูล</EmptyDataTemplate>
+                        <Columns>
+                            <asp:TemplateField ItemStyle-Width="10%" ItemStyle-HorizontalAlign="Center" ItemStyle-Font-Names="Tahoma">
+                                <ItemTemplate>
+                                    <asp:RadioButton ID="RadioButton1" runat="server" />
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                            <asp:BoundField DataField="addr_text" HeaderText="ที่อยู่" />
+                        </Columns>
+                        <RowStyle BackColor="#EFF3FB" />
+                        <EditRowStyle BackColor="#2461BF" HorizontalAlign="Left" />
+                        <PagerStyle BackColor="#D9DABF" ForeColor="#3B3B37" HorizontalAlign="Center" />
+                        <HeaderStyle BackColor="Salmon" Font-Bold="True" ForeColor="#3B3B37" Width="400px" />
+                    </asp:GridView>
+                </div>
+                <div class="col-md-12 text-center">
+                    <button type="button" class="btn btn-primary">ตกลง</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
-</div>
 
-<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">ที่อยู่จัดส่ง</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-          <asp:GridView ID="GvOrder1" runat="server" AutoGenerateColumns="false" AllowPaging="true" PageSize="10" HeaderStyle-HorizontalAlign="Center" CssClass="table table-bordered table-striped text-center" Width="110%" ShowHeader="true"
-              ShowHeaderWhenEmpty="true" GridLines="None" CellPadding="4">
-              <EmptyDataTemplate>ไม่พบข้อมูล</EmptyDataTemplate>
-              <Columns>
-                  <asp:TemplateField ItemStyle-Width="10%" ItemStyle-HorizontalAlign="Center" ItemStyle-Font-Names="Tahoma">
-                      <ItemTemplate>
-                          <asp:RadioButton ID="RadioButton2" runat="server" />
-                      </ItemTemplate>
-                  </asp:TemplateField>
-                  <asp:BoundField DataField="addr_text" HeaderText="ที่อยู่" />
-              </Columns>
-              <RowStyle BackColor="#EFF3FB" />
-              <EditRowStyle BackColor="#2461BF" />
-              <PagerStyle BackColor="#D9DABF" ForeColor="#3B3B37" HorizontalAlign="Center" />
-              <HeaderStyle BackColor="Salmon" Font-Bold="True" ForeColor="#3B3B37" Width="400px" />
-          </asp:GridView>
-      </div>
-        <div class="col-md-12 text-center">
-       <button type="button" class="btn btn-primary" >ตกลง</button>
-        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-      </div>
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">ที่อยู่จัดส่ง</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <asp:GridView ID="GvOrder1" runat="server" AutoGenerateColumns="false" AllowPaging="true" PageSize="10" HeaderStyle-HorizontalAlign="Center" CssClass="table table-bordered table-striped text-center" Width="110%" ShowHeader="true"
+                        ShowHeaderWhenEmpty="true" GridLines="None" CellPadding="4">
+                        <EmptyDataTemplate>ไม่พบข้อมูล</EmptyDataTemplate>
+                        <Columns>
+                            <asp:TemplateField ItemStyle-Width="10%" ItemStyle-HorizontalAlign="Center" ItemStyle-Font-Names="Tahoma">
+                                <ItemTemplate>
+                                    <asp:RadioButton ID="RadioButton2" runat="server" />
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                            <asp:BoundField DataField="addr_text" HeaderText="ที่อยู่" />
+                        </Columns>
+                        <RowStyle BackColor="#EFF3FB" />
+                        <EditRowStyle BackColor="#2461BF" />
+                        <PagerStyle BackColor="#D9DABF" ForeColor="#3B3B37" HorizontalAlign="Center" />
+                        <HeaderStyle BackColor="Salmon" Font-Bold="True" ForeColor="#3B3B37" Width="400px" />
+                    </asp:GridView>
+                </div>
+                <div class="col-md-12 text-center">
+                    <button type="button" class="btn btn-primary">ตกลง</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
-</div>
 </asp:Content>
