@@ -148,8 +148,12 @@
                         </textarea>
                 </div>
                 <div class="col-md-1">
+                                        <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+                                <ContentTemplate>
                     <img src="../Images/edit.png" style="width: 25px; height: 25px" data-toggle="modal" data-target="#exampleModalCenter1"//>
-                </div>
+                                                         </ContentTemplate>
+                    </asp:UpdatePanel>
+                                    </div>
                 <label for="title" class="col-md-2 control-label"></label>
                 <div class="col-md-4">
                     <div class="row">
@@ -169,7 +173,11 @@
                         </textarea>
                 </div>
                 <div class="col-md-1">
+                                                <asp:UpdatePanel ID="UpdatePanel4" runat="server">
+                                <ContentTemplate>
                     <img src="../Images/edit.png" style="width: 25px; height: 25px" data-toggle="modal" data-target="#exampleModalCenter"/>
+                                                       </ContentTemplate>
+                    </asp:UpdatePanel>
                 </div>
                 <label for="title" class="col-md-2 control-label"></label>
                 <div class="col-md-4">
@@ -373,7 +381,7 @@
       </div>
       <div class="modal-body">
           <asp:GridView ID="GvOrder" runat="server" AutoGenerateColumns="false" AllowPaging="true" PageSize="10" HeaderStyle-HorizontalAlign="Center" CssClass="table table-bordered table-striped text-center" Width="110%" ShowHeader="true"
-              ShowHeaderWhenEmpty="true" GridLines="None" CellPadding="4" >
+              ShowHeaderWhenEmpty="true" GridLines="None" CellPadding="4" OnPageIndexChanging="GvOrder_PageIndexChanged" >
               <EmptyDataTemplate>ไม่พบข้อมูล</EmptyDataTemplate>
               <Columns>
                   <asp:TemplateField ItemStyle-Width="10%" ItemStyle-HorizontalAlign="Center" ItemStyle-Font-Names="Tahoma">
@@ -381,7 +389,7 @@
                           <asp:RadioButton ID="RadioButton1" runat="server" />
                       </ItemTemplate>
                   </asp:TemplateField>
-                  <asp:BoundField DataField="" HeaderText="ที่อยู่" />
+                  <asp:BoundField DataField="addr_text" HeaderText="ที่อยู่" />
               </Columns>
               <RowStyle BackColor="#EFF3FB" />
               <EditRowStyle BackColor="#2461BF" />
@@ -407,8 +415,8 @@
         </button>
       </div>
       <div class="modal-body">
-          <asp:GridView ID="GvOrder2" runat="server" AutoGenerateColumns="false" AllowPaging="true" PageSize="10" HeaderStyle-HorizontalAlign="Center" CssClass="table table-bordered table-striped text-center" Width="110%" ShowHeader="true"
-              ShowHeaderWhenEmpty="true" GridLines="None" CellPadding="4">
+          <asp:GridView ID="GvOrder1" runat="server" AutoGenerateColumns="false" AllowPaging="true" PageSize="10" HeaderStyle-HorizontalAlign="Center" CssClass="table table-bordered table-striped text-center" Width="110%" ShowHeader="true"
+              ShowHeaderWhenEmpty="true" GridLines="None" CellPadding="4"  OnPageIndexChanging="GvOrder1_PageIndexChanged">
               <EmptyDataTemplate>ไม่พบข้อมูล</EmptyDataTemplate>
               <Columns>
                   <asp:TemplateField ItemStyle-Width="10%" ItemStyle-HorizontalAlign="Center" ItemStyle-Font-Names="Tahoma">
@@ -416,7 +424,7 @@
                           <asp:RadioButton ID="RadioButton2" runat="server" />
                       </ItemTemplate>
                   </asp:TemplateField>
-                  <asp:BoundField DataField="" HeaderText="ที่อยู่" />
+                  <asp:BoundField DataField="addr_text" HeaderText="ที่อยู่" />
               </Columns>
               <RowStyle BackColor="#EFF3FB" />
               <EditRowStyle BackColor="#2461BF" />

@@ -31,6 +31,9 @@ namespace BizErpBVN.Menu
                 this.refreshdataT2();
                 this.LoadStatus();
                 this.LoadItem();
+                this.LoadAddress();
+                this.LoadAddress1();
+
             }
         }
 
@@ -50,7 +53,7 @@ namespace BizErpBVN.Menu
 
         protected void CustomerGroup()
         {
-            NpgsqlCommand com = new NpgsqlCommand("select mt_name,mt_code from mt_cust", conn);
+            NpgsqlCommand com = new NpgsqlCommand("select mt_name,mt_code from mt_cust where mt_name <>'' order by mt_name", conn);
             NpgsqlDataAdapter da = new NpgsqlDataAdapter(com);
             DataSet ds = new DataSet();
             da.Fill(ds);  // fill dataset  
@@ -194,8 +197,8 @@ namespace BizErpBVN.Menu
 
         protected void LoadAddress()
         {
-            NpgsqlCommand cmd = new NpgsqlCommand("SELECT * FROM txn_so_line where parent_oid::text = @oid", conn);
-            cmd.Parameters.AddWithValue("@oid", DBCompany.gSaleRepOid);
+            NpgsqlCommand cmd = new NpgsqlCommand("select addr_text from mt_nameaddr where name_oid::text = @oid and seq<> 0 order by seq", conn);
+            cmd.Parameters.AddWithValue("@oid", cbbCustgrp.SelectedValue);
             NpgsqlDataAdapter sda = new NpgsqlDataAdapter(cmd);
             DataSet ds = new DataSet();
 
@@ -210,5 +213,27 @@ namespace BizErpBVN.Menu
             GvOrder.PageIndex = e.NewPageIndex;
             LoadAddress();
         }
+
+
+        protected void LoadAddress1()
+        {
+            
+          NpgsqlCommand cmd = new NpgsqlCommand("select addr_text from mt_nameaddr where name_oid::text = @oid and seq<> 0 order by seq", conn);
+            cmd.Parameters.AddWithValue("@oid", cbbCustgrp.SelectedValue);
+            NpgsqlDataAdapter sda = new NpgsqlDataAdapter(cmd);
+            DataSet ds = new DataSet();
+
+            sda.Fill(ds);
+            GvOrder1.DataSource = ds;
+            GvOrder1.DataBind();
+        }
+
+
+        protected void GvOrder1_PageIndexChanged(object sender, GridViewPageEventArgs e)
+        {
+            GvOrder1.PageIndex = e.NewPageIndex;
+            LoadAddress();
+        }
+
     }
 }
