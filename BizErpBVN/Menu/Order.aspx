@@ -417,7 +417,7 @@
                         <Columns>
                             <asp:TemplateField ItemStyle-Width="10%" ItemStyle-HorizontalAlign="Center" ItemStyle-Font-Names="Tahoma">
                                 <ItemTemplate>
-                                    <asp:RadioButton ID="RadioButton1" runat="server" OnClick="javascript:SelectSingleRadiobutton(this.id)"/>
+                                    <asp:RadioButton ID="RadioButton1" runat="server" OnClick="javascript:SelectSingleRadiobutton(this.id)" Visible='<%# Eval("oid") %>'/>
                                 </ItemTemplate>
                             </asp:TemplateField>
                             <asp:BoundField DataField="addr_text" HeaderText="ที่อยู่" />
@@ -429,7 +429,7 @@
                     </asp:GridView>
                 </div>
                 <div class="col-md-12 text-center">
-                    <button type="button" class="btn btn-primary">ตกลง</button>
+                    <asp:Button ID="Button1" runat="server" Text="ตกลง" CssClass="btn btn-primary" OnClick="Button1_Click" />
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                 </div>
             </div>
@@ -452,7 +452,7 @@
                         <Columns>
                             <asp:TemplateField ItemStyle-Width="10%" ItemStyle-HorizontalAlign="Center" ItemStyle-Font-Names="Tahoma">
                                 <ItemTemplate>
-                                    <asp:RadioButton ID="RadioButton2" runat="server" Checked="true" OnClick="javascript:SelectSingleRadiobutton(this.id)"/>
+                                    <asp:RadioButton ID="RadioButton2" runat="server"  OnClick="javascript:SelectSingleRadiobutton(this.id)" Visible='<%# Eval("oid") %>'/>
                                 </ItemTemplate>
                             </asp:TemplateField>
                             <asp:BoundField DataField="addr_text" HeaderText="ที่อยู่" />

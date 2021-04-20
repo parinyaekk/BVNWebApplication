@@ -232,13 +232,30 @@ namespace BizErpBVN.Menu
         }
 
 
-        protected void LoadAddress1()
+        protected void Button1_Click(object sender, EventArgs e)
         {
             try
             {
 
-                var radio = (RadioButton)GvOrder1.FindControl("RadioButton1");
+                foreach (GridViewRow gvr in GvOrder.Rows)
+                {
+                    RadioButton rd = (RadioButton)gvr.FindControl("RadioButton1");
+                    NpgsqlCommand cmd = new NpgsqlCommand("select * from  txn_so_line tl inner join mt_item mi on tl.line_item_oid = mi.oid   where tl.parent_oid::text = @oid and mi.oid::text = @oid1", conn);
+                    cmd.Parameters.AddWithValue("@oid", cbbCustgrp.SelectedValue);
+                    if (rd.Checked) {
+                        cmd.Parameters.AddWithValue("@oid1", rd.Text);
 
+                    }
+                    NpgsqlDataAdapter da = new NpgsqlDataAdapter(cmd);
+                    DataSet ds = new DataSet();
+                    da.Fill(ds);
+
+                    if (ds.Tables.Count > 0)
+                    {
+                        txt_Addr1.Value = ds.Tables[0].Rows[0]["addr_text"].ToString();
+
+                    }
+                }
 
             }
             catch (Exception ex)
@@ -247,6 +264,5 @@ namespace BizErpBVN.Menu
                 Response.Write(ex.Message);
             }
         }
-
     }
 }
