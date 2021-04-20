@@ -67,33 +67,27 @@
         <div class="container">
             <div class="form-group" style="padding-left: 10%">
                 <div class="col-md-12">
-                    <button type="button" class="btn btn-labeled btn-success">
+                    <asp:LinkButton ID="LinkButton6" runat="server" OnClick="SaveData" class="btn btn-labeled btn-success">
                         <span class="btn-label"><i class="glyphicon glyphicon-floppy-save"></i></span>บันทึก
-                   
-                    </button>
-                    <button type="button" class="btn btn-labeled alert-info">
+                    </asp:LinkButton>
+                    <asp:LinkButton ID="LinkButton5" runat="server" OnClick="gotoOrder" class="btn btn-labeled alert-info">
                         <span class="btn-label"><i class="glyphicon glyphicon-plus-sign"></i></span>สร้างใหม่
-                   
-                    </button>
-                    <button id="buttonEdit" type="button" class="btn btn-labeled btn-warning">
+                    </asp:LinkButton>
+                    <asp:LinkButton ID="LinkButton4" runat="server" OnClick="gotoHistory" class="btn btn-labeled btn-warning">
                         <span class="btn-label"><i class="glyphicon glyphicon-wrench"></i></span>แก้ไข
-                   
-                    </button>
-                    <button id="ButtonCancel" type="button" class="btn btn-labeled btn-danger">
+                    </asp:LinkButton>
+                    <asp:LinkButton ID="LinkButton3" runat="server" class="btn btn-labeled btn-danger">
                         <span class="btn-label"><i class="glyphicon glyphicon-remove"></i></span>ยกเลิกรายการ
-                   
-                    </button>
-                    <button type="button" class="btn btn-labeled btn-success">
+                    </asp:LinkButton>
+                    <asp:LinkButton ID="LinkButton2" runat="server" class="btn btn-labeled btn-success">
                         <span class="btn-label"><i class="glyphicon glyphicon-ok"></i></span>ยืนยันรายการ
-                   
-                    </button>
+                    </asp:LinkButton>
                 </div>
             </div>
             <div class="form-group">
                 <label for="title" class="col-md-2 control-label">เลขที่เอกสาร</label>
                 <div class="col-md-4">
-                    <input type="text" data-ng-model="tutorial.title"
-                        name="title" class="form-control" readonly/>
+                    <asp:TextBox ID="txn_num" runat="server" class="form-control" Readonly="true"></asp:TextBox>
                 </div>
                 <label for="title" class="col-md-2 control-label">สถานะ</label>
                 <div class="col-md-4">
@@ -112,14 +106,13 @@
                 <div class="col-md-4">
                     <div class="row">
                         <div class="col-sm-12">
-                            <input type="date" class="form-control">
+                            <input type="date" class="form-control" id="txtDate" runat="server">
                         </div>
                     </div>
                 </div>
                 <label for="title" class="col-md-2 control-label">เลขประจำตัวผู้เสียภาษี</label>
                 <div class="col-md-4">
-                    <input type="text" data-ng-model="tutorial.title"
-                        name="title" class="form-control" />
+                    <asp:TextBox ID="tax_num" runat="server" class="form-control" Readonly="true"></asp:TextBox>
                 </div>
             </div>
             <br />
@@ -356,17 +349,13 @@
                 <div class="col-md-4">
                     <div class="row">
                         <div class="col-md-12">
-                            <input type="number" style="text-align: right" class="form-control"
-                                required name="price" min="0" value="0.00" step="0.01" />
-
+                            <asp:DropDownList ID="en_sodepos_type" runat="server" class="form-control"></asp:DropDownList>
                         </div>
                     </div>
                 </div>
                 <label for="title" class="col-md-2 control-label">อธิบายรายการ</label>
                 <div class="col-md-4">
-                    <textarea data-ng-model="tutorial.description" rows="1" cols="50"
-                        name="description" class="form-control">
-                        </textarea>
+                    <asp:TextBox ID="txn_memo" runat="server" TextMode="multiline" Columns="50" Rows="2" class="form-control"></asp:TextBox>
                 </div>
             </div>
             <br />
@@ -374,13 +363,11 @@
             <div class="form-group">
                 <label for="title" class="col-md-2 control-label">จำนวนเงินมัดจำ</label>
                 <div class="col-md-4">
-                    <input type="text" data-ng-model="tutorial.title"
-                        name="title" class="form-control" />
+                    <asp:TextBox ID="sodepos_amt" style="text-align: right" runat="server" class="form-control"></asp:TextBox>
                 </div>
                 <label for="title" class="col-md-2 control-label">ยอดเงินที่รับชำระแล้ว</label>
                 <div class="col-md-4">
-                    <input type="number" style="text-align: right" class="form-control"
-                        required name="price" min="0" value="0.00" step="0.01" />
+                    <asp:TextBox ID="depos_amt" style="text-align: right" runat="server" class="form-control"></asp:TextBox>
                 </div>
             </div>
 
@@ -389,13 +376,11 @@
             <div class="form-group">
                 <label for="title" class="col-md-2 control-label">ส่วนลดท้ายบิล</label>
                 <div class="col-md-4">
-                    <input type="number" style="text-align: right" class="form-control"
-                        required name="price" min="0" value="0.00" step="0.01" />
+                    <asp:TextBox ID="disc2_amt" runat="server" style="text-align: right" class="form-control" AutoPostBack="true" OnTextChanged="dist_price_Change"></asp:TextBox>
                 </div>
                 <label for="title" class="col-md-2 control-label">ส่วนลด</label>
                 <div class="col-md-4">
-                    <input type="number" style="text-align: right" class="form-control"
-                        required name="price" min="0" value="0.00" step="0.01" />
+                    <asp:TextBox ID="disc1_amt" style="text-align: right" runat="server" class="form-control" Readonly="true"></asp:TextBox>
                 </div>
             </div>
             <br />
@@ -403,13 +388,12 @@
             <div class="form-group">
                 <label for="title" class="col-md-2 control-label">อัตราภาษี</label>
                 <div class="col-md-4">
-                    <input type="number" style="text-align: right" class="form-control"
-                        required name="price" min="0" value="0.00" step="0.01" />
+                    <input type="number" style="text-align: right" class="form-control" id="tax_rate"
+                        name="price" min="0" value="7" step="0.01" readonly />
                 </div>
                 <label for="title" class="col-md-2 control-label">มูลค่าภาษี</label>
                 <div class="col-md-4">
-                    <input type="number" style="text-align: right" class="form-control"
-                        required name="price" min="0" value="0.00" step="0.01" />
+                    <asp:TextBox ID="tax_amt" style="text-align: right" runat="server" class="form-control" Readonly="true"></asp:TextBox>
                 </div>
             </div>
             <br />
@@ -420,8 +404,7 @@
                 </div>
                 <label for="title" class="col-md-2 control-label">รวมทั้งสิ้น</label>
                 <div class="col-md-4">
-                    <input type="number" style="text-align: right" class="form-control"
-                        required name="price" min="0" value="0.00" step="0.01" />
+                    <asp:TextBox ID="txn_total" style="text-align: right" runat="server" class="form-control" Readonly="true"></asp:TextBox>
                 </div>
             </div>
             <br />

@@ -353,9 +353,9 @@
     <div id="tab2_page2" class="col-md-12 text-center" style="padding-left: 10%">
         <div class="form-group" style="padding-left: 10%">
             <div class="col-md-12">
-                <button id="buttonBack" type="button" class="btn btn-labeled btn-primary">
+                <asp:LinkButton ID="buttonBack" runat="server" OnClick="gotoHistory" class="btn btn-labeled btn-primary">
                     <span class="btn-label"><i class="glyphicon glyphicon-circle-arrow-left"></i></span>กลับหน้าหลัก
-                </button>
+                </asp:LinkButton>
                 <asp:LinkButton ID="LinkButton1" runat="server" OnClick="SaveData" class="btn btn-labeled btn-success">
                     <span class="btn-label"><i class="glyphicon glyphicon-floppy-save"></i></span>บันทึก
                 </asp:LinkButton>
