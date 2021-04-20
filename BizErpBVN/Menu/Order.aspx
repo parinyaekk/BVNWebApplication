@@ -207,7 +207,7 @@
             <div class="form-group">
                 <label for="description" class="col-md-2 control-label">รายการสินค้า</label>
                 <div class="col-md-4">
-                    <asp:DropDownList ID="cbbItem" runat="server" class="form-control" OnSelectedIndexChanged="cbbItem_SelectedIndexChanged" AutoPostBack="true"></asp:DropDownList>
+                    <asp:DropDownList ID="cbbItem" runat="server" class="form-control" OnSelectedIndexChanged="cbbItem_SelectedIndexChanged"></asp:DropDownList>
                 </div>
                 <label for="title" class="col-md-2 control-label">รายละเอียดสินค้า</label>
                 <div class="col-md-4">
@@ -417,7 +417,7 @@
                         <Columns>
                             <asp:TemplateField ItemStyle-Width="10%" ItemStyle-HorizontalAlign="Center" ItemStyle-Font-Names="Tahoma">
                                 <ItemTemplate>
-                                    <asp:RadioButton ID="RadioButton1" runat="server" OnClick="javascript:SelectSingleRadiobutton(this.id)" SelectedValue='<%# Bind("oid") %>'/>
+                                    <asp:RadioButton ID="RadioButton1" runat="server" OnClick="javascript:SelectSingleRadiobutton(this.id)"/>
                                 </ItemTemplate>
                             </asp:TemplateField>
                             <asp:BoundField DataField="addr_text" HeaderText="ที่อยู่" />
@@ -452,7 +452,7 @@
                         <Columns>
                             <asp:TemplateField ItemStyle-Width="10%" ItemStyle-HorizontalAlign="Center" ItemStyle-Font-Names="Tahoma">
                                 <ItemTemplate>
-                                    <asp:RadioButton ID="RadioButton2" runat="server" Checked="true" OnClick="javascript:SelectSingleRadiobutton(this.id)" SelectedValue='<%# Bind("oid") %>'/>
+                                    <asp:RadioButton ID="RadioButton2" runat="server" Checked="true" OnClick="javascript:SelectSingleRadiobutton(this.id)"/>
                                 </ItemTemplate>
                             </asp:TemplateField>
                             <asp:BoundField DataField="addr_text" HeaderText="ที่อยู่" />

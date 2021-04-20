@@ -655,4 +655,3 @@ D:\BVNWebApplication-master\BVNWebApplication-master\BizErpBVN\bin\Microsoft.AI.
 D:\BVNWebApplication-master\BVNWebApplication-master\BizErpBVN\bin\Microsoft.AI.Web.xml
 D:\BVNWebApplication-master\BVNWebApplication-master\BizErpBVN\obj\Debug\BizErpBVN.dll
 D:\BVNWebApplication-master\BVNWebApplication-master\BizErpBVN\obj\Debug\BizErpBVN.pdb
-D:\BVNWebApplication-master\BVNWebApplication-master\BizErpBVN\obj\Debug\BizErpBVN.csprojResolveAssemblyReference.cache
