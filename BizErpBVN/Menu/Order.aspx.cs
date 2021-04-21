@@ -455,7 +455,7 @@ namespace BizErpBVN.Menu
 
             disc1_amt.Text = valdisc1_amt.ToString();
             txn_total.Text = valsum.ToString();
-            tax_amt.Text = ((valsum * 7)/ 107).ToString();
+            tax_amt.Text = ((valsum * 7)/ 107).ToString("F2");
         }
 
         public void ClearOtherField()
