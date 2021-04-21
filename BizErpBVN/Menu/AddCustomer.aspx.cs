@@ -494,7 +494,7 @@ namespace BizErpBVN.Menu
                     conn.Close();
                     cntData++;
                 }
-                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Save Record Customer Successfully.')", true);
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('บันทึกข้อมูลสำเร็จ')", true);
                 Response.Redirect("Home.aspx");
             }
             catch (Exception ex)

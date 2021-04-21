@@ -47,7 +47,7 @@ namespace BizErpBVN.Menu
                         cmd.ExecuteNonQuery();
                         conn.Close();
 
-                        ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Delete Record Customer Successfully.')", true);
+                        ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('ลบข้อมูลสำเร็จ')", true);
                         //Response.Redirect("Home.aspx");
                         refreshdata1();
                     }

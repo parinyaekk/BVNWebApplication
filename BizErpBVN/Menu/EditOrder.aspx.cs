@@ -212,7 +212,7 @@ namespace BizErpBVN.Menu
                 cmd.ExecuteNonQuery();
                 conn.Close();
 
-                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Record Cancel Successfully')", true);
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('ยกเลิกรายการสำเร็จ')", true);
                 
                 Response.Redirect("HistoryOrder.aspx");
             }
@@ -241,7 +241,7 @@ namespace BizErpBVN.Menu
                     cmd.ExecuteNonQuery();
                     conn.Close();
 
-                    ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Record Update Successfully')", true);
+                    ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Update ข้อมูลสำเร็จ')", true);
 
                     getEditData(Guid.Parse(Session["parent_oid"].ToString()));
                 }
@@ -297,7 +297,7 @@ namespace BizErpBVN.Menu
                 cmd.ExecuteNonQuery();
                 conn.Close();
 
-                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Record Update Successfully')", true);
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Update ข้อมูลสำเร็จ')", true);
             }
             catch (Exception ex)
             {

@@ -68,7 +68,7 @@ namespace BizErpBVN.Menu
 
                 conn.Close();
 
-                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Record Approve Successfully')", true);
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('ยืนยันรายการสำเร็จ')", true);
 
                 refreshGridT4();
 
@@ -98,7 +98,7 @@ namespace BizErpBVN.Menu
                     cmd.ExecuteNonQuery();
                     conn.Close();
 
-                    ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Record Reject Successfully')", true);
+                    ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('ยกเลิกรายการสำเร็จ')", true);
 
                     refreshGridT4();
                 }
