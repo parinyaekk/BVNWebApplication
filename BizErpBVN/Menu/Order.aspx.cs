@@ -449,7 +449,7 @@ namespace BizErpBVN.Menu
                 //temp.line_netprice_amt = row.Cells[6].Text;
                 //temp.line_memo = row.Cells[7].Text;
                 //lstModel.Add(temp);
-                valdisc1_amt += (Convert.ToDouble(String.IsNullOrEmpty(row.Cells[3].Text) ? "0" : row.Cells[3].Text) + Convert.ToDouble(String.IsNullOrEmpty(row.Cells[4].Text) ? "0" : row.Cells[4].Text)) * Convert.ToDouble(String.IsNullOrEmpty(row.Cells[5].Text) ? "0" : row.Cells[5].Text);
+                valdisc1_amt += (Convert.ToDouble(String.IsNullOrEmpty(row.Cells[3].Text) || row.Cells[3].Text == "&nbsp;" ? "0" : row.Cells[3].Text) + Convert.ToDouble(String.IsNullOrEmpty(row.Cells[4].Text) ? "0" : row.Cells[4].Text)) * Convert.ToDouble(String.IsNullOrEmpty(row.Cells[5].Text) ? "0" : row.Cells[5].Text);
                 valsum += Convert.ToDouble(String.IsNullOrEmpty(row.Cells[6].Text) ? "0" : row.Cells[6].Text);
             }
 
