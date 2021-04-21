@@ -380,6 +380,15 @@ namespace BizErpBVN.Menu
             {
                 DataTable table = Session["dttableline"] as DataTable;
                 DataRow drNew = table.NewRow();
+                foreach (GridViewRow gvr in GvOrder.Rows)
+                {
+                    RadioButton rd = (RadioButton)gvr.FindControl("RadioButton1");
+                    if (rd.Checked)
+                    {
+                        drNew["mt_name"] = rd.ToolTip;
+                    }
+                }
+
                 drNew["mt_name"] = cbbItem.SelectedItem;
                 drNew["line_item_dest"] = txtItem_dest.Value;
                 drNew["line_price"] = txtPrice.Text;

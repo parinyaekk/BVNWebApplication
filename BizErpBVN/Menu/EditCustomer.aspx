@@ -66,10 +66,12 @@
                 </div>
             </div>
             <br />
+                    <br />
             <hr />
             <h2>รายละเอียด</h2>
             <hr />
             <br />
+                    <br />
             <div class="form-group">
                 <label for="title" class="col-md-2 control-label">ประเภทองค์กร</label>
                 <div class="col-md-4">
@@ -138,7 +140,7 @@
                 <div class="col-md-4">
                     <div class="row">
                         <div class="col-sm-12">
-                            <asp:TextBox ID="txtCrLimit" runat="server" class="form-control" TextMode="Number"></asp:TextBox>
+                            <asp:TextBox ID="txtCrLimit" runat="server"  TextMode="Number" CssClass="form-control text-right"></asp:TextBox>
                         </div>
                     </div>
                 </div>
@@ -160,9 +162,12 @@
                 </div>
             </div>
             <br />
+                    <br />
             <hr />
             <h2>ที่อยู่หลัก</h2>
             <hr />
+                    <br />
+                    <br />
             <div class="form-group">
                 <label for="title" class="col-md-2 control-label">ชื่อผู้ติดต่อ</label>
                 <div class="col-md-4">
@@ -243,6 +248,8 @@
             <hr />
             <h2>ที่อยู่อื่นๆ</h2>
             <hr />
+                                <br />
+                    <br />
             <div class="form-group">
                 <label for="title" class="col-md-2 control-label">ชื่อผู้ติดต่อ</label>
                 <div class="col-md-4">
