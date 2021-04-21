@@ -33,14 +33,13 @@
         <div class="container">
             <div class="col-md-12" style="text-align: center">
                 <div class="col-md-12">
-                    <asp:LinkButton type="button" class="btn btn-success" runat="server" OnClick="btnSave_Click">
+                    <asp:LinkButton type="button" class="btn btn-success" runat="server" OnClick="btnSave_Click" Height="42px">
                         <span class="btn-label"><i class="glyphicon glyphicon-floppy-save"></i></span>บันทึก
                     </asp:LinkButton>
                     &nbsp;
                    
-                    <button id="btnBack" type="button" class="btn btn-primary">
+                    <button id="btnBack" type="button" class="btn btn-primary" style="height:42px" >
                         <span class="btn-label"><i class="glyphicon glyphicon-circle-arrow-left"></i></span>กลับหน้าหลัก
-                   
                     </button>
 
                 </div>
