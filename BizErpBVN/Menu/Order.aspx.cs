@@ -73,7 +73,7 @@ namespace BizErpBVN.Menu
         }
         protected void line_qty_Change(object sender, EventArgs e)
         {
-            txtNetprice_amt.Text = ((Convert.ToDouble(String.IsNullOrEmpty(txtPrice.Text) ? "0" : txtPrice.Text) - Convert.ToDouble(String.IsNullOrEmpty(txtDisc1_price.Text) || txtDisc1_price.Text == "&nbsp;" ? "0" : txtDisc1_price.Text)) * Convert.ToDouble(String.IsNullOrEmpty(txtline_qty.Text) || txtline_qty.Text == "&nbsp;" ? "0" : txtline_qty.Text)).ToString();
+            txtNetprice_amt.Text = ((Convert.ToDouble(String.IsNullOrEmpty(txtPrice.Text) || txtPrice.Text == "&nbsp;" ? "0" : txtPrice.Text) - Convert.ToDouble(String.IsNullOrEmpty(txtDisc1_price.Text) || txtDisc1_price.Text == "&nbsp;" ? "0" : txtDisc1_price.Text)) * Convert.ToDouble(String.IsNullOrEmpty(txtline_qty.Text) || txtline_qty.Text == "&nbsp;" ? "0" : txtline_qty.Text)).ToString();
         }
         protected void gotoHistory(Object sender, EventArgs e)
         {
@@ -92,74 +92,76 @@ namespace BizErpBVN.Menu
                 //call sp_getrun('SOF', '04-21-2021', true, 'test')
                 string valmt_pymt = mt_pymt.Text; //oid
                 string valtxn_date = txtDate.Value; //oid
-
-                if (String.IsNullOrEmpty(txn_num.Text))
-                {
-                    NpgsqlCommand com0 = new NpgsqlCommand("call sp_getrun(@p_runcode, Date(@p_rundate), true, @p_string)", conn);
-                    com0.Parameters.AddWithValue("@p_runcode", "SOF");
-                    com0.Parameters.AddWithValue("@p_rundate", valtxn_date);
-                    com0.Parameters.AddWithValue("@p_string", "test");
-                    NpgsqlDataAdapter da0 = new NpgsqlDataAdapter(com0);
-                    DataSet ds0 = new DataSet();
-                    da0.Fill(ds0);
-                    if (ds0.Tables[0].Rows.Count > 0)
-                    {
-                        txn_num.Text = ds0.Tables[0].Rows[0][1].ToString();
-                    }
-                }
-
-                Guid ggpymtid = new Guid();
-                NpgsqlCommand com2 = new NpgsqlCommand("select oid from mt_pymt where mt_code = @mt_code", conn);
-                com2.Parameters.AddWithValue("@mt_code", valmt_pymt);
-                NpgsqlDataAdapter da2 = new NpgsqlDataAdapter(com2);
-                DataSet ds2 = new DataSet();
-                da2.Fill(ds2);
-                if (ds2.Tables[0].Rows.Count > 0)
-                {
-                    ggpymtid = Guid.Parse(ds2.Tables[0].Rows[0]["oid"].ToString());
-                }
-                string valtax_num = tax_num.Text;
                 string valcbbCustgrp = cbbCustgrp.Text;
-                string valen_saledelry_type = en_saledelry_type.Text;
-                var valmt_emp = Guid.Parse(DBCompany.gSaleRepOid.ToString());
-                string valcbbTaxcalc = cbbTaxcalc.Text;
-                string valaddr_text = txt_Addr1.Value;
-                string valship_addr_text = txt_Addr2.Value;
 
-                List<TempModel> lstModel = new List<TempModel>();
-                foreach (GridViewRow row in GridView6.Rows)
+                if (!String.IsNullOrEmpty(valtxn_date) && !String.IsNullOrEmpty(valcbbCustgrp) && cbbCustgrp.SelectedIndex != 0)
                 {
-                    //mt_name
-                    //line_item_dest
-                    //line_price
-                    //line_disc1_price
-                    //line_disc2_price
-                    //line_qty
-                    //line_netprice_amt
-                    //line_memo
-                    var temp = new TempModel();
-                    temp.mt_name = row.Cells[0].Text;
-                    temp.line_item_dest = row.Cells[1].Text;
-                    temp.line_price = row.Cells[2].Text;
-                    temp.line_disc1_price = row.Cells[3].Text;
-                    temp.line_disc2_price = row.Cells[4].Text;
-                    temp.line_qty = row.Cells[5].Text;
-                    temp.line_netprice_amt = row.Cells[6].Text;
-                    temp.line_memo = row.Cells[7].Text;
-                    lstModel.Add(temp);
-                }
+                    if (String.IsNullOrEmpty(txn_num.Text))
+                    {
+                        NpgsqlCommand com0 = new NpgsqlCommand("call sp_getrun(@p_runcode, Date(@p_rundate), true, @p_string)", conn);
+                        com0.Parameters.AddWithValue("@p_runcode", "SOF");
+                        com0.Parameters.AddWithValue("@p_rundate", String.IsNullOrEmpty(valtxn_date) ? null : valtxn_date);
+                        com0.Parameters.AddWithValue("@p_string", "test");
+                        NpgsqlDataAdapter da0 = new NpgsqlDataAdapter(com0);
+                        DataSet ds0 = new DataSet();
+                        da0.Fill(ds0);
+                        if (ds0.Tables[0].Rows.Count > 0)
+                        {
+                            txn_num.Text = ds0.Tables[0].Rows[0][1].ToString();
+                        }
+                    }
 
-                string valen_sodepos_type = en_sodepos_type.Text;
-                string valtxn_memo = txn_memo.Text;
-                string valsodepos_amt = sodepos_amt.Text;
-                string valdepos_amt = depos_amt.Text;
-                string valdisc2_amt = disc2_amt.Text;
-                string valdisc1_amt = disc1_amt.Text; 
-                var valtax_rate = 7;
-                string valtax_amt = tax_amt.Text;
-                string valtxn_total = txn_total.Text;
+                    Guid ggpymtid = new Guid();
+                    NpgsqlCommand com2 = new NpgsqlCommand("select oid from mt_pymt where mt_code = @mt_code", conn);
+                    com2.Parameters.AddWithValue("@mt_code", valmt_pymt);
+                    NpgsqlDataAdapter da2 = new NpgsqlDataAdapter(com2);
+                    DataSet ds2 = new DataSet();
+                    da2.Fill(ds2);
+                    if (ds2.Tables[0].Rows.Count > 0)
+                    {
+                        ggpymtid = Guid.Parse(ds2.Tables[0].Rows[0]["oid"].ToString());
+                    }
+                    string valtax_num = tax_num.Text;
+                    string valen_saledelry_type = en_saledelry_type.Text;
+                    var valmt_emp = Guid.Parse(DBCompany.gSaleRepOid.ToString());
+                    string valcbbTaxcalc = cbbTaxcalc.Text;
+                    string valaddr_text = txt_Addr1.Value;
+                    string valship_addr_text = txt_Addr2.Value;
 
-                NpgsqlCommand cmd = new NpgsqlCommand(@"INSERT INTO txn_so 
+                    List<TempModel> lstModel = new List<TempModel>();
+                    foreach (GridViewRow row in GridView6.Rows)
+                    {
+                        //mt_name
+                        //line_item_dest
+                        //line_price
+                        //line_disc1_price
+                        //line_disc2_price
+                        //line_qty
+                        //line_netprice_amt
+                        //line_memo
+                        var temp = new TempModel();
+                        temp.mt_name = row.Cells[0].Text;
+                        temp.line_item_dest = row.Cells[1].Text;
+                        temp.line_price = row.Cells[2].Text;
+                        temp.line_disc1_price = row.Cells[3].Text;
+                        temp.line_disc2_price = row.Cells[4].Text;
+                        temp.line_qty = row.Cells[5].Text;
+                        temp.line_netprice_amt = row.Cells[6].Text;
+                        temp.line_memo = row.Cells[7].Text;
+                        lstModel.Add(temp);
+                    }
+
+                    string valen_sodepos_type = en_sodepos_type.Text;
+                    string valtxn_memo = txn_memo.Text;
+                    string valsodepos_amt = sodepos_amt.Text;
+                    string valdepos_amt = depos_amt.Text;
+                    string valdisc2_amt = disc2_amt.Text;
+                    string valdisc1_amt = disc1_amt.Text;
+                    var valtax_rate = 7;
+                    string valtax_amt = tax_amt.Text;
+                    string valtxn_total = txn_total.Text;
+
+                    NpgsqlCommand cmd = new NpgsqlCommand(@"INSERT INTO txn_so 
                                                         (
                                                         txn_num, --1
                                                         txn_date, --2
@@ -235,75 +237,75 @@ namespace BizErpBVN.Menu
                                                         --@comt2_amt, --34
                                                         @txn_memo --35
                                                         )", conn);
-                conn.Open();
-                cmd.Parameters.AddWithValue("@txn_num", txn_num.Text); //1
-                cmd.Parameters.AddWithValue("@txn_date", Convert.ToDateTime(valtxn_date)); //2
-                cmd.Parameters.AddWithValue("@txn_type", "SOF"); //3
-                cmd.Parameters.AddWithValue("@txn_status", "NEW"); //4
-                cmd.Parameters.AddWithValue("@itemcatgy_oid", Guid.Parse("0a290710-4021-4277-b25d-853e9463cee7")); //5
-                cmd.Parameters.AddWithValue("@cust_oid", Guid.Parse(valcbbCustgrp)); //6 
-                cmd.Parameters.AddWithValue("@addr_oid", Guid.Parse(Session["btn_addr1"].ToString())); //7
-                cmd.Parameters.AddWithValue("@addr_text", valaddr_text); //8
-                cmd.Parameters.AddWithValue("@addr_phn", ""); //9
-                cmd.Parameters.AddWithValue("@addr_fax", ""); //10
-                cmd.Parameters.AddWithValue("@ship_addr_oid", Guid.Parse(Session["btn_addr2"].ToString())); //11
-                cmd.Parameters.AddWithValue("@ship_addr_text", valship_addr_text); //12
-                cmd.Parameters.AddWithValue("@ship_addr_phn", ""); //13
-                cmd.Parameters.AddWithValue("@ship_addr_fax", ""); //14
-                cmd.Parameters.AddWithValue("@tax_num", valtax_num); //15
-                cmd.Parameters.AddWithValue("@curr_oid", Guid.Parse("281262b0-61e3-43bc-8c17-26184c7072fe")); //16
-                cmd.Parameters.AddWithValue("@pymt_oid", ggpymtid); //17
-                cmd.Parameters.AddWithValue("@saledelry_type", valen_saledelry_type == "----------เลือก----------" ? "" : valen_saledelry_type); //18
-                cmd.Parameters.AddWithValue("@taxcalc", "TAXINC"); //19
-                cmd.Parameters.AddWithValue("@salerep_oid", Guid.Parse(DBCompany.gSaleRepOid.ToString())); //20
-                cmd.Parameters.AddWithValue("@price_amt", Convert.ToDouble(valtxn_total) + Convert.ToDouble(valdisc1_amt) + Convert.ToDouble(valdisc2_amt)); //21
-                cmd.Parameters.AddWithValue("@disc1_amt", Convert.ToDouble(valdisc1_amt)); //22
-                cmd.Parameters.AddWithValue("@disc2_amt", Convert.ToDouble(valdisc2_amt)); //23
-                cmd.Parameters.AddWithValue("@netprice_amt", Convert.ToDouble(valtxn_total)); //24
-                cmd.Parameters.AddWithValue("@tax_rate", 7); //25
-                cmd.Parameters.AddWithValue("@tax_amt", Convert.ToDouble(valtax_amt)); //26
-                cmd.Parameters.AddWithValue("@netprice_nontax", Convert.ToDouble(valtxn_total) - Convert.ToDouble(valtax_amt)); //27
-                cmd.Parameters.AddWithValue("@txn_total", Convert.ToDouble(valtxn_total)); //28
-                cmd.Parameters.AddWithValue("@sodepos_type", valen_sodepos_type); //29
-                cmd.Parameters.AddWithValue("@sodepos_amt", Convert.ToDouble(valsodepos_amt)); //30
-                cmd.Parameters.AddWithValue("@depos_amt", Convert.ToDouble(valdepos_amt)); //31
-                cmd.Parameters.AddWithValue("@outstn_amt", Convert.ToDouble(valtxn_total) - Convert.ToDouble(valdepos_amt)); //32
-                //cmd.Parameters.AddWithValue("@comt1_amt", Zipcode); //33
-                //cmd.Parameters.AddWithValue("@comt2_amt", Zipcode); //34
-                cmd.Parameters.AddWithValue("@txn_memo", valtxn_memo); //35
-                //cmd.Parameters.AddWithValue("@add_oid", DBCompany.gSaleRepOid);
-                cmd.ExecuteNonQuery();
-                conn.Close();
+                    conn.Open();
+                    cmd.Parameters.AddWithValue("@txn_num", txn_num.Text); //1
+                    cmd.Parameters.AddWithValue("@txn_date", String.IsNullOrEmpty(valtxn_date) ? DateTime.Now : Convert.ToDateTime(valtxn_date)); //2
+                    cmd.Parameters.AddWithValue("@txn_type", "SOF"); //3
+                    cmd.Parameters.AddWithValue("@txn_status", "NEW"); //4
+                    cmd.Parameters.AddWithValue("@itemcatgy_oid", Guid.Parse("0a290710-4021-4277-b25d-853e9463cee7")); //5
+                    cmd.Parameters.AddWithValue("@cust_oid", Guid.Parse(valcbbCustgrp)); //6 
+                    cmd.Parameters.AddWithValue("@addr_oid", String.IsNullOrEmpty(Session["btn_addr1"].ToString()) ? null : Guid.Parse(Session["btn_addr1"].ToString())); //7
+                    cmd.Parameters.AddWithValue("@addr_text", String.IsNullOrEmpty(valaddr_text) ? "" : valaddr_text); //8
+                    cmd.Parameters.AddWithValue("@addr_phn", ""); //9
+                    cmd.Parameters.AddWithValue("@addr_fax", ""); //10
+                    cmd.Parameters.AddWithValue("@ship_addr_oid", String.IsNullOrEmpty(Session["btn_addr2"].ToString()) ? null : Guid.Parse(Session["btn_addr2"].ToString())); //11
+                    cmd.Parameters.AddWithValue("@ship_addr_text", String.IsNullOrEmpty(valship_addr_text) ? "" : valship_addr_text); //12
+                    cmd.Parameters.AddWithValue("@ship_addr_phn", ""); //13
+                    cmd.Parameters.AddWithValue("@ship_addr_fax", ""); //14
+                    cmd.Parameters.AddWithValue("@tax_num", valtax_num); //15
+                    cmd.Parameters.AddWithValue("@curr_oid", Guid.Parse("281262b0-61e3-43bc-8c17-26184c7072fe")); //16
+                    cmd.Parameters.AddWithValue("@pymt_oid", ggpymtid); //17
+                    cmd.Parameters.AddWithValue("@saledelry_type", valen_saledelry_type == "----------เลือก----------" ? "" : valen_saledelry_type); //18
+                    cmd.Parameters.AddWithValue("@taxcalc", "TAXINC"); //19
+                    cmd.Parameters.AddWithValue("@salerep_oid", Guid.Parse(DBCompany.gSaleRepOid.ToString())); //20
+                    cmd.Parameters.AddWithValue("@price_amt", Convert.ToDouble(String.IsNullOrEmpty(valtxn_total) || valtxn_total == "&nbsp;" ? "0" : valtxn_total) + Convert.ToDouble(String.IsNullOrEmpty(valdisc1_amt) || valdisc1_amt == "&nbsp;" ? "0" : valdisc1_amt) + Convert.ToDouble(String.IsNullOrEmpty(valdisc2_amt) || valdisc2_amt == "&nbsp;" ? "0" : valdisc2_amt)); //21
+                    cmd.Parameters.AddWithValue("@disc1_amt", Convert.ToDouble(String.IsNullOrEmpty(valdisc1_amt) || valdisc1_amt == "&nbsp;" ? "0" : valdisc1_amt)); //22
+                    cmd.Parameters.AddWithValue("@disc2_amt", Convert.ToDouble(String.IsNullOrEmpty(valdisc2_amt) || valdisc2_amt == "&nbsp;" ? "0" : valdisc2_amt)); //23
+                    cmd.Parameters.AddWithValue("@netprice_amt", Convert.ToDouble(String.IsNullOrEmpty(valtxn_total) || valtxn_total == "&nbsp;" ? "0" : valtxn_total)); //24
+                    cmd.Parameters.AddWithValue("@tax_rate", 7); //25
+                    cmd.Parameters.AddWithValue("@tax_amt", Convert.ToDouble(String.IsNullOrEmpty(valtax_amt) || valtax_amt == "&nbsp;" ? "0" : valtax_amt)); //26
+                    cmd.Parameters.AddWithValue("@netprice_nontax", Convert.ToDouble(String.IsNullOrEmpty(valtxn_total) || valtxn_total == "&nbsp;" ? "0" : valtxn_total) - Convert.ToDouble(String.IsNullOrEmpty(valtax_amt) || valtax_amt == "&nbsp;" ? "0" : valtax_amt)); //27
+                    cmd.Parameters.AddWithValue("@txn_total", Convert.ToDouble(String.IsNullOrEmpty(valtxn_total) || valtxn_total == "&nbsp;" ? "0" : valtxn_total)); //28
+                    cmd.Parameters.AddWithValue("@sodepos_type", valen_sodepos_type == "----------เลือก----------" ? "" : valen_sodepos_type); //29
+                    cmd.Parameters.AddWithValue("@sodepos_amt", Convert.ToDouble(String.IsNullOrEmpty(valsodepos_amt) || valsodepos_amt == "&nbsp;" ? "0" : valsodepos_amt)); //30
+                    cmd.Parameters.AddWithValue("@depos_amt", Convert.ToDouble(String.IsNullOrEmpty(valdepos_amt) || valdepos_amt == "&nbsp;" ? "0" : valdepos_amt)); //31
+                    cmd.Parameters.AddWithValue("@outstn_amt", Convert.ToDouble(String.IsNullOrEmpty(valtxn_total) || valtxn_total == "&nbsp;" ? "0" : valtxn_total) - Convert.ToDouble(String.IsNullOrEmpty(valdepos_amt) || valdepos_amt == "&nbsp;" ? "0" : valdepos_amt)); //32
+                                                                                                                                                                                                                                                                               //cmd.Parameters.AddWithValue("@comt1_amt", Zipcode); //33
+                                                                                                                                                                                                                                                                               //cmd.Parameters.AddWithValue("@comt2_amt", Zipcode); //34
+                    cmd.Parameters.AddWithValue("@txn_memo", valtxn_memo); //35
+                                                                           //cmd.Parameters.AddWithValue("@add_oid", DBCompany.gSaleRepOid);
+                    cmd.ExecuteNonQuery();
+                    conn.Close();
 
-                
-                Guid ggtxn_soid = new Guid();
-                NpgsqlCommand com3 = new NpgsqlCommand("select oid from txn_so where txn_num = @txn_num", conn);
-                com3.Parameters.AddWithValue("@txn_num", txn_num.Text);
-                NpgsqlDataAdapter da3 = new NpgsqlDataAdapter(com3);
-                DataSet ds3 = new DataSet();
-                da3.Fill(ds3);
-                if (ds3.Tables[0].Rows.Count > 0)
-                {
-                    ggtxn_soid = Guid.Parse(ds3.Tables[0].Rows[0]["oid"].ToString());
-                }
-                int cnt = 1;
-                foreach (var items in lstModel)
-                {
-                    Guid ggitemid = new Guid();
-                    Guid ggunitid = new Guid();
-                    NpgsqlCommand com4 = new NpgsqlCommand("select * from mt_item where mt_name = @mt_name", conn);
-                    com4.Parameters.AddWithValue("@mt_name", items.mt_name);
-                    NpgsqlDataAdapter da4 = new NpgsqlDataAdapter(com4);
-                    DataSet ds4 = new DataSet();
-                    da4.Fill(ds4);
-                    if (ds4.Tables[0].Rows.Count > 0)
+
+                    Guid ggtxn_soid = new Guid();
+                    NpgsqlCommand com3 = new NpgsqlCommand("select oid from txn_so where txn_num = @txn_num", conn);
+                    com3.Parameters.AddWithValue("@txn_num", txn_num.Text);
+                    NpgsqlDataAdapter da3 = new NpgsqlDataAdapter(com3);
+                    DataSet ds3 = new DataSet();
+                    da3.Fill(ds3);
+                    if (ds3.Tables[0].Rows.Count > 0)
                     {
-                        ggitemid = Guid.Parse(ds4.Tables[0].Rows[0]["oid"].ToString());
-                        ggunitid = Guid.Parse(ds4.Tables[0].Rows[0]["unt_oid"].ToString());
+                        ggtxn_soid = Guid.Parse(ds3.Tables[0].Rows[0]["oid"].ToString());
                     }
+                    int cnt = 1;
+                    foreach (var items in lstModel)
+                    {
+                        Guid ggitemid = new Guid();
+                        Guid ggunitid = new Guid();
+                        NpgsqlCommand com4 = new NpgsqlCommand("select * from mt_item where mt_name = @mt_name", conn);
+                        com4.Parameters.AddWithValue("@mt_name", items.mt_name);
+                        NpgsqlDataAdapter da4 = new NpgsqlDataAdapter(com4);
+                        DataSet ds4 = new DataSet();
+                        da4.Fill(ds4);
+                        if (ds4.Tables[0].Rows.Count > 0)
+                        {
+                            ggitemid = Guid.Parse(ds4.Tables[0].Rows[0]["oid"].ToString());
+                            ggunitid = Guid.Parse(ds4.Tables[0].Rows[0]["unt_oid"].ToString());
+                        }
 
 
-                    NpgsqlCommand cmd2 = new NpgsqlCommand(@"INSERT INTO txn_so_line 
+                        NpgsqlCommand cmd2 = new NpgsqlCommand(@"INSERT INTO txn_so_line 
                                                         (
                                                         parent_oid, --1
                                                         line_seq, --2
@@ -337,26 +339,31 @@ namespace BizErpBVN.Menu
                                                         @line_netprice_amt, --13
                                                         @line_memo --14
                                                         )", conn);
-                    conn.Open();
-                    cmd2.Parameters.AddWithValue("@parent_oid", ggtxn_soid); //1
-                    cmd2.Parameters.AddWithValue("@line_seq", cnt); //2
-                    cmd2.Parameters.AddWithValue("@line_item_oid", ggitemid); //3
-                    cmd2.Parameters.AddWithValue("@line_item_dest", items.line_item_dest); //4
-                    cmd2.Parameters.AddWithValue("@line_unt_oid", ggunitid); //5
-                    cmd2.Parameters.AddWithValue("@line_price", Convert.ToDouble(items.line_price)); //6
-                    cmd2.Parameters.AddWithValue("@line_disc1_price", Convert.ToDouble(String.IsNullOrEmpty(items.line_disc1_price) || items.line_disc1_price == "&nbsp;" ? "0" : items.line_disc1_price)); //7 
-                    cmd2.Parameters.AddWithValue("@line_disc2_price", Convert.ToDouble(String.IsNullOrEmpty(items.line_disc2_price) || items.line_disc2_price == "&nbsp;" ? "0" : items.line_disc2_price)); //8
-                    cmd2.Parameters.AddWithValue("@line_disc_price", Convert.ToDouble(String.IsNullOrEmpty(items.line_price) || items.line_price == "&nbsp;" ? "0" : items.line_price) - (Convert.ToDouble(String.IsNullOrEmpty(items.line_disc1_price) || items.line_disc1_price == "&nbsp;" ? "0" : items.line_disc1_price) + Convert.ToDouble(String.IsNullOrEmpty(items.line_disc2_price) || items.line_disc2_price == "&nbsp;" ? "0" : items.line_disc2_price))); //9
-                    cmd2.Parameters.AddWithValue("@line_qty", Convert.ToInt32(String.IsNullOrEmpty(items.line_qty) || items.line_qty == "&nbsp;" ? "0" : items.line_qty)); //10
-                    cmd2.Parameters.AddWithValue("@line_price_amt", Convert.ToDouble(String.IsNullOrEmpty(items.line_price) || items.line_price == "&nbsp;" ? "0" : items.line_price) * Convert.ToDouble(String.IsNullOrEmpty(items.line_qty) || items.line_qty == "&nbsp;" ? "0" : items.line_qty)); //11
-                    cmd2.Parameters.AddWithValue("@line_disc_amt", Convert.ToDouble(String.IsNullOrEmpty(items.line_price) || items.line_price == "&nbsp;" ? "0" : items.line_price) * Convert.ToDouble(String.IsNullOrEmpty(items.line_qty) || items.line_qty == "&nbsp;" ? "0" : items.line_qty)); //12
-                    cmd2.Parameters.AddWithValue("@line_netprice_amt", Convert.ToDouble(String.IsNullOrEmpty(items.line_netprice_amt) || items.line_netprice_amt == "&nbsp;" ? "0" : items.line_netprice_amt)); //13
-                    cmd2.Parameters.AddWithValue("@line_memo", items.line_memo); //14
-                    cmd2.ExecuteNonQuery();
-                    conn.Close();
-                    cnt++;
+                        conn.Open();
+                        cmd2.Parameters.AddWithValue("@parent_oid", ggtxn_soid); //1
+                        cmd2.Parameters.AddWithValue("@line_seq", cnt); //2
+                        cmd2.Parameters.AddWithValue("@line_item_oid", ggitemid); //3
+                        cmd2.Parameters.AddWithValue("@line_item_dest", items.line_item_dest); //4
+                        cmd2.Parameters.AddWithValue("@line_unt_oid", ggunitid); //5
+                        cmd2.Parameters.AddWithValue("@line_price", Convert.ToDouble(items.line_price)); //6
+                        cmd2.Parameters.AddWithValue("@line_disc1_price", Convert.ToDouble(String.IsNullOrEmpty(items.line_disc1_price) || items.line_disc1_price == "&nbsp;" ? "0" : items.line_disc1_price)); //7 
+                        cmd2.Parameters.AddWithValue("@line_disc2_price", Convert.ToDouble(String.IsNullOrEmpty(items.line_disc2_price) || items.line_disc2_price == "&nbsp;" ? "0" : items.line_disc2_price)); //8
+                        cmd2.Parameters.AddWithValue("@line_disc_price", Convert.ToDouble(String.IsNullOrEmpty(items.line_price) || items.line_price == "&nbsp;" ? "0" : items.line_price) - (Convert.ToDouble(String.IsNullOrEmpty(items.line_disc1_price) || items.line_disc1_price == "&nbsp;" ? "0" : items.line_disc1_price) + Convert.ToDouble(String.IsNullOrEmpty(items.line_disc2_price) || items.line_disc2_price == "&nbsp;" ? "0" : items.line_disc2_price))); //9
+                        cmd2.Parameters.AddWithValue("@line_qty", Convert.ToInt32(String.IsNullOrEmpty(items.line_qty) || items.line_qty == "&nbsp;" ? "0" : items.line_qty)); //10
+                        cmd2.Parameters.AddWithValue("@line_price_amt", Convert.ToDouble(String.IsNullOrEmpty(items.line_price) || items.line_price == "&nbsp;" ? "0" : items.line_price) * Convert.ToDouble(String.IsNullOrEmpty(items.line_qty) || items.line_qty == "&nbsp;" ? "0" : items.line_qty)); //11
+                        cmd2.Parameters.AddWithValue("@line_disc_amt", Convert.ToDouble(String.IsNullOrEmpty(items.line_price) || items.line_price == "&nbsp;" ? "0" : items.line_price) * Convert.ToDouble(String.IsNullOrEmpty(items.line_qty) || items.line_qty == "&nbsp;" ? "0" : items.line_qty)); //12
+                        cmd2.Parameters.AddWithValue("@line_netprice_amt", Convert.ToDouble(String.IsNullOrEmpty(items.line_netprice_amt) || items.line_netprice_amt == "&nbsp;" ? "0" : items.line_netprice_amt)); //13
+                        cmd2.Parameters.AddWithValue("@line_memo", items.line_memo); //14
+                        cmd2.ExecuteNonQuery();
+                        conn.Close();
+                        cnt++;
+                    }
+                    ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Record Update Successfully')", true);
                 }
-                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Record Update Successfully')", true);
+                else
+                {
+                    ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Please fill data')", true);
+                }
             }
             catch (Exception ex)
             {
@@ -449,8 +456,8 @@ namespace BizErpBVN.Menu
                 //temp.line_netprice_amt = row.Cells[6].Text;
                 //temp.line_memo = row.Cells[7].Text;
                 //lstModel.Add(temp);
-                valdisc1_amt += (Convert.ToDouble(String.IsNullOrEmpty(row.Cells[3].Text) || row.Cells[3].Text == "&nbsp;" ? "0" : row.Cells[3].Text) + Convert.ToDouble(String.IsNullOrEmpty(row.Cells[4].Text) ? "0" : row.Cells[4].Text)) * Convert.ToDouble(String.IsNullOrEmpty(row.Cells[5].Text) ? "0" : row.Cells[5].Text);
-                valsum += Convert.ToDouble(String.IsNullOrEmpty(row.Cells[6].Text) ? "0" : row.Cells[6].Text);
+                valdisc1_amt += (Convert.ToDouble(String.IsNullOrEmpty(row.Cells[3].Text) || row.Cells[3].Text == "&nbsp;" ? "0" : row.Cells[3].Text) + Convert.ToDouble(String.IsNullOrEmpty(row.Cells[4].Text) || row.Cells[4].Text == "&nbsp;" ? "0" : row.Cells[4].Text)) * Convert.ToDouble(String.IsNullOrEmpty(row.Cells[5].Text) || row.Cells[5].Text == "&nbsp;" ? "0" : row.Cells[5].Text);
+                valsum += Convert.ToDouble(String.IsNullOrEmpty(row.Cells[6].Text) || row.Cells[6].Text == "&nbsp;" ? "0" : row.Cells[6].Text);
             }
 
             disc1_amt.Text = valdisc1_amt.ToString();
