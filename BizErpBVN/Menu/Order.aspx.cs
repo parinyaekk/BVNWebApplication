@@ -344,13 +344,13 @@ namespace BizErpBVN.Menu
                     cmd2.Parameters.AddWithValue("@line_item_dest", items.line_item_dest); //4
                     cmd2.Parameters.AddWithValue("@line_unt_oid", ggunitid); //5
                     cmd2.Parameters.AddWithValue("@line_price", Convert.ToDouble(items.line_price)); //6
-                    cmd2.Parameters.AddWithValue("@line_disc1_price", Convert.ToDouble(items.line_disc1_price)); //7 
-                    cmd2.Parameters.AddWithValue("@line_disc2_price", Convert.ToDouble(items.line_disc2_price)); //8
-                    cmd2.Parameters.AddWithValue("@line_disc_price", Convert.ToDouble(items.line_price) - (Convert.ToDouble(items.line_disc1_price) + Convert.ToDouble(items.line_disc2_price))); //9
-                    cmd2.Parameters.AddWithValue("@line_qty", Convert.ToInt32(items.line_qty)); //10
-                    cmd2.Parameters.AddWithValue("@line_price_amt", Convert.ToDouble(items.line_price) * Convert.ToDouble(items.line_qty)); //11
-                    cmd2.Parameters.AddWithValue("@line_disc_amt", Convert.ToDouble(items.line_price) * Convert.ToDouble(items.line_qty)); //12
-                    cmd2.Parameters.AddWithValue("@line_netprice_amt", Convert.ToDouble(items.line_netprice_amt)); //13
+                    cmd2.Parameters.AddWithValue("@line_disc1_price", Convert.ToDouble(String.IsNullOrEmpty(items.line_disc1_price) || items.line_disc1_price == "&nbsp;" ? "0" : items.line_disc1_price)); //7 
+                    cmd2.Parameters.AddWithValue("@line_disc2_price", Convert.ToDouble(String.IsNullOrEmpty(items.line_disc2_price) || items.line_disc2_price == "&nbsp;" ? "0" : items.line_disc2_price)); //8
+                    cmd2.Parameters.AddWithValue("@line_disc_price", Convert.ToDouble(String.IsNullOrEmpty(items.line_price) || items.line_price == "&nbsp;" ? "0" : items.line_price) - (Convert.ToDouble(String.IsNullOrEmpty(items.line_disc1_price) || items.line_disc1_price == "&nbsp;" ? "0" : items.line_disc1_price) + Convert.ToDouble(String.IsNullOrEmpty(items.line_disc1_price) || items.line_disc2_price == "&nbsp;" ? "0" : items.line_disc2_price))); //9
+                    cmd2.Parameters.AddWithValue("@line_qty", Convert.ToInt32(String.IsNullOrEmpty(items.line_qty) || items.line_qty == "&nbsp;" ? "0" : items.line_qty)); //10
+                    cmd2.Parameters.AddWithValue("@line_price_amt", Convert.ToDouble(String.IsNullOrEmpty(items.line_price) || items.line_price == "&nbsp;" ? "0" : items.line_price) * Convert.ToDouble(String.IsNullOrEmpty(items.line_qty) || items.line_qty == "&nbsp;" ? "0" : items.line_qty)); //11
+                    cmd2.Parameters.AddWithValue("@line_disc_amt", Convert.ToDouble(String.IsNullOrEmpty(items.line_price) || items.line_price == "&nbsp;" ? "0" : items.line_price) * Convert.ToDouble(String.IsNullOrEmpty(items.line_qty) || items.line_qty == "&nbsp;" ? "0" : items.line_qty)); //12
+                    cmd2.Parameters.AddWithValue("@line_netprice_amt", Convert.ToDouble(String.IsNullOrEmpty(items.line_netprice_amt) || items.line_netprice_amt == "&nbsp;" ? "0" : items.line_netprice_amt)); //13
                     cmd2.Parameters.AddWithValue("@line_memo", items.line_memo); //14
                     cmd2.ExecuteNonQuery();
                     conn.Close();
@@ -555,6 +555,9 @@ namespace BizErpBVN.Menu
             cbbStatus.DataSource = ds.Tables[0];
             cbbStatus.DataBind();
             cbbStatus.Items.Insert(0, "----------เลือก----------");
+            cbbStatus.SelectedIndex = 2;
+            cbbStatus.Enabled = false;
+            cbbStatus.CssClass = "form-control";
         }
 
         protected void refreshdataT2()
@@ -665,7 +668,7 @@ namespace BizErpBVN.Menu
                 sda.Fill(ds1);
                 GvOrder.DataSource = ds1;
                 GvOrder.DataBind();
-                txt_Addr1.Value = ds1.Tables[0].Rows[0]["addr_text"].ToString();
+                //txt_Addr1.Value = ds1.Tables[0].Rows[0]["addr_text"].ToString();
 
 
             NpgsqlCommand cmd2 = new NpgsqlCommand("select addr_text,oid from mt_nameaddr where name_oid::text = @oid and seq<> 0 order by seq", conn);
