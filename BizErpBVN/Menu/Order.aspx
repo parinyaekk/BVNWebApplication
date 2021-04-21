@@ -171,7 +171,6 @@
             <div class="form-group">
                 <label for="description" class="col-md-2 control-label">ที่อยู่</label>
                 <div class="col-md-4">
-
                     <asp:UpdatePanel ID="UpdatePanel22" runat="server">
                         <ContentTemplate>
                             <textarea data-ng-model="tutorial.description" rows="2" runat="server" id="txt_Addr1"
@@ -201,9 +200,13 @@
             <div class="form-group">
                 <label for="description" class="col-md-2 control-label">ที่อยู่จัดส่ง</label>
                 <div class="col-md-4">
+                                        <asp:UpdatePanel ID="UpdatePanel9" runat="server">
+                        <ContentTemplate>
                     <textarea data-ng-model="tutorial.description" rows="2" runat="server" id="txt_Addr2"
                         name="description" class="form-control">
                         </textarea>
+                                                    </ContentTemplate>
+                    </asp:UpdatePanel>
                 </div>
                 <div class="col-md-1">
                     <asp:UpdatePanel ID="UpdatePanel4" runat="server">
@@ -253,7 +256,7 @@
                 <div class="col-md-4">
                     <asp:UpdatePanel ID="UpdatePanel2" runat="server">
                         <ContentTemplate>
-                            <asp:TextBox ID="txtPrice" runat="server" class="form-control" TextMode="Number" ReadOnly></asp:TextBox>
+                            <asp:TextBox ID="txtPrice" runat="server" class="form-control" TextMode="Number" ReadOnly="true"></asp:TextBox>
                         </ContentTemplate>
                     </asp:UpdatePanel>
                 </div>
@@ -287,7 +290,7 @@
                         <div class="col-sm-12">
                             <asp:UpdatePanel ID="UpdatePanel7" runat="server">
                                 <ContentTemplate>
-                                    <asp:TextBox ID="txtNetprice_amt" runat="server" class="form-control" TextMode="Number" ReadOnly></asp:TextBox>
+                                    <asp:TextBox ID="txtNetprice_amt" runat="server" class="form-control" TextMode="Number" ReadOnly="true"></asp:TextBox>
                                 </ContentTemplate>
                             </asp:UpdatePanel>
                         </div>
