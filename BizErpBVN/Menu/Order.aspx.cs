@@ -238,17 +238,18 @@ namespace BizErpBVN.Menu
                                                         @txn_memo --35
                                                         )", conn);
                     conn.Open();
+                    Guid test = new Guid();
                     cmd.Parameters.AddWithValue("@txn_num", txn_num.Text); //1
                     cmd.Parameters.AddWithValue("@txn_date", String.IsNullOrEmpty(valtxn_date) ? DateTime.Now : Convert.ToDateTime(valtxn_date)); //2
                     cmd.Parameters.AddWithValue("@txn_type", "SOF"); //3
                     cmd.Parameters.AddWithValue("@txn_status", "NEW"); //4
                     cmd.Parameters.AddWithValue("@itemcatgy_oid", Guid.Parse("0a290710-4021-4277-b25d-853e9463cee7")); //5
                     cmd.Parameters.AddWithValue("@cust_oid", Guid.Parse(valcbbCustgrp)); //6 
-                    cmd.Parameters.AddWithValue("@addr_oid", String.IsNullOrEmpty(Session["btn_addr1"].ToString()) ? null : Guid.Parse(Session["btn_addr1"].ToString())); //7
+                    cmd.Parameters.AddWithValue("@addr_oid", String.IsNullOrEmpty(Session["btn_addr1"].ToString()) ? test : Guid.Parse(Session["btn_addr1"].ToString())); //7
                     cmd.Parameters.AddWithValue("@addr_text", String.IsNullOrEmpty(valaddr_text) ? "" : valaddr_text); //8
                     cmd.Parameters.AddWithValue("@addr_phn", ""); //9
                     cmd.Parameters.AddWithValue("@addr_fax", ""); //10
-                    cmd.Parameters.AddWithValue("@ship_addr_oid", String.IsNullOrEmpty(Session["btn_addr2"].ToString()) ? null : Guid.Parse(Session["btn_addr2"].ToString())); //11
+                    cmd.Parameters.AddWithValue("@ship_addr_oid", String.IsNullOrEmpty(Session["btn_addr2"].ToString()) ? test : Guid.Parse(Session["btn_addr2"].ToString())); //11
                     cmd.Parameters.AddWithValue("@ship_addr_text", String.IsNullOrEmpty(valship_addr_text) ? "" : valship_addr_text); //12
                     cmd.Parameters.AddWithValue("@ship_addr_phn", ""); //13
                     cmd.Parameters.AddWithValue("@ship_addr_fax", ""); //14
