@@ -93,7 +93,7 @@ table
             </td>
             <td></td>
             <td style="padding-top:10px">
-                <asp:LinkButton ID="ButtonClear" runat="server" Text="เคลียร์" CssClass="btn btn-info"  Height="40px" OnClick="ButtonClear_Click">
+                <asp:LinkButton ID="ButtonClear" runat="server" Text="เคลียร์" CssClass="btn btn-info"  Height="38px" OnClick="ButtonClear_Click">
                   <i class="glyphicon glyphicon-refresh" style="padding-bottom:5px"></i> &nbsp;เคลียร์
                 </asp:LinkButton>
             </td>
@@ -118,10 +118,10 @@ table
             <asp:BoundField DataField="mt_name" HeaderText="ชื่อลูกค้า" />
             <asp:TemplateField ItemStyle-Width="25%" ItemStyle-HorizontalAlign="Center" ItemStyle-Font-Names="Tahoma">
                 <ItemTemplate>
-                    <asp:LinkButton ID="btnEdit" runat="server" class="btn btn-labeled btn-warning" CommandArgument='<%# "edit;" + Eval("oid") %>' Width="100px" Height="40px"><span class="btn-label"><i class="glyphicon glyphicon-wrench"></i></span>
+                    <asp:LinkButton ID="btnEdit" runat="server" class="btn btn-labeled btn-warning" CommandArgument='<%# "edit;" + Eval("oid") %>' Width="100px" Height="38px"><span class="btn-label"><i class="glyphicon glyphicon-wrench"></i></span>
                         แก้ไข
                     </asp:LinkButton>
-                    <asp:LinkButton ID="lnkSelect" runat="server" class="btn btn-labeled btn-danger" CommandArgument='<%# "delete;" + Eval("oid") %>' OnClientClick="ConfirmCancel()" Width="100px" Height="40px"><span class="btn-label"><i class="glyphicon glyphicon-trash"></i></span>
+                    <asp:LinkButton ID="lnkSelect" runat="server" class="btn btn-labeled btn-danger" CommandArgument='<%# "delete;" + Eval("oid") %>' OnClientClick="ConfirmCancel()" Width="100px" Height="38px"><span class="btn-label"><i class="glyphicon glyphicon-trash"></i></span>
                         ลบ
                     </asp:LinkButton>
                 </ItemTemplate>

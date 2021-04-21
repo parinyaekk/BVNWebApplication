@@ -76,12 +76,6 @@
                     <asp:LinkButton ID="LinkButton4" runat="server" OnClick="gotoHistory" class="btn btn-labeled btn-warning">
                         <span class="btn-label"><i class="glyphicon glyphicon-wrench"></i></span>แก้ไข
                     </asp:LinkButton>
-                    <asp:LinkButton ID="LinkButton3" runat="server" class="btn btn-labeled btn-danger">
-                        <span class="btn-label"><i class="glyphicon glyphicon-remove"></i></span>ยกเลิกรายการ
-                    </asp:LinkButton>
-                    <asp:LinkButton ID="LinkButton2" runat="server" class="btn btn-labeled btn-success">
-                        <span class="btn-label"><i class="glyphicon glyphicon-ok"></i></span>ยืนยันรายการ
-                    </asp:LinkButton>
                 </div>
             </div>
             <div class="form-group">
@@ -314,7 +308,7 @@
                 <div class="col-md-4">
                     <div class="row">
                         <div class="col-sm-12">
-                            <asp:LinkButton ID="AddItem" runat="server" OnClick="ButtonAdd_Click" CssClass="btn btn-info form-control" Style="height: 38px; width: 120px;">
+                            <asp:LinkButton ID="AddItem" runat="server" OnClick="ButtonAdd_Click" CssClass="btn btn-info form-control" Style="height: 37px; width: 100px;">
                           <i class="glyphicon glyphicon-plus"></i>&nbsp;เพิ่ม</asp:LinkButton>
                         </div>
                     </div>
