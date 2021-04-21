@@ -38,6 +38,8 @@ namespace BizErpBVN.Menu
                 DataRow drNew = dt.NewRow();
                 dt.Rows.Add(drNew);
                 Session["dttableline"] = dt;
+                ClearOtherField();
+
             }
         }
         private void createDataTable()
@@ -364,9 +366,9 @@ namespace BizErpBVN.Menu
 
         protected void dist_price_Change(object sender, EventArgs e)
         {
-            double discnt = Convert.ToDouble(disc2_amt.Text);
-            double tax = Convert.ToDouble(tax_amt.Text);
-            double sum = Convert.ToDouble(txn_total.Text);
+            double discnt = Convert.ToDouble(String.IsNullOrEmpty(disc2_amt.Text) ? "0" : disc2_amt.Text);
+            double tax = Convert.ToDouble(String.IsNullOrEmpty(tax_amt.Text) ? "0" : tax_amt.Text);
+            double sum = Convert.ToDouble(String.IsNullOrEmpty(txn_total.Text) ? "0" : txn_total.Text);
             sum = sum - discnt;
             tax_amt.Text = ((sum * 7) / 107).ToString();
             txn_total.Text = (sum).ToString();
@@ -636,6 +638,7 @@ namespace BizErpBVN.Menu
         protected void cbbItem_SelectedIndexChanged(object sender, EventArgs e)
         {
             GetItem();
+
         }
 
 

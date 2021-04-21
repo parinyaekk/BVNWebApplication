@@ -335,6 +335,16 @@
                     <asp:BoundField DataField="line_qty" HeaderText="หน่วยนับ" DataFormatString="{0:N2}" />
                     <asp:BoundField DataField="line_netprice_amt" HeaderText="รวมมูลค่า" DataFormatString="{0:N2}" />
                     <asp:BoundField DataField="line_memo" HeaderText="อธิบายเพิ่มเติม" />
+            <asp:TemplateField ItemStyle-Width="25%" ItemStyle-HorizontalAlign="Center" ItemStyle-Font-Names="Tahoma">
+                <ItemTemplate>
+                    <asp:LinkButton ID="btnEdit" runat="server" class="btn btn-labeled btn-warning"  Width="100px" Height="40px"><span class="btn-label"><i class="glyphicon glyphicon-wrench"></i></span>
+                        แก้ไข
+                    </asp:LinkButton>
+                    <asp:LinkButton ID="lnkSelect" runat="server" class="btn btn-labeled btn-danger"  Width="100px" Height="40px"><span class="btn-label"><i class="glyphicon glyphicon-trash"></i></span>
+                        ลบ
+                    </asp:LinkButton>
+                </ItemTemplate>
+            </asp:TemplateField>
                 </Columns>
                 <RowStyle BackColor="#EFF3FB" />
                 <EditRowStyle BackColor="#2461BF" />
