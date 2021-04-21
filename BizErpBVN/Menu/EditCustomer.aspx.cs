@@ -647,7 +647,7 @@ namespace BizErpBVN.Menu
             }
             catch (Exception ex)
             {
-
+                Response.Write(ex.Message);
             }
         }
 
@@ -752,6 +752,7 @@ namespace BizErpBVN.Menu
             //    dr["fax2"] = gvr.Cells[11].Text;
             //    dt.Rows.Add(dr);
             //}
+
             DataRow drNew = table.NewRow();
             drNew["contname"] = TextBox2.Text;
             drNew["street"] = txtAddress.Text;

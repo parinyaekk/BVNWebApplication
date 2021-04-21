@@ -123,6 +123,8 @@ namespace BizErpBVN.Menu
                     }
                     string valtax_num = tax_num.Text;
                     string valen_saledelry_type = en_saledelry_type.Text;
+
+
                     var valmt_emp = Guid.Parse(DBCompany.gSaleRepOid.ToString());
                     string valcbbTaxcalc = cbbTaxcalc.Text;
                     string valaddr_text = txt_Addr1.Value;
@@ -148,6 +150,7 @@ namespace BizErpBVN.Menu
                         temp.line_qty = row.Cells[5].Text;
                         temp.line_netprice_amt = row.Cells[6].Text;
                         temp.line_memo = row.Cells[7].Text;
+
                         lstModel.Add(temp);
                     }
 
@@ -754,8 +757,6 @@ namespace BizErpBVN.Menu
         //            CustomerNames.Add(rdr["en_name"].ToString());
         //        }
         //        return CustomerNames;
-
-
         //    }
         //}
 

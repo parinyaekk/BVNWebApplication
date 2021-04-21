@@ -104,7 +104,7 @@ table
         <tr>
             <td>
                 <button id="btnAdd1" type="button" class="btn btn-labeled btn-success">
-                        <span class="btn-label"><i class="glyphicon glyphicon-wrench"></i></span>เพิ่ม
+                        <span class="btn-label"><i class="glyphicon glyphicon-plus"></i></span>เพิ่ม
                 </button>
             </td>
         </tr>
@@ -118,10 +118,10 @@ table
             <asp:BoundField DataField="mt_name" HeaderText="ชื่อลูกค้า" />
             <asp:TemplateField ItemStyle-Width="25%" ItemStyle-HorizontalAlign="Center" ItemStyle-Font-Names="Tahoma">
                 <ItemTemplate>
-                    <asp:LinkButton ID="btnEdit" runat="server" class="btn btn-labeled btn-warning" CommandArgument='<%# "edit;" + Eval("oid") %>' Width="100px" Height="38px"><span class="btn-label"><i class="glyphicon glyphicon-wrench"></i></span>
+                    <asp:LinkButton ID="btnEdit" runat="server" class="btn btn-labeled btn-warning" Width="100px" Height="38px"><span class="btn-label"><i class="glyphicon glyphicon-wrench"></i></span>
                         แก้ไข
                     </asp:LinkButton>
-                    <asp:LinkButton ID="lnkSelect" runat="server" class="btn btn-labeled btn-danger" CommandArgument='<%# "delete;" + Eval("oid") %>' OnClientClick="ConfirmCancel()" Width="100px" Height="38px"><span class="btn-label"><i class="glyphicon glyphicon-trash"></i></span>
+                    <asp:LinkButton ID="lnkSelect" runat="server" class="btn btn-labeled btn-danger"  Width="100px" Height="38px"><span class="btn-label"><i class="glyphicon glyphicon-trash"></i></span>
                         ลบ
                     </asp:LinkButton>
                 </ItemTemplate>
