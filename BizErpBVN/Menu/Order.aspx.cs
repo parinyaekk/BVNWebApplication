@@ -39,7 +39,8 @@ namespace BizErpBVN.Menu
                 dt.Rows.Add(drNew);
                 Session["dttableline"] = dt;
                 ClearOtherField();
-
+                Session["btn_addr1"] = "";
+                Session["btn_addr2"] = "";
             }
         }
         private void createDataTable()
@@ -241,11 +242,11 @@ namespace BizErpBVN.Menu
                 cmd.Parameters.AddWithValue("@txn_status", "NEW"); //4
                 cmd.Parameters.AddWithValue("@itemcatgy_oid", Guid.Parse("0a290710-4021-4277-b25d-853e9463cee7")); //5
                 cmd.Parameters.AddWithValue("@cust_oid", Guid.Parse(valcbbCustgrp)); //6 
-                //cmd.Parameters.AddWithValue("@addr_oid", null); //7
+                cmd.Parameters.AddWithValue("@addr_oid", Guid.Parse(Session["btn_addr1"].ToString())); //7
                 cmd.Parameters.AddWithValue("@addr_text", valaddr_text); //8
                 cmd.Parameters.AddWithValue("@addr_phn", ""); //9
                 cmd.Parameters.AddWithValue("@addr_fax", ""); //10
-                //cmd.Parameters.AddWithValue("@ship_addr_oid", null); //11
+                cmd.Parameters.AddWithValue("@ship_addr_oid", Guid.Parse(Session["btn_addr2"].ToString())); //11
                 cmd.Parameters.AddWithValue("@ship_addr_text", valship_addr_text); //12
                 cmd.Parameters.AddWithValue("@ship_addr_phn", ""); //13
                 cmd.Parameters.AddWithValue("@ship_addr_fax", ""); //14
@@ -448,8 +449,8 @@ namespace BizErpBVN.Menu
                 //temp.line_netprice_amt = row.Cells[6].Text;
                 //temp.line_memo = row.Cells[7].Text;
                 //lstModel.Add(temp);
-                valdisc1_amt += (Convert.ToDouble(row.Cells[3].Text) + Convert.ToDouble(row.Cells[4].Text)) * Convert.ToDouble(row.Cells[5].Text);
-                valsum += Convert.ToDouble(row.Cells[6].Text);
+                valdisc1_amt += (Convert.ToDouble(String.IsNullOrEmpty(row.Cells[3].Text) ? "0" : row.Cells[3].Text) + Convert.ToDouble(String.IsNullOrEmpty(row.Cells[4].Text) ? "0" : row.Cells[4].Text)) * Convert.ToDouble(String.IsNullOrEmpty(row.Cells[5].Text) ? "0" : row.Cells[5].Text);
+                valsum += Convert.ToDouble(String.IsNullOrEmpty(row.Cells[6].Text) ? "0" : row.Cells[6].Text);
             }
 
             disc1_amt.Text = valdisc1_amt.ToString();
@@ -768,7 +769,7 @@ namespace BizErpBVN.Menu
                         if(ds1.Tables[0].Rows.Count > 0)
                         {
                             txt_Addr1.Value = ds1.Tables[0].Rows[0]["addr_text"].ToString();
-
+                            Session["btn_addr1"] = rd.ToolTip;
                         }
 
                     }
@@ -804,7 +805,7 @@ namespace BizErpBVN.Menu
                         if (ds2.Tables[0].Rows.Count > 0)
                         {
                             txt_Addr2.Value = ds2.Tables[0].Rows[0]["addr_text"].ToString();
-
+                            Session["btn_addr2"] = rd2.ToolTip;
                         }
 
                     }

@@ -188,20 +188,10 @@
     <Content Include="Menu\EditOrder.aspx" />
     <Content Include="Menu\Order.aspx" />
     <Content Include="Menu\Home.aspx" />
-    <Content Include="Menu\Tab2.ascx" />
-    <Content Include="Menu\Tab1.ascx" />
     <Content Include="Menu\MainMenu.Master" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Images\bg.jpeg" />
     <Content Include="Images\bg2.jpg" />
-    <Content Include="Menu\MainMenu.aspx" />
-    <Content Include="Menu\Tab2_SelectCustomer.ascx" />
-    <Content Include="Menu\Tab3.ascx" />
-    <Content Include="Menu\Tab4.ascx">
-      <BrowseToURL>~/Menu/Tab5.ascx</BrowseToURL>
-    </Content>
-    <Content Include="Menu\Tab5.ascx" />
-    <Content Include="Menu\Tab1_Add.ascx" />
     <Content Include="Menu\Approve_Purchase.aspx" />
     <Content Include="PopUp.html" />
     <Content Include="Scripts\bootstrap.js" />
@@ -315,61 +305,12 @@
     <Compile Include="Menu\Home.aspx.designer.cs">
       <DependentUpon>Home.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Menu\MainMenu.aspx.cs">
-      <DependentUpon>MainMenu.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Menu\MainMenu.aspx.designer.cs">
-      <DependentUpon>MainMenu.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Menu\MainMenu.Master.cs">
       <DependentUpon>MainMenu.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Menu\MainMenu.Master.designer.cs">
       <DependentUpon>MainMenu.Master</DependentUpon>
-    </Compile>
-    <Compile Include="Menu\Tab2.ascx.cs">
-      <DependentUpon>Tab2.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Menu\Tab2.ascx.designer.cs">
-      <DependentUpon>Tab2.ascx</DependentUpon>
-    </Compile>
-    <Compile Include="Menu\Tab2_SelectCustomer.ascx.cs">
-      <DependentUpon>Tab2_SelectCustomer.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Menu\Tab2_SelectCustomer.ascx.designer.cs">
-      <DependentUpon>Tab2_SelectCustomer.ascx</DependentUpon>
-    </Compile>
-    <Compile Include="Menu\Tab3.ascx.cs">
-      <DependentUpon>Tab3.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Menu\Tab3.ascx.designer.cs">
-      <DependentUpon>Tab3.ascx</DependentUpon>
-    </Compile>
-    <Compile Include="Menu\Tab4.ascx.cs">
-      <DependentUpon>Tab4.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Menu\Tab4.ascx.designer.cs">
-      <DependentUpon>Tab4.ascx</DependentUpon>
-    </Compile>
-    <Compile Include="Menu\Tab5.ascx.cs">
-      <DependentUpon>Tab5.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Menu\Tab5.ascx.designer.cs">
-      <DependentUpon>Tab5.ascx</DependentUpon>
-    </Compile>
-    <Compile Include="Menu\Tab1_Add.ascx.cs">
-      <DependentUpon>Tab1_Add.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Menu\Tab1_Add.ascx.designer.cs">
-      <DependentUpon>Tab1_Add.ascx</DependentUpon>
     </Compile>
     <Compile Include="Menu\Approve_Purchase.aspx.cs">
       <DependentUpon>Approve_Purchase.aspx</DependentUpon>
@@ -406,13 +347,6 @@
     </Compile>
     <Compile Include="ViewSwitcher.ascx.designer.cs">
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>
-    </Compile>
-    <Compile Include="Menu\Tab1.ascx.cs">
-      <DependentUpon>Tab1.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Menu\Tab1.ascx.designer.cs">
-      <DependentUpon>Tab1.ascx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
