@@ -167,11 +167,11 @@ namespace BizErpBVN.Menu
                                                         txn_status, --4
                                                         itemcatgy_oid, --5
                                                         cust_oid, --6
-                                                        --addr_oid, --7 
+                                                        addr_oid, --7 
                                                         addr_text, --8
                                                         addr_phn, --9
                                                         addr_fax, --10
-                                                        --ship_addr_oid, --11
+                                                        ship_addr_oid, --11
                                                         ship_addr_text, --12
                                                         ship_addr_phn, --13
                                                         ship_addr_fax, --14
@@ -205,11 +205,11 @@ namespace BizErpBVN.Menu
                                                         @txn_status, --4
                                                         @itemcatgy_oid, --5
                                                         @cust_oid, --6
-                                                        --@addr_oid, --7 
+                                                        @addr_oid, --7 
                                                         @addr_text, --8
                                                         @addr_phn, --9
                                                         @addr_fax, --10
-                                                        --@ship_addr_oid, --11
+                                                        @ship_addr_oid, --11
                                                         @ship_addr_text, --12
                                                         @ship_addr_phn, --13
                                                         @ship_addr_fax, --14
@@ -371,7 +371,7 @@ namespace BizErpBVN.Menu
             double tax = Convert.ToDouble(String.IsNullOrEmpty(tax_amt.Text) ? "0" : tax_amt.Text);
             double sum = Convert.ToDouble(String.IsNullOrEmpty(txn_total.Text) ? "0" : txn_total.Text);
             sum = sum - discnt;
-            tax_amt.Text = ((sum * 7) / 107).ToString();
+            tax_amt.Text = ((sum * 7) / 107).ToString("F2");
             txn_total.Text = (sum).ToString();
         }
 
