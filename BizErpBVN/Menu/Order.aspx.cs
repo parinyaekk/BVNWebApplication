@@ -360,7 +360,7 @@ namespace BizErpBVN.Menu
             }
             catch (Exception ex)
             {
-
+                Response.Write(ex.Message);
             }
         }
 
