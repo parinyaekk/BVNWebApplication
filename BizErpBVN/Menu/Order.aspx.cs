@@ -602,7 +602,12 @@ namespace BizErpBVN.Menu
                 //txtUnt_oid.Text = ds.Tables[0].Columns["line_unt_oid"].ToString();
                 //txtNetprice_amt.Text = ds.Tables[0].Columns["mt_code"].ToString();
                 //txtMemo.Value = ds.Tables[0].Columns["line_memo"].ToString();
-                NpgsqlCommand cmd = new NpgsqlCommand(@"select mi.mt_name,mi.saleprice1,mi.disc1
+
+
+
+
+
+                NpgsqlCommand cmd = new NpgsqlCommand(@"select mi.mt_name, cast(mi.saleprice1 as decimal(10,2)) AS saleprice1 ,cast(mi.disc1 as decimal(10,2)) AS disc1 
                                                         from mt_item mi
                                                         where mi.oid::Text = @oid", conn);
                 cmd.Parameters.AddWithValue("@oid", cbbItem.SelectedValue);

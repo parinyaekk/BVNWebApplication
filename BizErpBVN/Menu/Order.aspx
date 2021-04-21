@@ -87,7 +87,7 @@
             <div class="form-group">
                 <label for="title" class="col-md-2 control-label">เลขที่เอกสาร</label>
                 <div class="col-md-4">
-                    <asp:TextBox ID="txn_num" runat="server" class="form-control" Readonly="true"></asp:TextBox>
+                    <asp:TextBox ID="txn_num" runat="server" class="form-control" ReadOnly="true"></asp:TextBox>
                 </div>
                 <label for="title" class="col-md-2 control-label">สถานะ</label>
                 <div class="col-md-4">
@@ -112,7 +112,7 @@
                 </div>
                 <label for="title" class="col-md-2 control-label">เลขประจำตัวผู้เสียภาษี</label>
                 <div class="col-md-4">
-                    <asp:TextBox ID="tax_num" runat="server" class="form-control" Readonly="true"></asp:TextBox>
+                    <asp:TextBox ID="tax_num" runat="server" class="form-control" ReadOnly="true"></asp:TextBox>
                 </div>
             </div>
             <br />
@@ -200,12 +200,12 @@
             <div class="form-group">
                 <label for="description" class="col-md-2 control-label">ที่อยู่จัดส่ง</label>
                 <div class="col-md-4">
-                                        <asp:UpdatePanel ID="UpdatePanel9" runat="server">
+                    <asp:UpdatePanel ID="UpdatePanel9" runat="server">
                         <ContentTemplate>
-                    <textarea data-ng-model="tutorial.description" rows="2" runat="server" id="txt_Addr2"
-                        name="description" class="form-control">
+                            <textarea data-ng-model="tutorial.description" rows="2" runat="server" id="txt_Addr2"
+                                name="description" class="form-control">
                         </textarea>
-                                                    </ContentTemplate>
+                        </ContentTemplate>
                     </asp:UpdatePanel>
                 </div>
                 <div class="col-md-1">
@@ -240,7 +240,7 @@
                         <div class="col-sm-12">
                             <asp:UpdatePanel ID="UpdatePanel3" runat="server">
                                 <ContentTemplate>
-                                    <textarea data-ng-model="tutorial.description" rows="1" id="txtItem_dest" runat="server"
+                                    <textarea data-ng-model="tutorial.description" rows="1" id="txtItem_dest" runat="server" style="text-align: left"
                                         name="description" class="form-control">
                         </textarea>
                                 </ContentTemplate>
@@ -256,7 +256,7 @@
                 <div class="col-md-4">
                     <asp:UpdatePanel ID="UpdatePanel2" runat="server">
                         <ContentTemplate>
-                            <asp:TextBox ID="txtPrice" runat="server" class="form-control" TextMode="Number" ReadOnly="true"></asp:TextBox>
+                            <asp:TextBox ID="txtPrice" runat="server" CssClass="form-control text-right" TextMode="Number" ReadOnly="true"></asp:TextBox>
                         </ContentTemplate>
                     </asp:UpdatePanel>
                 </div>
@@ -266,7 +266,7 @@
                         <div class="col-sm-12">
                             <asp:UpdatePanel ID="UpdatePanel5" runat="server">
                                 <ContentTemplate>
-                                    <asp:TextBox ID="txtDisc1_price" runat="server" class="form-control" TextMode="Number" AutoPostBack="true" OnTextChanged="line_qty_Change"></asp:TextBox>
+                                    <asp:TextBox ID="txtDisc1_price" runat="server" CssClass="form-control text-right" TextMode="Number" AutoPostBack="true" OnTextChanged="line_qty_Change"></asp:TextBox>
                                 </ContentTemplate>
                             </asp:UpdatePanel>
                         </div>
@@ -280,7 +280,7 @@
                 <div class="col-md-4">
                     <asp:UpdatePanel ID="UpdatePanel6" runat="server">
                         <ContentTemplate>
-                            <asp:TextBox ID="txtline_qty" runat="server" class="form-control" TextMode="Number" AutoPostBack="true" OnTextChanged="line_qty_Change"></asp:TextBox>
+                            <asp:TextBox ID="txtline_qty" runat="server" TextMode="Number" AutoPostBack="true" OnTextChanged="line_qty_Change" CssClass="form-control text-right"></asp:TextBox>
                         </ContentTemplate>
                     </asp:UpdatePanel>
                 </div>
@@ -290,7 +290,7 @@
                         <div class="col-sm-12">
                             <asp:UpdatePanel ID="UpdatePanel7" runat="server">
                                 <ContentTemplate>
-                                    <asp:TextBox ID="txtNetprice_amt" runat="server" class="form-control" TextMode="Number" ReadOnly="true"></asp:TextBox>
+                                    <asp:TextBox ID="txtNetprice_amt" runat="server" CssClass="form-control text-right" TextMode="Number" ReadOnly="true"></asp:TextBox>
                                 </ContentTemplate>
                             </asp:UpdatePanel>
                         </div>
@@ -327,13 +327,13 @@
                 ShowHeaderWhenEmpty="true" GridLines="None" CellPadding="4" OnPageIndexChanging="GridView6_PageIndexChanged">
                 <EmptyDataTemplate>ไม่พบข้อมูล</EmptyDataTemplate>
                 <Columns>
-                    <asp:BoundField DataField="mt_name" HeaderText="รายการสินค้า" />
+                    <asp:BoundField DataField="mt_name" HeaderText="รายการสินค้า" ItemStyle-HorizontalAlign="Center"></asp:BoundField>
                     <asp:BoundField DataField="line_item_dest" HeaderText="รายละเอียดสินค้า" />
-                    <asp:BoundField DataField="line_price" HeaderText="ราคาต่อหน่วย" />
-                    <asp:BoundField DataField="line_disc1_price" HeaderText="ส่วนลดต่อหน่วย" />
-                    <asp:BoundField DataField="line_disc2_price" HeaderText="ส่วนลดต่อหน่วย - กรณีลูกค้ารับสินค้าเอง " />
-                    <asp:BoundField DataField="line_qty" HeaderText="หน่วยนับ" />
-                    <asp:BoundField DataField="line_netprice_amt" HeaderText="รวมมูลค่า" />
+                    <asp:BoundField DataField="line_price" HeaderText="ราคาต่อหน่วย" DataFormatString="{0:N2}" />
+                    <asp:BoundField DataField="line_disc1_price" HeaderText="ส่วนลดต่อหน่วย" DataFormatString="{0:N2}" />
+                    <asp:BoundField DataField="line_disc2_price" HeaderText="ส่วนลดต่อหน่วย - กรณีลูกค้ารับสินค้าเอง " DataFormatString="{0:N2}" />
+                    <asp:BoundField DataField="line_qty" HeaderText="หน่วยนับ" DataFormatString="{0:N2}" />
+                    <asp:BoundField DataField="line_netprice_amt" HeaderText="รวมมูลค่า" DataFormatString="{0:N2}" />
                     <asp:BoundField DataField="line_memo" HeaderText="อธิบายเพิ่มเติม" />
                 </Columns>
                 <RowStyle BackColor="#EFF3FB" />
@@ -366,11 +366,11 @@
             <div class="form-group">
                 <label for="title" class="col-md-2 control-label">จำนวนเงินมัดจำ</label>
                 <div class="col-md-4">
-                    <asp:TextBox ID="sodepos_amt" style="text-align: right" runat="server" class="form-control"></asp:TextBox>
+                    <asp:TextBox ID="sodepos_amt" Style="text-align: right" runat="server" class="form-control" type="number"></asp:TextBox>
                 </div>
                 <label for="title" class="col-md-2 control-label">ยอดเงินที่รับชำระแล้ว</label>
                 <div class="col-md-4">
-                    <asp:TextBox ID="depos_amt" style="text-align: right" runat="server" class="form-control"></asp:TextBox>
+                    <asp:TextBox ID="depos_amt" Style="text-align: right" runat="server" class="form-control" type="number"></asp:TextBox>
                 </div>
             </div>
 
@@ -379,11 +379,12 @@
             <div class="form-group">
                 <label for="title" class="col-md-2 control-label">ส่วนลดท้ายบิล</label>
                 <div class="col-md-4">
-                    <asp:TextBox ID="disc2_amt" runat="server" style="text-align: right" class="form-control" AutoPostBack="true" OnTextChanged="dist_price_Change"></asp:TextBox>
+   
+                            <asp:TextBox ID="disc2_amt" runat="server" Style="text-align: right" class="form-control" AutoPostBack="true" OnTextChanged="dist_price_Change"></asp:TextBox>
                 </div>
                 <label for="title" class="col-md-2 control-label">ส่วนลด</label>
                 <div class="col-md-4">
-                    <asp:TextBox ID="disc1_amt" style="text-align: right" runat="server" class="form-control" Readonly="true"></asp:TextBox>
+                    <asp:TextBox ID="disc1_amt" Style="text-align: right" runat="server" class="form-control" ReadOnly="true" type="number"></asp:TextBox>
                 </div>
             </div>
             <br />
@@ -396,7 +397,7 @@
                 </div>
                 <label for="title" class="col-md-2 control-label">มูลค่าภาษี</label>
                 <div class="col-md-4">
-                    <asp:TextBox ID="tax_amt" style="text-align: right" runat="server" class="form-control" Readonly="true"></asp:TextBox>
+                    <asp:TextBox ID="tax_amt" Style="text-align: right" runat="server" class="form-control" ReadOnly="true" type="number"></asp:TextBox>
                 </div>
             </div>
             <br />
@@ -407,7 +408,7 @@
                 </div>
                 <label for="title" class="col-md-2 control-label">รวมทั้งสิ้น</label>
                 <div class="col-md-4">
-                    <asp:TextBox ID="txn_total" style="text-align: right" runat="server" class="form-control" Readonly="true"></asp:TextBox>
+                    <asp:TextBox ID="txn_total" Style="text-align: right" runat="server" class="form-control" ReadOnly="true" type="number"></asp:TextBox>
                 </div>
             </div>
             <br />
@@ -444,7 +445,7 @@
                     </asp:GridView>
                 </div>
                 <div class="col-md-12 text-center">
-                    <asp:Button ID="Button1" runat="server" Text="ตกลง" CssClass="btn btn-primary" OnClick="Button1_Click"/>
+                    <asp:Button ID="Button1" runat="server" Text="ตกลง" CssClass="btn btn-primary" OnClick="Button1_Click" />
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                 </div>
             </div>
