@@ -452,8 +452,7 @@ namespace BizErpBVN.Menu
                     conn.Close();
                     cntData++;
                 }
-                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Save Record Customer Successfully.')", true);
-                Response.Redirect("Home.aspx");
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Save Record Customer Successfully.');window.location ='Home.aspx';", true);
             }
             catch (Exception ex)
             {
@@ -722,59 +721,62 @@ namespace BizErpBVN.Menu
 
         protected void ButtonAdd_Click(object sender, EventArgs e)
         {
-            //contname 0
-            //street 1
-            //addr1 2
-            //phn1 3
-            //phn2 4
-            //prov_code 5
-            //amphur_code 6
-            //locat_code 7
-            //zipcode 8
-            //email 9
-            //fax1 10
-            //fax2 11
-            DataTable table = Session["dttable"] as DataTable;
-            //foreach (GridViewRow gvr in GridViewTdd1.Rows)
-            //{
-            //    DataRow dr = dt.NewRow();
-            //    dr["contname"] = gvr.Cells[0].Text;
-            //    dr["street"] = gvr.Cells[1].Text;
-            //    dr["addr1"] = gvr.Cells[2].Text;
-            //    dr["phn1"] = gvr.Cells[3].Text;
-            //    dr["phn2"] = gvr.Cells[4].Text;
-            //    dr["prov_code"] = gvr.Cells[5].Text;
-            //    dr["amphur_code"] = gvr.Cells[6].Text;
-            //    dr["locat_code"] = gvr.Cells[7].Text;
-            //    dr["zipcode"] = gvr.Cells[8].Text;
-            //    dr["email"] = gvr.Cells[9].Text;
-            //    dr["fax1"] = gvr.Cells[10].Text;
-            //    dr["fax2"] = gvr.Cells[11].Text;
-            //    dt.Rows.Add(dr);
-            //}
+            if (!String.IsNullOrEmpty(TextBox2.Text) && !String.IsNullOrEmpty(txtAddress.Text))
+            {
+                //contname 0
+                //street 1
+                //addr1 2
+                //phn1 3
+                //phn2 4
+                //prov_code 5
+                //amphur_code 6
+                //locat_code 7
+                //zipcode 8
+                //email 9
+                //fax1 10
+                //fax2 11
+                DataTable table = Session["dttable"] as DataTable;
+                //foreach (GridViewRow gvr in GridViewTdd1.Rows)
+                //{
+                //    DataRow dr = dt.NewRow();
+                //    dr["contname"] = gvr.Cells[0].Text;
+                //    dr["street"] = gvr.Cells[1].Text;
+                //    dr["addr1"] = gvr.Cells[2].Text;
+                //    dr["phn1"] = gvr.Cells[3].Text;
+                //    dr["phn2"] = gvr.Cells[4].Text;
+                //    dr["prov_code"] = gvr.Cells[5].Text;
+                //    dr["amphur_code"] = gvr.Cells[6].Text;
+                //    dr["locat_code"] = gvr.Cells[7].Text;
+                //    dr["zipcode"] = gvr.Cells[8].Text;
+                //    dr["email"] = gvr.Cells[9].Text;
+                //    dr["fax1"] = gvr.Cells[10].Text;
+                //    dr["fax2"] = gvr.Cells[11].Text;
+                //    dt.Rows.Add(dr);
+                //}
 
-            DataRow drNew = table.NewRow();
-            drNew["contname"] = TextBox2.Text;
-            drNew["street"] = txtAddress.Text;
-            drNew["phn"] = TextBox3.Text;
-            drNew["prov_txt"] = cbbProvinceTh2.SelectedItem == null ? null : cbbProvinceTh2.SelectedItem.ToString();
-            drNew["prov_code"] = cbbProvinceTh2.SelectedItem == null ? null : cbbProvinceTh2.SelectedItem.Value;
-            drNew["amphur_txt"] = cbbAmperr2.SelectedItem == null ? null : cbbAmperr2.SelectedItem.ToString();
-            drNew["amphur_code"] = cbbAmperr2.SelectedItem == null ? null : cbbAmperr2.SelectedItem.Value;
-            drNew["locat_txt"] = cbbSubDistrict2.SelectedItem == null ? null : cbbSubDistrict2.SelectedItem.ToString();
-            drNew["locat_code"] = cbbSubDistrict2.SelectedItem == null ? null : cbbSubDistrict2.SelectedItem.Value;
-            drNew["zipcode"] = txtZipCode2.Text;
-            drNew["email"] = txtMail2.Text;
-            drNew["fax"] = txtFax.Text;
-            table.Rows.Add(drNew);
+                DataRow drNew = table.NewRow();
+                drNew["contname"] = TextBox2.Text;
+                drNew["street"] = txtAddress.Text;
+                drNew["phn"] = TextBox3.Text;
+                drNew["prov_txt"] = cbbProvinceTh2.SelectedItem == null ? null : cbbProvinceTh2.SelectedIndex > 0 ? cbbProvinceTh2.SelectedItem.ToString() : null;
+                drNew["prov_code"] = cbbProvinceTh2.SelectedItem == null ? null : cbbProvinceTh2.SelectedIndex > 0 ?  cbbProvinceTh2.SelectedItem.Value : null;
+                drNew["amphur_txt"] = cbbAmperr2.SelectedItem == null ? null : cbbAmperr2.SelectedIndex > 0 ? cbbAmperr2.SelectedItem.ToString() : null;
+                drNew["amphur_code"] = cbbAmperr2.SelectedItem == null ? null : cbbAmperr2.SelectedIndex > 0 ? cbbAmperr2.SelectedItem.Value : null;
+                drNew["locat_txt"] = cbbSubDistrict2.SelectedItem == null ? null : cbbSubDistrict2.SelectedIndex > 0 ? cbbSubDistrict2.SelectedItem.ToString() : null;
+                drNew["locat_code"] = cbbSubDistrict2.SelectedItem == null ? null : cbbSubDistrict2.SelectedIndex > 0 ? cbbSubDistrict2.SelectedItem.Value : null;
+                drNew["zipcode"] = txtZipCode2.Text;
+                drNew["email"] = txtMail2.Text;
+                drNew["fax"] = txtFax.Text;
+                table.Rows.Add(drNew);
 
-            RemoveNullColumnFromDataTable(table);
-            Session["dttable"] = table;
+                RemoveNullColumnFromDataTable(table);
+                Session["dttable"] = table;
 
-            GridViewTdd1.DataSource = table;
-            GridViewTdd1.DataBind();
+                GridViewTdd1.DataSource = table;
+                GridViewTdd1.DataBind();
 
-            ClearOtherField();
+                ClearOtherField();
+            }
         }
 
         public void ClearOtherField()
