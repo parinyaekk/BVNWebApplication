@@ -367,7 +367,7 @@ namespace BizErpBVN.Menu
                 }
                 else
                 {
-                    ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('กรุณากรอกข้อมูล !')", true);
+                    ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('กรุณาระบุข้อมูลให้ครบ !')", true);
                 }
             }
             catch (Exception ex)

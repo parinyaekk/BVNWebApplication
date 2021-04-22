@@ -42,7 +42,7 @@
             var confirm_value = document.createElement("INPUT");
             confirm_value.type = "hidden";
             confirm_value.name = "confirm_value";
-            if (confirm("Do you want to delete data?")) {
+            if (confirm("คุณต้องการลบข้อมูลใช่หรือไม่ ?")) {
                 confirm_value.value = "Yes";
             }
             else {
@@ -345,7 +345,7 @@
                     <asp:BoundField DataField="line_memo" HeaderText="อธิบายเพิ่มเติม" />
                     <asp:TemplateField ItemStyle-Width="24%" ItemStyle-HorizontalAlign="Center" ItemStyle-Font-Names="Tahoma">
                         <ItemTemplate>
-                            <asp:LinkButton ID="btnEdit" runat="server" class="btn btn-labeled btn-warning" CommandArgument='<%# Container.DataItemIndex %>' CommandName="edititem"  Width="90px" Height="38px"><span class="btn-label"><i class="glyphicon glyphicon-wrench"></i></span>
+                            <asp:LinkButton ID="btnEdit" runat="server" class="btn btn-labeled btn-warning" CommandArgument='<%# Container.DataItemIndex %>' CommandName="edititem"  Width="95px" Height="38px"><span class="btn-label"><i class="glyphicon glyphicon-wrench"></i></span>
                         แก้ไข
                     </asp:LinkButton>
                             <asp:LinkButton ID="lnkSelect" runat="server" class="btn btn-labeled btn-danger" CommandName="deleteitem" CommandArgument='<%# Container.DataItemIndex %>' OnClientClick="ConfirmCancel()" Width="90px" Height="38px"><span class="btn-label"><i class="glyphicon glyphicon-trash"></i></span>
@@ -455,16 +455,6 @@
                                 </ItemTemplate>
                             </asp:TemplateField>
                             <asp:BoundField DataField="addr_text" HeaderText="ที่อยู่" />
-                            <asp:TemplateField ItemStyle-Width="25%" ItemStyle-HorizontalAlign="Center" ItemStyle-Font-Names="Tahoma">
-                                <ItemTemplate>
-                                    <asp:LinkButton ID="btnEdit" runat="server" class="btn btn-labeled btn-warning" Width="100px" Height="38px"><span class="btn-label"><i class="glyphicon glyphicon-wrench"></i></span>
-                        แก้ไข
-                    </asp:LinkButton>
-                                    <asp:LinkButton ID="lnkSelect" runat="server" class="btn btn-labeled btn-danger" Width="100px" Height="38px"><span class="btn-label"><i class="glyphicon glyphicon-trash"></i></span>
-                        ลบ
-                    </asp:LinkButton>
-                                </ItemTemplate>
-                            </asp:TemplateField>
                         </Columns>
                         <RowStyle BackColor="#EFF3FB" />
                         <EditRowStyle BackColor="#2461BF" HorizontalAlign="Left" />

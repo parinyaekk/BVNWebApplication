@@ -34,11 +34,11 @@
         <div class="container">
             <div class="col-md-12" style="text-align: center">
                 <div class="col-md-12">
-                    <asp:LinkButton type="button" class="btn btn-warning" runat="server" OnClick="btnSave_Click">
+                    <asp:LinkButton type="button" class="btn btn-warning" runat="server" OnClick="btnSave_Click" Width="140px" Height="42px">
                         <span class="btn-label"><i class="glyphicon glyphicon-wrench"></i></span>แก้ไขข้อมูล
                     </asp:LinkButton>
                     &nbsp;
-                    <button id="btnBack" type="button" class="btn btn-primary">
+                    <button id="btnBack" type="button" class="btn btn-primary" style="height:45px;width:140px">
                         <span class="btn-label"><i class="glyphicon glyphicon-circle-arrow-left"></i></span>กลับหน้าหลัก
                     </button>
 

@@ -65,7 +65,7 @@ table
         var confirm_value = document.createElement("INPUT");
         confirm_value.type = "hidden";
         confirm_value.name = "confirm_value";
-        if (confirm("Do you want to delete data?")) {
+        if (confirm("คุณต้องการลบข้อมูลใช่หรือไม่ ?")) {
             confirm_value.value = "Yes";
         }
         else {
