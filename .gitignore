@@ -1,0 +1,7 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/BizErpBVN/obj/Release/.NETFramework,Version=v4.6.1.AssemblyAttributes.cs
+.vs/BizErpBVN*
+obj*
