@@ -882,12 +882,12 @@ namespace BizErpBVN.Menu
                 {
                     Session["ixRowUpdate"] = arr;
                     cbbItem.SelectedItem.Text = row.Cells[0].Text;
-                    txtItem_dest.Value= row.Cells[1].Text;
+                    txtItem_dest.Value= row.Cells[1].Text.Replace("&nbsp;", "");
                     GetItem();
                     //txtPrice.Text = row.Cells[2].Text;
-                    txtDisc1_price.Text = row.Cells[3].Text;
-                    txtline_qty.Text = row.Cells[5].Text;
-                    txtMemo.Value = row.Cells[7].Text;
+                    txtDisc1_price.Text = row.Cells[3].Text.Replace("&nbsp;", "");
+                    txtline_qty.Text = row.Cells[5].Text.Replace("&nbsp;", "");
+                    txtMemo.Value = row.Cells[7].Text.Replace("&nbsp;", "");
                     txtNetprice_amt.Text = ((Convert.ToDouble(String.IsNullOrEmpty(txtPrice.Text) || txtPrice.Text == "&nbsp;" ? "0" : txtPrice.Text) - Convert.ToDouble(String.IsNullOrEmpty(txtDisc1_price.Text) || txtDisc1_price.Text == "&nbsp;" ? "0" : txtDisc1_price.Text)) * Convert.ToDouble(String.IsNullOrEmpty(txtline_qty.Text) || txtline_qty.Text == "&nbsp;" ? "0" : txtline_qty.Text)).ToString();
                     AddItem.Visible = false;
                     UpdateItem.Visible = true;
@@ -929,6 +929,11 @@ namespace BizErpBVN.Menu
 
                 ClearOtherField();
                 Summary();
+
+                Session["ixRowUpdate"] = "";
+                AddItem.Visible = true;
+                UpdateItem.Visible = false;
+
             }
         }
 
