@@ -39,8 +39,10 @@ namespace BizErpBVN.Menu
                 dt.Rows.Add(drNew);
                 Session["dttableline"] = dt;
                 ClearOtherField();
+                Session["ixRowUpdate"] = "";
                 Session["btn_addr1"] = "";
                 Session["btn_addr2"] = "";
+                UpdateItem.Visible = false;
             }
         }
         private void createDataTable()
@@ -83,7 +85,6 @@ namespace BizErpBVN.Menu
         {
             Response.Redirect("Order.aspx");
         }
-
         protected void SaveData(Object sender, EventArgs e)
         {
             try
@@ -374,8 +375,6 @@ namespace BizErpBVN.Menu
                 Response.Write(ex.Message);
             }
         }
-
-
         protected void dist_price_Change(object sender, EventArgs e)
         {
             double discnt = Convert.ToDouble(String.IsNullOrEmpty(disc2_amt.Text) ? "0" : disc2_amt.Text);
@@ -385,7 +384,6 @@ namespace BizErpBVN.Menu
             tax_amt.Text = ((sum * 7) / 107).ToString("F2");
             txn_total.Text = (sum).ToString();
         }
-
         protected void ButtonAdd_Click(object sender, EventArgs e)
         {
             if (cbbItem.SelectedIndex > 0)
@@ -411,8 +409,15 @@ namespace BizErpBVN.Menu
                 drNew["line_memo"] = txtMemo.Value;
                 table.Rows.Add(drNew);
 
-                RemoveNullColumnFromDataTable(table);
-                Session["dttable"] = table;
+                try
+                {
+                    RemoveNullColumnFromDataTable(table);
+                }
+                catch
+                {
+
+                }
+                Session["dttableline"] = table;
 
                 GridView6.DataSource = table;
                 GridView6.DataBind();
@@ -425,8 +430,15 @@ namespace BizErpBVN.Menu
         {
             for (int i = dt.Rows.Count - 1; i >= 0; i--)
             {
-                if (dt.Rows[i][0] == DBNull.Value && dt.Rows[i][1] == DBNull.Value && dt.Rows[i][2] == DBNull.Value && dt.Rows[i][3] == DBNull.Value && dt.Rows[i][4] == DBNull.Value && dt.Rows[i][5] == DBNull.Value)
+                if(dt.Rows[i].RowState.ToString() == "Deleted")
+                {
                     dt.Rows[i].Delete();
+                }
+                else
+                { 
+                    if (dt.Rows[i][0] == DBNull.Value)
+                        dt.Rows[i].Delete();
+                }
             }
             dt.AcceptChanges();
         }
@@ -441,7 +453,6 @@ namespace BizErpBVN.Menu
             public string line_netprice_amt { get; set; }
             public string line_memo { get; set; }
         }
-
 
         public void Summary()
         {
@@ -635,8 +646,8 @@ namespace BizErpBVN.Menu
 
                 NpgsqlCommand cmd = new NpgsqlCommand(@"select mi.mt_name, cast(mi.saleprice1 as decimal(10,2)) AS saleprice1 ,cast(mi.disc1 as decimal(10,2)) AS disc1 
                                                         from mt_item mi
-                                                        where mi.oid::Text = @oid", conn);
-                cmd.Parameters.AddWithValue("@oid", cbbItem.SelectedValue);
+                                                        where mi.mt_name = @mt_name", conn);
+                cmd.Parameters.AddWithValue("@mt_name", cbbItem.SelectedItem.ToString());
                 NpgsqlDataAdapter da = new NpgsqlDataAdapter(cmd);
                 DataSet ds = new DataSet();
                 da.Fill(ds);
@@ -832,5 +843,94 @@ namespace BizErpBVN.Menu
             }
 
         }
+
+        protected void GridView6_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            int arr = Convert.ToInt32(e.CommandArgument);
+            conn.Close();
+            if (e.CommandName == "deleteitem" || e.CommandName == "edititem")
+            {
+                GridViewRow row = (GridViewRow)(((LinkButton)e.CommandSource).NamingContainer);
+
+                if (e.CommandName == "deleteitem")
+                {
+                    string confirmValue = Request.Form["confirm_value"];
+                    if (confirmValue == "Yes")
+                    {
+                            DataTable table = Session["dttableline"] as DataTable;
+                        table.Rows[arr].Delete();
+
+                        try
+                        {
+                            RemoveNullColumnFromDataTable(table);
+                        }
+                        catch
+                        {
+
+                        }
+                    
+                        Session["dttableline"] = table;
+
+                        GridView6.DataSource = table;
+                        GridView6.DataBind();
+
+                        ClearOtherField();
+                        Summary();
+                    }
+                }
+                if (e.CommandName == "edititem")
+                {
+                    Session["ixRowUpdate"] = arr;
+                    cbbItem.SelectedItem.Text = row.Cells[0].Text;
+                    txtItem_dest.Value= row.Cells[1].Text;
+                    GetItem();
+                    //txtPrice.Text = row.Cells[2].Text;
+                    txtDisc1_price.Text = row.Cells[3].Text;
+                    txtline_qty.Text = row.Cells[5].Text;
+                    txtMemo.Value = row.Cells[7].Text;
+                    txtNetprice_amt.Text = ((Convert.ToDouble(String.IsNullOrEmpty(txtPrice.Text) || txtPrice.Text == "&nbsp;" ? "0" : txtPrice.Text) - Convert.ToDouble(String.IsNullOrEmpty(txtDisc1_price.Text) || txtDisc1_price.Text == "&nbsp;" ? "0" : txtDisc1_price.Text)) * Convert.ToDouble(String.IsNullOrEmpty(txtline_qty.Text) || txtline_qty.Text == "&nbsp;" ? "0" : txtline_qty.Text)).ToString();
+                    AddItem.Visible = false;
+                    UpdateItem.Visible = true;
+                }
+            }
+        }
+
+        protected void ButtonUpdate_Click(object sender, EventArgs e)
+        {
+            if (!String.IsNullOrEmpty(Session["ixRowUpdate"].ToString()))
+            {
+                int ixrow = Convert.ToInt32(Session["ixRowUpdate"].ToString());
+
+                DataTable table = Session["dttableline"] as DataTable;
+                DataRow drNew = table.Rows[ixrow];
+
+                drNew["mt_name"] = cbbItem.SelectedItem;
+                drNew["line_item_dest"] = txtItem_dest.Value;
+                drNew["line_price"] = txtPrice.Text;
+                drNew["line_disc1_price"] = txtDisc1_price.Text;
+                drNew["line_disc2_price"] = en_saledelry_type.Text == "CUST" ? Session["Custdiscount"].ToString() : "0";
+                drNew["line_qty"] = txtline_qty.Text;
+                drNew["line_netprice_amt"] = txtNetprice_amt.Text;
+                drNew["line_memo"] = txtMemo.Value;
+                table.AcceptChanges();
+
+                try
+                {
+                    RemoveNullColumnFromDataTable(table);
+                }
+                catch
+                {
+
+                }
+                Session["dttableline"] = table;
+
+                GridView6.DataSource = table;
+                GridView6.DataBind();
+
+                ClearOtherField();
+                Summary();
+            }
+        }
+
     }
 }

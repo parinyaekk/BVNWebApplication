@@ -7,11 +7,13 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BizErpBVN.Menu {
-    
-    
-    public partial class Order {
-        
+namespace BizErpBVN.Menu
+{
+
+
+    public partial class Order
+    {
+
         /// <summary>
         /// ScriptManager1 control.
         /// </summary>
@@ -20,7 +22,7 @@ namespace BizErpBVN.Menu {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.ScriptManager ScriptManager1;
-        
+
         /// <summary>
         /// LinkButton6 control.
         /// </summary>
@@ -29,7 +31,7 @@ namespace BizErpBVN.Menu {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton LinkButton6;
-        
+
         /// <summary>
         /// LinkButton5 control.
         /// </summary>
@@ -38,7 +40,7 @@ namespace BizErpBVN.Menu {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton LinkButton5;
-        
+
         /// <summary>
         /// LinkButton4 control.
         /// </summary>
@@ -47,7 +49,7 @@ namespace BizErpBVN.Menu {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton LinkButton4;
-        
+
         /// <summary>
         /// txn_num control.
         /// </summary>
@@ -56,7 +58,7 @@ namespace BizErpBVN.Menu {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txn_num;
-        
+
         /// <summary>
         /// cbbStatus control.
         /// </summary>
@@ -65,7 +67,7 @@ namespace BizErpBVN.Menu {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList cbbStatus;
-        
+
         /// <summary>
         /// txtDate control.
         /// </summary>
@@ -74,7 +76,7 @@ namespace BizErpBVN.Menu {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl txtDate;
-        
+
         /// <summary>
         /// tax_num control.
         /// </summary>
@@ -83,7 +85,7 @@ namespace BizErpBVN.Menu {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox tax_num;
-        
+
         /// <summary>
         /// cbbCustgrp control.
         /// </summary>
@@ -92,7 +94,7 @@ namespace BizErpBVN.Menu {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList cbbCustgrp;
-        
+
         /// <summary>
         /// mt_pymt control.
         /// </summary>
@@ -101,7 +103,7 @@ namespace BizErpBVN.Menu {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList mt_pymt;
-        
+
         /// <summary>
         /// en_saledelry_type control.
         /// </summary>
@@ -110,7 +112,7 @@ namespace BizErpBVN.Menu {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList en_saledelry_type;
-        
+
         /// <summary>
         /// cbbTaxcalc control.
         /// </summary>
@@ -119,7 +121,7 @@ namespace BizErpBVN.Menu {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList cbbTaxcalc;
-        
+
         /// <summary>
         /// mt_emp control.
         /// </summary>
@@ -128,7 +130,7 @@ namespace BizErpBVN.Menu {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList mt_emp;
-        
+
         /// <summary>
         /// UpdatePanel22 control.
         /// </summary>
@@ -137,7 +139,7 @@ namespace BizErpBVN.Menu {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.UpdatePanel UpdatePanel22;
-        
+
         /// <summary>
         /// txt_Addr1 control.
         /// </summary>
@@ -146,7 +148,7 @@ namespace BizErpBVN.Menu {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlTextArea txt_Addr1;
-        
+
         /// <summary>
         /// UpdatePanel1 control.
         /// </summary>
@@ -155,7 +157,7 @@ namespace BizErpBVN.Menu {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.UpdatePanel UpdatePanel1;
-        
+
         /// <summary>
         /// UpdatePanel9 control.
         /// </summary>
@@ -164,7 +166,7 @@ namespace BizErpBVN.Menu {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.UpdatePanel UpdatePanel9;
-        
+
         /// <summary>
         /// txt_Addr2 control.
         /// </summary>
@@ -173,7 +175,7 @@ namespace BizErpBVN.Menu {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlTextArea txt_Addr2;
-        
+
         /// <summary>
         /// UpdatePanel4 control.
         /// </summary>
@@ -182,7 +184,7 @@ namespace BizErpBVN.Menu {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.UpdatePanel UpdatePanel4;
-        
+
         /// <summary>
         /// cbbItem control.
         /// </summary>
@@ -191,7 +193,7 @@ namespace BizErpBVN.Menu {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList cbbItem;
-        
+
         /// <summary>
         /// UpdatePanel3 control.
         /// </summary>
@@ -200,7 +202,7 @@ namespace BizErpBVN.Menu {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.UpdatePanel UpdatePanel3;
-        
+
         /// <summary>
         /// txtItem_dest control.
         /// </summary>
@@ -209,7 +211,7 @@ namespace BizErpBVN.Menu {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlTextArea txtItem_dest;
-        
+
         /// <summary>
         /// UpdatePanel2 control.
         /// </summary>
@@ -218,7 +220,7 @@ namespace BizErpBVN.Menu {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.UpdatePanel UpdatePanel2;
-        
+
         /// <summary>
         /// txtPrice control.
         /// </summary>
@@ -227,7 +229,7 @@ namespace BizErpBVN.Menu {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtPrice;
-        
+
         /// <summary>
         /// UpdatePanel5 control.
         /// </summary>
@@ -236,7 +238,7 @@ namespace BizErpBVN.Menu {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.UpdatePanel UpdatePanel5;
-        
+
         /// <summary>
         /// txtDisc1_price control.
         /// </summary>
@@ -245,7 +247,7 @@ namespace BizErpBVN.Menu {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtDisc1_price;
-        
+
         /// <summary>
         /// UpdatePanel6 control.
         /// </summary>
@@ -254,7 +256,7 @@ namespace BizErpBVN.Menu {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.UpdatePanel UpdatePanel6;
-        
+
         /// <summary>
         /// txtline_qty control.
         /// </summary>
@@ -263,7 +265,7 @@ namespace BizErpBVN.Menu {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtline_qty;
-        
+
         /// <summary>
         /// UpdatePanel7 control.
         /// </summary>
@@ -272,7 +274,7 @@ namespace BizErpBVN.Menu {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.UpdatePanel UpdatePanel7;
-        
+
         /// <summary>
         /// txtNetprice_amt control.
         /// </summary>
@@ -281,7 +283,7 @@ namespace BizErpBVN.Menu {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtNetprice_amt;
-        
+
         /// <summary>
         /// UpdatePanel8 control.
         /// </summary>
@@ -290,7 +292,7 @@ namespace BizErpBVN.Menu {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.UpdatePanel UpdatePanel8;
-        
+
         /// <summary>
         /// txtMemo control.
         /// </summary>
@@ -299,7 +301,7 @@ namespace BizErpBVN.Menu {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlTextArea txtMemo;
-        
+
         /// <summary>
         /// AddItem control.
         /// </summary>
@@ -308,7 +310,16 @@ namespace BizErpBVN.Menu {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton AddItem;
-        
+
+        /// <summary>
+        /// UpdateItem control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton UpdateItem;
+
         /// <summary>
         /// GridView6 control.
         /// </summary>
@@ -317,7 +328,7 @@ namespace BizErpBVN.Menu {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView GridView6;
-        
+
         /// <summary>
         /// en_sodepos_type control.
         /// </summary>
@@ -326,7 +337,7 @@ namespace BizErpBVN.Menu {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList en_sodepos_type;
-        
+
         /// <summary>
         /// txn_memo control.
         /// </summary>
@@ -335,7 +346,7 @@ namespace BizErpBVN.Menu {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txn_memo;
-        
+
         /// <summary>
         /// sodepos_amt control.
         /// </summary>
@@ -344,7 +355,7 @@ namespace BizErpBVN.Menu {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox sodepos_amt;
-        
+
         /// <summary>
         /// depos_amt control.
         /// </summary>
@@ -353,7 +364,7 @@ namespace BizErpBVN.Menu {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox depos_amt;
-        
+
         /// <summary>
         /// disc2_amt control.
         /// </summary>
@@ -362,7 +373,7 @@ namespace BizErpBVN.Menu {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox disc2_amt;
-        
+
         /// <summary>
         /// disc1_amt control.
         /// </summary>
@@ -371,7 +382,7 @@ namespace BizErpBVN.Menu {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox disc1_amt;
-        
+
         /// <summary>
         /// tax_amt control.
         /// </summary>
@@ -380,7 +391,7 @@ namespace BizErpBVN.Menu {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox tax_amt;
-        
+
         /// <summary>
         /// txn_total control.
         /// </summary>
@@ -389,7 +400,7 @@ namespace BizErpBVN.Menu {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txn_total;
-        
+
         /// <summary>
         /// GvOrder control.
         /// </summary>
@@ -398,7 +409,7 @@ namespace BizErpBVN.Menu {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView GvOrder;
-        
+
         /// <summary>
         /// Button1 control.
         /// </summary>
@@ -407,7 +418,7 @@ namespace BizErpBVN.Menu {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button Button1;
-        
+
         /// <summary>
         /// GvOrder1 control.
         /// </summary>
@@ -416,7 +427,7 @@ namespace BizErpBVN.Menu {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView GvOrder1;
-        
+
         /// <summary>
         /// Button2 control.
         /// </summary>

@@ -38,6 +38,19 @@
             }
         };
 
+        function ConfirmCancel() {
+            var confirm_value = document.createElement("INPUT");
+            confirm_value.type = "hidden";
+            confirm_value.name = "confirm_value";
+            if (confirm("Do you want to delete data?")) {
+                confirm_value.value = "Yes";
+            }
+            else {
+                confirm_value.value = "No";
+            }
+            document.forms[0].appendChild(confirm_value);
+        }
+
         function SearchText() {
             $("#txtEmpName").autocomplete({
                 source: function (request, response) {
@@ -310,6 +323,8 @@
                         <div class="col-sm-12">
                             <asp:LinkButton ID="AddItem" runat="server" OnClick="ButtonAdd_Click" CssClass="btn btn-info form-control" Style="height: 37px; width: 100px;">
                           <i class="glyphicon glyphicon-plus"></i>&nbsp;เพิ่ม</asp:LinkButton>
+                            <asp:LinkButton ID="UpdateItem" runat="server" OnClick="ButtonUpdate_Click" CssClass="btn btn-warning form-control" Style="height: 37px; width: 100px;">
+                          <i class="glyphicon glyphicon-plus"></i>&nbsp;แก้ไขข้อมูล</asp:LinkButton>
                         </div>
                     </div>
                 </div>
@@ -317,8 +332,7 @@
             <br />
             <br />
             <br />
-            <asp:GridView ID="GridView6" runat="server" AutoGenerateColumns="false" AllowPaging="true" PageSize="10" HeaderStyle-HorizontalAlign="Center" CssClass="table table-bordered table-striped" Width="100%" ShowFooter="false" ShowHeader="true"
-                ShowHeaderWhenEmpty="true" GridLines="None" CellPadding="4" OnPageIndexChanging="GridView6_PageIndexChanged">
+            <asp:GridView ID="GridView6" runat="server" AutoGenerateColumns="false" AllowPaging="true" PageSize="10" HeaderStyle-HorizontalAlign="Center" CssClass="table table-bordered table-striped" Width="100%" ShowFooter="false" ShowHeader="true" ShowHeaderWhenEmpty="true" GridLines="None" CellPadding="4" OnPageIndexChanging="GridView6_PageIndexChanged" OnRowCommand="GridView6_RowCommand">
                 <EmptyDataTemplate>ไม่พบข้อมูล</EmptyDataTemplate>
                 <Columns>
                     <asp:BoundField DataField="mt_name" HeaderText="รายการสินค้า" ItemStyle-HorizontalAlign="Center"></asp:BoundField>
@@ -331,10 +345,10 @@
                     <asp:BoundField DataField="line_memo" HeaderText="อธิบายเพิ่มเติม" />
                     <asp:TemplateField ItemStyle-Width="24%" ItemStyle-HorizontalAlign="Center" ItemStyle-Font-Names="Tahoma">
                         <ItemTemplate>
-                            <asp:LinkButton ID="btnEdit" runat="server" class="btn btn-labeled btn-warning"  Width="90px" Height="38px"><span class="btn-label"><i class="glyphicon glyphicon-wrench"></i></span>
+                            <asp:LinkButton ID="btnEdit" runat="server" class="btn btn-labeled btn-warning" CommandArgument='<%# Container.DataItemIndex %>' CommandName="edititem"  Width="90px" Height="38px"><span class="btn-label"><i class="glyphicon glyphicon-wrench"></i></span>
                         แก้ไข
                     </asp:LinkButton>
-                            <asp:LinkButton ID="lnkSelect" runat="server" class="btn btn-labeled btn-danger" Width="90px" Height="38px"><span class="btn-label"><i class="glyphicon glyphicon-trash"></i></span>
+                            <asp:LinkButton ID="lnkSelect" runat="server" class="btn btn-labeled btn-danger" CommandName="deleteitem" CommandArgument='<%# Container.DataItemIndex %>' OnClientClick="ConfirmCancel()" Width="90px" Height="38px"><span class="btn-label"><i class="glyphicon glyphicon-trash"></i></span>
                         ลบ
                     </asp:LinkButton>
                         </ItemTemplate>
