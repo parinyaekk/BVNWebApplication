@@ -241,7 +241,7 @@ namespace BizErpBVN.Menu
                     cmd.ExecuteNonQuery();
                     conn.Close();
 
-                    ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Update ข้อมูลสำเร็จ')", true);
+                    ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('ยืนยันรายการสำเร็จ')", true);
 
                     getEditData(Guid.Parse(Session["parent_oid"].ToString()));
                 }

@@ -12,7 +12,7 @@
             var confirm_value = document.createElement("INPUT");
             confirm_value.type = "hidden";
             confirm_value.name = "confirm_value";
-            if (confirm("Do you want to reject data?")) {
+            if (confirm("คุณต้องการยกเลิกรายการใช่หรือไม่ ?")) {
                 confirm_value.value = "Yes";
             }
             else {
@@ -125,7 +125,7 @@
                 <div class="col-md-4">
                     <div class="row">
                         <div class="col-sm-12">
-                            <asp:DropDownList ID="mt_emp" runat="server" class="form-control" readonly></asp:DropDownList>
+                            <asp:DropDownList ID="mt_emp" runat="server" class="form-control" readonly="true"></asp:DropDownList>
                         </div>
                     </div>
                 </div>
@@ -205,7 +205,7 @@
             <div class="form-group hidden">
                 <label for="description" class="col-md-2 control-label">ราคาต่อหน่วย</label>
                 <div class="col-md-4">
-                    <asp:TextBox ID="txtPrice" runat="server" class="form-control" TextMode="Number" ReadOnly></asp:TextBox>
+                    <asp:TextBox ID="txtPrice" runat="server" class="form-control" TextMode="Number" ReadOnly="true"></asp:TextBox>
                 </div>
                 <label for="title" class="col-md-2 control-label">ส่วนลดต่อหน่วย</label>
                 <div class="col-md-4">
@@ -227,7 +227,7 @@
                 <div class="col-md-4">
                     <div class="row">
                         <div class="col-sm-12">
-                            <asp:TextBox ID="txtNetprice_amt" runat="server" class="form-control" TextMode="Number" ReadOnly></asp:TextBox>
+                            <asp:TextBox ID="txtNetprice_amt" runat="server" class="form-control" TextMode="Number" ReadOnly="true"></asp:TextBox>
                         </div>
                     </div>
                 </div>

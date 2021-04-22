@@ -246,3 +246,4 @@ C:\Users\parinya\source\repos\BVNWebApplication\BizErpBVN\obj\Debug\BizErpBVN.cs
 C:\Users\parinya\source\repos\BVNWebApplication\BizErpBVN\obj\Debug\BizErpBVN.csproj.CopyComplete
 C:\Users\parinya\source\repos\BVNWebApplication\BizErpBVN\obj\Debug\BizErpBVN.dll
 C:\Users\parinya\source\repos\BVNWebApplication\BizErpBVN\obj\Debug\BizErpBVN.pdb
+D:\BVNWebApplication-master\BVNWebApplication-master\BizErpBVN\obj\Debug\BizErpBVN.csprojResolveAssemblyReference.cache
