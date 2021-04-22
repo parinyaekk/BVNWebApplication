@@ -137,7 +137,7 @@
                 <div class="col-md-4">
                     <div class="row">
                         <div class="col-sm-12">
-                            <asp:TextBox ID="txtCrLimit" runat="server" class="form-control" TextMode="Number"></asp:TextBox>
+                            <asp:TextBox ID="txtCrLimit" runat="server" CssClass="form-control text-right" TextMode="Number"></asp:TextBox>
                         </div>
                     </div>
                 </div>
