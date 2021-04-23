@@ -38,7 +38,7 @@
                         <span class="btn-label"><i class="glyphicon glyphicon-wrench"></i></span>แก้ไขข้อมูล
                     </asp:LinkButton>
                     &nbsp;
-                    <button id="btnBack" type="button" class="btn btn-primary" style="height:45px;width:140px">
+                    <button id="btnBack" type="button" class="btn btn-primary" style="height:42px;width:140px">
                         <span class="btn-label"><i class="glyphicon glyphicon-circle-arrow-left"></i></span>กลับหน้าหลัก
                     </button>
 

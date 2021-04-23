@@ -27,18 +27,26 @@
     </asp:ScriptManager>
     <div id="tab2_page1" class="col-md-12 text-center" style="padding-left: 10%">
         <div class="container">
-            <div class="form-group" style="">
+            <div class="form-group">
                 <div class="col-md-12">
                     <asp:LinkButton ID="ButtonAdd1" runat="server" OnClick="gotoOrder" class="btn btn-labeled alert-info">
                         <span class="btn-label"><i class="glyphicon glyphicon-plus-sign"></i></span>สร้างใหม่
                     </asp:LinkButton>
+                    <div style="display:none">
                     <asp:LinkButton ID="ButtonEdit1" runat="server" OnClick="gotoHistory" class="btn btn-labeled btn-warning">
                         <span class="btn-label"><i class="glyphicon glyphicon-wrench"></i></span>แก้ไข
                     </asp:LinkButton>
+                        </div>
+                                    <asp:LinkButton ID="LinkButton2" runat="server" OnClick="gotoHistory" class="btn btn-labeled btn-primary">
+                    <span class="btn-label"><i class="glyphicon glyphicon-circle-arrow-left"></i></span>กลับหน้าหลัก
+                </asp:LinkButton>
+                <asp:LinkButton ID="LinkButton3" runat="server" OnClick="SaveData" class="btn btn-labeled btn-success">
+                    <span class="btn-label"><i class="glyphicon glyphicon-floppy-save"></i></span>บันทึก
+                </asp:LinkButton>
                     <asp:LinkButton ID="ButtonCancel" runat="server" OnClick="Cancel" OnClientClick="ConfirmCancel()" class="btn btn-labeled btn-danger">
                         <span class="btn-label"><i class="glyphicon glyphicon-remove"></i></span>ยกเลิกรายการ
                     </asp:LinkButton>
-                    <asp:LinkButton ID="ButtonSubmit" runat="server" OnClick="Submit" class="btn btn-labeled btn-success">
+                    <asp:LinkButton ID="ButtonSubmit" runat="server" OnClick="Submit" class="btn btn-labeled btn-info">
                         <span class="btn-label"><i class="glyphicon glyphicon-ok"></i></span>ยืนยันรายการ
                     </asp:LinkButton>
                     <asp:LinkButton ID="ButtonConfirm" runat="server" OnClick="Confirm" class="btn btn-labeled btn-primary">
@@ -315,7 +323,7 @@
             <div class="form-group">
                 <label for="title" class="col-md-2 control-label">ส่วนลดท้ายบิล</label>
                 <div class="col-md-4">
-                    <asp:TextBox ID="disc2_amt" runat="server" style="text-align: right" class="form-control" Readonly="true"></asp:TextBox>
+                    <asp:TextBox ID="disc2_amt" runat="server" style="text-align: right" class="form-control"></asp:TextBox>
                 </div>
                 <label for="title" class="col-md-2 control-label">ส่วนลด</label>
                 <div class="col-md-4">
@@ -350,7 +358,7 @@
             <br />
         </div>
     </div>
-    <div id="tab2_page2" class="col-md-12 text-center" style="padding-left: 10%">
+    <div id="tab2_page2" class="col-md-12 text-center" style="padding-left: 10%; display: none">
         <div class="form-group" style="padding-left: 10%">
             <div class="col-md-12">
                 <asp:LinkButton ID="buttonBack" runat="server" OnClick="gotoHistory" class="btn btn-labeled btn-primary">
