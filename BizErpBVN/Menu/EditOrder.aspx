@@ -113,7 +113,7 @@
                 <div class="col-md-4">
                     <div class="row">
                         <div class="col-sm-12">
-                            <asp:DropDownList ID="en_saledelry_type" runat="server" class="form-control" readonlu></asp:DropDownList>
+                            <asp:DropDownList ID="en_saledelry_type" runat="server" class="form-control" OnSelectedIndexChanged="en_saledelry_type_SelectedIndexChanged" AutoPostBack="True"></asp:DropDownList>
                         </div>
                     </div>
                 </div>
@@ -186,12 +186,13 @@
             <br />
             <br />
             <hr />
+                        <hr />
             <br />
             <br />
-            <div class="form-group hidden">
+            <div class="form-group">
                 <label for="description" class="col-md-2 control-label">รายการสินค้า</label>
                 <div class="col-md-4">
-                    <asp:DropDownList ID="cbbItem" runat="server" class="form-control" OnSelectedIndexChanged="cbbItem_SelectedIndexChanged" AutoPostBack="True" ></asp:DropDownList>
+                    <asp:DropDownList ID="cbbItem" runat="server" class="form-control" OnSelectedIndexChanged="cbbItem_SelectedIndexChanged" AutoPostBack="True"></asp:DropDownList>
                 </div>
                 <label for="title" class="col-md-2 control-label">รายละเอียดสินค้า</label>
                 <div class="col-md-4">
@@ -199,73 +200,97 @@
                         <div class="col-sm-12">
                             <asp:UpdatePanel ID="UpdatePanel3" runat="server">
                                 <ContentTemplate>
-                                    <textarea data-ng-model="tutorial.description" rows="1" id="txtItem_dest" runat="server"
+                                    <textarea data-ng-model="tutorial.description" rows="1" id="txtItem_dest" runat="server" style="text-align: left"
                                         name="description" class="form-control">
-                                    </textarea>
+                        </textarea>
                                 </ContentTemplate>
                             </asp:UpdatePanel>
                         </div>
                     </div>
                 </div>
             </div>
-<%--            <br />
-            <br />--%>
-            <div class="form-group hidden">
+            <br />
+            <br />
+            <div class="form-group">
                 <label for="description" class="col-md-2 control-label">ราคาต่อหน่วย</label>
                 <div class="col-md-4">
-                    <asp:TextBox ID="txtPrice" runat="server" class="form-control" TextMode="Number" ReadOnly="true"></asp:TextBox>
+                    <asp:UpdatePanel ID="UpdatePanel2" runat="server">
+                        <ContentTemplate>
+                            <asp:TextBox ID="txtPrice" runat="server" CssClass="form-control text-right" TextMode="Number" ReadOnly="true"></asp:TextBox>
+                        </ContentTemplate>
+                    </asp:UpdatePanel>
                 </div>
                 <label for="title" class="col-md-2 control-label">ส่วนลดต่อหน่วย</label>
                 <div class="col-md-4">
                     <div class="row">
                         <div class="col-sm-12">
-                            <asp:TextBox ID="txtDisc1_price" runat="server" class="form-control" TextMode="Number" AutoPostBack="true" OnTextChanged="dist_price_Change"></asp:TextBox>
+                            <asp:UpdatePanel ID="UpdatePanel5" runat="server">
+                                <ContentTemplate>
+                                    <asp:TextBox ID="txtDisc1_price" runat="server" CssClass="form-control text-right" TextMode="Number" AutoPostBack="true" OnTextChanged="line_qty_Change"></asp:TextBox>
+                                </ContentTemplate>
+                            </asp:UpdatePanel>
                         </div>
                     </div>
                 </div>
             </div>
-<%--            <br />
-            <br />--%>
-            <div class="form-group hidden">
+            <br />
+            <br />
+            <div class="form-group">
                 <label for="description" class="col-md-2 control-label">หน่วยนับ</label>
                 <div class="col-md-4">
-                    <asp:TextBox ID="txtline_qty" runat="server" class="form-control" TextMode="Number" AutoPostBack="true" OnTextChanged="line_qty_Change"></asp:TextBox>
+                    <asp:UpdatePanel ID="UpdatePanel6" runat="server">
+                        <ContentTemplate>
+                            <asp:TextBox ID="txtline_qty" runat="server" TextMode="Number" AutoPostBack="true" OnTextChanged="line_qty_Change" CssClass="form-control text-right"></asp:TextBox>
+                        </ContentTemplate>
+                    </asp:UpdatePanel>
                 </div>
                 <label for="title" class="col-md-2 control-label">รวมมูลค่า</label>
                 <div class="col-md-4">
                     <div class="row">
                         <div class="col-sm-12">
-                            <asp:TextBox ID="txtNetprice_amt" runat="server" class="form-control" TextMode="Number" ReadOnly="true"></asp:TextBox>
+                            <asp:UpdatePanel ID="UpdatePanel7" runat="server">
+                                <ContentTemplate>
+                                    <asp:TextBox ID="txtNetprice_amt" runat="server" CssClass="form-control text-right" TextMode="Number" ReadOnly="true"></asp:TextBox>
+                                </ContentTemplate>
+                            </asp:UpdatePanel>
                         </div>
                     </div>
                 </div>
             </div>
-<%--            <br />
-            <br />--%>
-            <div class="form-group hidden">
+            <br />
+            <br />
+            <div class="form-group">
                 <label for="description" class="col-md-2 control-label">อธิบายเพิ่มเติม</label>
                 <div class="col-md-4">
-                    <textarea data-ng-model="tutorial.description" rows="2" id="txtMemo" runat="server"
-                        name="description" class="form-control">
+                    <asp:UpdatePanel ID="UpdatePanel8" runat="server">
+                        <ContentTemplate>
+                            <textarea data-ng-model="tutorial.description" rows="2" id="txtMemo" runat="server"
+                                name="description" class="form-control">
                         </textarea>
+                        </ContentTemplate>
+                    </asp:UpdatePanel>
                 </div>
                 <label for="title" class="col-md-2 control-label"></label>
                 <div class="col-md-4">
                     <div class="row">
                         <div class="col-sm-12">
-                            <asp:LinkButton ID="AddItem" runat="server" OnClick="ButtonAdd_Click" CssClass="btn btn-info form-control" Style="height: 38px; width: 120px;">
+                            <asp:LinkButton ID="AddItem" runat="server" OnClick="ButtonAdd_Click" CssClass="btn btn-info form-control" Style="height: 37px; width: 100px;">
                           <i class="glyphicon glyphicon-plus"></i>&nbsp;เพิ่ม</asp:LinkButton>
+                            <asp:LinkButton ID="UpdateItem" runat="server" OnClick="ButtonUpdate_Click" CssClass="btn btn-warning form-control" Style="height: 37px; width: 100px;">
+                          <i class="glyphicon glyphicon-plus"></i>&nbsp;แก้ไขข้อมูล</asp:LinkButton>
                         </div>
                     </div>
                 </div>
             </div>
-<%--            <br />
             <br />
-            <br />--%>
+            <br />
+            <br />
             <asp:GridView ID="GridView6" runat="server" AutoGenerateColumns="false" AllowPaging="true" PageSize="10" HeaderStyle-HorizontalAlign="Center" CssClass="table table-bordered table-striped" Width="100%" ShowFooter="false" ShowHeader="true"
-                ShowHeaderWhenEmpty="true" GridLines="None" CellPadding="4" OnPageIndexChanging="GridView6_PageIndexChanged">
+                ShowHeaderWhenEmpty="true" GridLines="None" CellPadding="4" OnPageIndexChanging="GridView6_PageIndexChanged"  OnRowCommand="GridView6_RowCommand">
                 <EmptyDataTemplate>ไม่พบข้อมูล</EmptyDataTemplate>
                 <Columns>
+                    <asp:BoundField DataField="itemoid" HeaderText="idสินค้า" HeaderStyle-CssClass="hidden" ItemStyle-CssClass="hidden" />
+                    <asp:BoundField DataField="lineoid" HeaderText="idline" HeaderStyle-CssClass="hidden" ItemStyle-CssClass="hidden" />
                     <asp:BoundField DataField="mt_name" HeaderText="รายการสินค้า" />
                     <asp:BoundField DataField="line_item_dest" HeaderText="รายละเอียดสินค้า" />
                     <asp:BoundField DataField="line_price" HeaderText="ราคาต่อหน่วย" />
@@ -274,6 +299,16 @@
                     <asp:BoundField DataField="line_qty" HeaderText="หน่วยนับ" />
                     <asp:BoundField DataField="line_netprice_amt" HeaderText="รวมมูลค่า" />
                     <asp:BoundField DataField="line_memo" HeaderText="อธิบายเพิ่มเติม" />
+                    <asp:TemplateField ItemStyle-Width="24%" ItemStyle-HorizontalAlign="Center" ItemStyle-Font-Names="Tahoma">
+                        <ItemTemplate>
+                            <asp:LinkButton ID="btnEdit" runat="server" class="btn btn-labeled btn-warning" Width="95px" Height="38px" CommandArgument='<%# Eval("itemoid") %>' CommandName="edititem"><span class="btn-label"><i class="glyphicon glyphicon-wrench"></i></span>
+                                แก้ไข
+                            </asp:LinkButton>
+                                    <asp:LinkButton ID="lnkSelect" runat="server" class="btn btn-labeled btn-danger"  Width="90px" Height="38px" OnClientClick="ConfirmCancel()" CommandArgument='<%# Eval("lineoid") %>' CommandName="deleteitem"><span class="btn-label"><i class="glyphicon glyphicon-trash"></i></span>
+                                ลบ
+                            </asp:LinkButton>
+                        </ItemTemplate>
+                    </asp:TemplateField>
                 </Columns>
                 <RowStyle BackColor="#EFF3FB" />
                 <EditRowStyle BackColor="#2461BF" />
@@ -313,7 +348,7 @@
             <div class="form-group">
                 <label for="title" class="col-md-2 control-label">ยอดเงินที่รับชำระแล้ว</label>
                 <div class="col-md-4">
-                    <asp:TextBox ID="depos_amt" style="text-align: right" runat="server" class="form-control" Readonly="true"></asp:TextBox>
+                    <asp:TextBox ID="depos_amt" style="text-align: right" runat="server" class="form-control"></asp:TextBox>
                 </div>
                 <label />
                 <label />
@@ -323,7 +358,7 @@
             <div class="form-group">
                 <label for="title" class="col-md-2 control-label">ส่วนลดท้ายบิล</label>
                 <div class="col-md-4">
-                    <asp:TextBox ID="disc2_amt" runat="server" style="text-align: right" class="form-control"></asp:TextBox>
+                    <asp:TextBox ID="disc2_amt" runat="server" style="text-align: right" class="form-control" AutoPostBack="true" OnTextChanged="dist_price_Change"></asp:TextBox>
                 </div>
                 <label for="title" class="col-md-2 control-label">ส่วนลด</label>
                 <div class="col-md-4">

@@ -353,10 +353,10 @@ namespace BizErpBVN.Menu
                         cmd2.Parameters.AddWithValue("@line_price", Convert.ToDouble(items.line_price)); //6
                         cmd2.Parameters.AddWithValue("@line_disc1_price", Convert.ToDouble(String.IsNullOrEmpty(items.line_disc1_price) || items.line_disc1_price == "&nbsp;" ? "0" : items.line_disc1_price)); //7 
                         cmd2.Parameters.AddWithValue("@line_disc2_price", Convert.ToDouble(String.IsNullOrEmpty(items.line_disc2_price) || items.line_disc2_price == "&nbsp;" ? "0" : items.line_disc2_price)); //8
-                        cmd2.Parameters.AddWithValue("@line_disc_price", Convert.ToDouble(String.IsNullOrEmpty(items.line_price) || items.line_price == "&nbsp;" ? "0" : items.line_price) - (Convert.ToDouble(String.IsNullOrEmpty(items.line_disc1_price) || items.line_disc1_price == "&nbsp;" ? "0" : items.line_disc1_price) + Convert.ToDouble(String.IsNullOrEmpty(items.line_disc2_price) || items.line_disc2_price == "&nbsp;" ? "0" : items.line_disc2_price))); //9
+                        cmd2.Parameters.AddWithValue("@line_disc_price", Convert.ToDouble(String.IsNullOrEmpty(items.line_disc1_price) || items.line_disc1_price == "&nbsp;" ? "0" : items.line_disc1_price) + Convert.ToDouble(String.IsNullOrEmpty(items.line_disc2_price) || items.line_disc2_price == "&nbsp;" ? "0" : items.line_disc2_price)); //9
                         cmd2.Parameters.AddWithValue("@line_qty", Convert.ToInt32(String.IsNullOrEmpty(items.line_qty) || items.line_qty == "&nbsp;" ? "0" : items.line_qty)); //10
                         cmd2.Parameters.AddWithValue("@line_price_amt", Convert.ToDouble(String.IsNullOrEmpty(items.line_price) || items.line_price == "&nbsp;" ? "0" : items.line_price) * Convert.ToDouble(String.IsNullOrEmpty(items.line_qty) || items.line_qty == "&nbsp;" ? "0" : items.line_qty)); //11
-                        cmd2.Parameters.AddWithValue("@line_disc_amt", Convert.ToDouble(String.IsNullOrEmpty(items.line_price) || items.line_price == "&nbsp;" ? "0" : items.line_price) * Convert.ToDouble(String.IsNullOrEmpty(items.line_qty) || items.line_qty == "&nbsp;" ? "0" : items.line_qty)); //12
+                        cmd2.Parameters.AddWithValue("@line_disc_amt", (Convert.ToDouble(String.IsNullOrEmpty(items.line_disc1_price) || items.line_disc1_price == "&nbsp;" ? "0" : items.line_disc1_price) + Convert.ToDouble(String.IsNullOrEmpty(items.line_disc2_price) || items.line_disc2_price == "&nbsp;" ? "0" : items.line_disc2_price)) * Convert.ToDouble(String.IsNullOrEmpty(items.line_qty) || items.line_qty == "&nbsp;" ? "0" : items.line_qty)); //12
                         cmd2.Parameters.AddWithValue("@line_netprice_amt", Convert.ToDouble(String.IsNullOrEmpty(items.line_netprice_amt) || items.line_netprice_amt == "&nbsp;" ? "0" : items.line_netprice_amt)); //13
                         cmd2.Parameters.AddWithValue("@line_memo", items.line_memo); //14
                         cmd2.ExecuteNonQuery();
@@ -377,9 +377,10 @@ namespace BizErpBVN.Menu
         }
         protected void dist_price_Change(object sender, EventArgs e)
         {
+            double? total = Convert.ToDouble(Session["Total"].ToString());
             double discnt = Convert.ToDouble(String.IsNullOrEmpty(disc2_amt.Text) ? "0" : disc2_amt.Text);
             double tax = Convert.ToDouble(String.IsNullOrEmpty(tax_amt.Text) ? "0" : tax_amt.Text);
-            double sum = Convert.ToDouble(String.IsNullOrEmpty(txn_total.Text) ? "0" : txn_total.Text);
+            double sum = Convert.ToDouble(total == null ? 0 : total);
             sum = sum - discnt;
             tax_amt.Text = ((sum * 7) / 107).ToString("F2");
             txn_total.Text = (sum).ToString();
@@ -478,6 +479,7 @@ namespace BizErpBVN.Menu
             disc1_amt.Text = valdisc1_amt.ToString();
             txn_total.Text = valsum.ToString();
             tax_amt.Text = ((valsum * 7)/ 107).ToString("F2");
+            Session["Total"] = txn_total.Text;
         }
 
         public void ClearOtherField()
