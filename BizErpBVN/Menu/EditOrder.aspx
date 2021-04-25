@@ -228,8 +228,7 @@
                         <div class="col-sm-12">
                             <asp:UpdatePanel ID="UpdatePanel3" runat="server">
                                 <ContentTemplate>
-                                    <textarea data-ng-model="tutorial.description" rows="1" id="txtItem_dest" runat="server" style="text-align: left" readonly="readonly"
-                                        name="description" class="form-control">
+                                    <textarea data-ng-model="tutorial.description" rows="1" id="txtItem_dest" runat="server" style="text-align: left" name="description" class="form-control">
                         </textarea>
                                 </ContentTemplate>
                             </asp:UpdatePanel>
@@ -254,7 +253,7 @@
                         <div class="col-sm-12">
                             <asp:UpdatePanel ID="UpdatePanel5" runat="server">
                                 <ContentTemplate>
-                                    <asp:TextBox ID="txtDisc1_price" runat="server" CssClass="form-control text-right" TextMode="Number" AutoPostBack="true" OnTextChanged="line_qty_Change" ReadOnly="true"></asp:TextBox>
+                                    <asp:TextBox ID="txtDisc1_price" runat="server" CssClass="form-control text-right" TextMode="Number" AutoPostBack="true" OnTextChanged="line_qty_Change"></asp:TextBox>
                                 </ContentTemplate>
                             </asp:UpdatePanel>
                         </div>
@@ -266,19 +265,24 @@
             <div class="form-group">
                 <label for="description" class="col-md-2 control-label">หน่วยนับ</label>
                 <div class="col-md-4">
-                    <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+                    <asp:UpdatePanel ID="UpdatePanel10" runat="server">
                         <ContentTemplate>
-                            <asp:TextBox ID="TextBox1" runat="server" TextMode="Number" AutoPostBack="true" CssClass="form-control text-right"></asp:TextBox>
+                            <asp:TextBox ID="txtUnit" runat="server" CssClass="form-control text-left" ReadOnly="true"></asp:TextBox>
                         </ContentTemplate>
                     </asp:UpdatePanel>
                 </div>
-                <label for="description" class="col-md-2 control-label">จำนวน</label>
+                <label for="title" class="col-md-2 control-label">จำนวน</label>
                 <div class="col-md-4">
-                    <asp:UpdatePanel ID="UpdatePanel6" runat="server">
-                        <ContentTemplate>
-                            <asp:TextBox ID="txtline_qty" runat="server" TextMode="Number" AutoPostBack="true" OnTextChanged="line_qty_Change" CssClass="form-control text-right"></asp:TextBox>
-                        </ContentTemplate>
-                    </asp:UpdatePanel>
+                    <div class="row">
+                        <div class="col-sm-12">
+
+                            <asp:UpdatePanel ID="UpdatePanel6" runat="server">
+                                <ContentTemplate>
+                                    <asp:TextBox ID="txtline_qty" runat="server" TextMode="Number" AutoPostBack="true" OnTextChanged="line_qty_Change" CssClass="form-control text-right"></asp:TextBox>
+                                </ContentTemplate>
+                            </asp:UpdatePanel>
+                        </div>
+                    </div>
                 </div>
             </div>
             <br />
@@ -339,7 +343,8 @@
                     <asp:BoundField DataField="line_price" HeaderText="ราคาต่อหน่วย" ItemStyle-Wrap="true" HeaderStyle-Wrap="true" />
                     <asp:BoundField DataField="line_disc1_price" HeaderText="ส่วนลดต่อหน่วย" ItemStyle-Wrap="true" HeaderStyle-Wrap="true" />
                     <asp:BoundField DataField="line_disc2_price" HeaderText="ส่วนลดต่อหน่วย - กรณีลูกค้ารับสินค้าเอง " ItemStyle-Wrap="true" HeaderStyle-Wrap="true" />
-                    <asp:BoundField DataField="line_qty" HeaderText="หน่วยนับ" ItemStyle-Wrap="true" HeaderStyle-Wrap="true" />
+                    <asp:BoundField DataField="line_qty" HeaderText="จำนวน" ItemStyle-Wrap="true" HeaderStyle-Wrap="true" />
+                    <asp:BoundField DataField="unt_name" HeaderText="หน่วยนับ" />
                     <asp:BoundField DataField="line_netprice_amt" HeaderText="รวมมูลค่า" ItemStyle-Wrap="true" HeaderStyle-Wrap="true" />
                     <asp:BoundField DataField="line_memo" HeaderText="อธิบายเพิ่มเติม" ItemStyle-Wrap="true" HeaderStyle-Wrap="true" />
                     <asp:TemplateField ItemStyle-Width="24%" ItemStyle-HorizontalAlign="Center" ItemStyle-Font-Names="Tahoma">

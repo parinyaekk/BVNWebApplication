@@ -287,10 +287,9 @@
                 <div class="col-md-4">
                     <asp:UpdatePanel ID="UpdatePanel10" runat="server">
                         <ContentTemplate>
-                            <asp:TextBox ID="TextBox1" runat="server" CssClass="form-control text-right" TextMode="Number"></asp:TextBox>
+                            <asp:TextBox ID="txtUnit" runat="server" CssClass="form-control text-left" ReadOnly="true"></asp:TextBox>
                         </ContentTemplate>
                     </asp:UpdatePanel>
-
                 </div>
                 <label for="title" class="col-md-2 control-label">จำนวน</label>
                 <div class="col-md-4">
@@ -357,15 +356,16 @@
             <asp:GridView ID="GridView6" runat="server" AutoGenerateColumns="false" AllowPaging="true" PageSize="10" HeaderStyle-HorizontalAlign="Center" CssClass="table table-bordered table-striped" Width="100%" ShowFooter="false" ShowHeader="true" ShowHeaderWhenEmpty="true" GridLines="None" CellPadding="4" OnPageIndexChanging="GridView6_PageIndexChanged" OnRowCommand="GridView6_RowCommand">
                 <EmptyDataTemplate>ไม่พบข้อมูล</EmptyDataTemplate>
                 <Columns>
-                    <asp:BoundField DataField="mt_name" HeaderText="รายการสินค้า" ItemStyle-HorizontalAlign="Center"></asp:BoundField>
-                    <asp:BoundField DataField="line_item_dest" HeaderText="รายละเอียดสินค้า" />
-                    <asp:BoundField DataField="line_price" HeaderText="ราคาต่อหน่วย" DataFormatString="{0:N2}" />
-                    <asp:BoundField DataField="line_disc1_price" HeaderText="ส่วนลดต่อหน่วย" DataFormatString="{0:N2}" />
-                    <asp:BoundField DataField="line_disc2_price" HeaderText="ส่วนลดต่อหน่วย - กรณีลูกค้ารับสินค้าเอง " DataFormatString="{0:N2}" />
-                    <asp:BoundField DataField="line_qty" HeaderText="หน่วยนับ" DataFormatString="{0:N2}" />
-                    <asp:BoundField DataField="line_netprice_amt" HeaderText="รวมมูลค่า" DataFormatString="{0:N2}" />
-                    <asp:BoundField DataField="line_memo" HeaderText="อธิบายเพิ่มเติม" />
-                    <asp:TemplateField ItemStyle-Width="24%" ItemStyle-HorizontalAlign="Center" ItemStyle-Font-Names="Tahoma">
+                    <asp:BoundField DataField="mt_name" HeaderText="รายการสินค้า" ItemStyle-HorizontalAlign="Center"></asp:BoundField>  <%-- 0 --%> 
+                    <asp:BoundField DataField="line_item_dest" HeaderText="รายละเอียดสินค้า" />  <%-- 1 --%> 
+                    <asp:BoundField DataField="line_price" HeaderText="ราคาต่อหน่วย" DataFormatString="{0:N2}" />  <%-- 2 --%> 
+                    <asp:BoundField DataField="line_disc1_price" HeaderText="ส่วนลดต่อหน่วย" DataFormatString="{0:N2}" />  <%-- 3 --%> 
+                    <asp:BoundField DataField="line_disc2_price" HeaderText="ส่วนลดต่อหน่วย - กรณีลูกค้ารับสินค้าเอง " DataFormatString="{0:N2}" />  <%-- 4 --%> 
+                    <asp:BoundField DataField="unt_name" HeaderText="หน่วยนับ" /> <%-- 5 --%> 
+                    <asp:BoundField DataField="line_qty" HeaderText="จำนวน" DataFormatString="{0:N2}" />  <%-- 6 --%> 
+                    <asp:BoundField DataField="line_netprice_amt" HeaderText="รวมมูลค่า" DataFormatString="{0:N2}" />  <%-- 7 --%> 
+                    <asp:BoundField DataField="line_memo" HeaderText="อธิบายเพิ่มเติม" />  <%-- 8 --%> 
+                    <asp:TemplateField ItemStyle-Width="24%" ItemStyle-HorizontalAlign="Center" ItemStyle-Font-Names="Tahoma"> 
                         <ItemTemplate>
                             <asp:LinkButton ID="btnEdit" runat="server" class="btn btn-labeled btn-warning" CommandArgument='<%# Container.DataItemIndex %>' CommandName="edititem" Width="95px" Height="38px"><span class="btn-label"><i class="glyphicon glyphicon-wrench"></i></span>
                         แก้ไข

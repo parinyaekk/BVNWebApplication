@@ -36,6 +36,7 @@ namespace BizErpBVN.Menu
                 this.LoadTaxcalc();
                 this.refreshdataT2();
                 this.LoadStatus();
+                this.ClearOtherField();
                 getEditData(GGID);
                 this.LoadItem();
                 this.LoadAddress();
@@ -54,16 +55,19 @@ namespace BizErpBVN.Menu
             //line_netprice_amt
             //line_memo
             dt = new DataTable();
-            DataColumn dc1 = new DataColumn("mt_name");
-            DataColumn dc2 = new DataColumn("line_item_dest");
-            DataColumn dc3 = new DataColumn("line_price");
-            DataColumn dc4 = new DataColumn("line_disc1_price");
-            DataColumn dc5 = new DataColumn("line_disc2_price");
-            DataColumn dc6 = new DataColumn("line_qty");
+            dt = new DataTable();
+            DataColumn dc0 = new DataColumn("mt_name");
+            DataColumn dc1 = new DataColumn("line_item_dest");
+            DataColumn dc2 = new DataColumn("line_price");
+            DataColumn dc3 = new DataColumn("line_disc1_price");
+            DataColumn dc4 = new DataColumn("line_disc2_price");
+            DataColumn dc5 = new DataColumn("line_qty");
+            DataColumn dc6 = new DataColumn("unt_name");
             DataColumn dc7 = new DataColumn("line_netprice_amt");
             DataColumn dc8 = new DataColumn("line_memo");
             DataColumn dc9 = new DataColumn("itemoid");
             DataColumn dc10 = new DataColumn("lineoid");
+            dt.Columns.Add(dc0);
             dt.Columns.Add(dc1);
             dt.Columns.Add(dc2);
             dt.Columns.Add(dc3);
@@ -153,9 +157,10 @@ namespace BizErpBVN.Menu
                     txt_Addr1.Value = ds.Tables[0].Rows[0]["addr_text"].ToString();
                     txt_Addr2.Value = ds.Tables[0].Rows[0]["ship_addr_text"].ToString();
 
-                    NpgsqlCommand com5 = new NpgsqlCommand(@"select mi.mt_name,line_item_dest,line_price,line_disc1_price,line_disc2_price,line_qty,line_netprice_amt,line_memo,mi.oid as itemoid, tl.oid as lineoid
+                    NpgsqlCommand com5 = new NpgsqlCommand(@"select mi.mt_name,line_item_dest,line_price,line_disc1_price,line_disc2_price,line_qty,line_netprice_amt,line_memo,mi.oid as itemoid, tl.oid as lineoid, mu.mt_name as unitname
                                                             from txn_so_line tl 
                                                             JOIN mt_item mi ON tl.line_item_oid = mi.oid
+                                                            left join mt_unt mu on mi.unt_oid = mu.oid
                                                             where tl.parent_oid = @parent_oid ORDER BY tl.line_seq", conn);
                     com5.Parameters.AddWithValue("@parent_oid", ggid);
                     NpgsqlDataAdapter da5 = new NpgsqlDataAdapter(com5);
@@ -178,6 +183,7 @@ namespace BizErpBVN.Menu
                             drNew["line_memo"] = row.ItemArray[7].ToString();
                             drNew["itemoid"] = row.ItemArray[8].ToString();
                             drNew["lineoid"] = row.ItemArray[9].ToString();
+                            drNew["unt_name"] = row.ItemArray[10].ToString();
                             table.Rows.Add(drNew);
                         }
                         RemoveNullColumnFromDataTable(table);
@@ -796,6 +802,7 @@ namespace BizErpBVN.Menu
             txtline_qty.Text = "";
             txtNetprice_amt.Text = "";
             txtMemo.Value = "";
+            txtUnit.Text = "";
         }
 
         public class TempModel
@@ -806,6 +813,7 @@ namespace BizErpBVN.Menu
             public string line_disc1_price { get; set; }
             public string line_disc2_price { get; set; }
             public string line_qty { get; set; }
+            public string unit_name { get; set; }
             public string line_netprice_amt { get; set; }
             public string line_memo { get; set; }
             public Guid itemoid { get; set; }
@@ -974,9 +982,11 @@ namespace BizErpBVN.Menu
                     if (e.CommandName == "edititem")
                     {
                         Session["itemoid"] = itemoid;
-                        NpgsqlCommand com = new NpgsqlCommand(@"select mi.mt_name,line_item_dest,line_price,line_disc1_price,line_disc2_price,line_qty,line_netprice_amt,line_memo,mi.oid as itemoid
+                        NpgsqlCommand com = new NpgsqlCommand(@"select mi.mt_name,line_item_dest,line_price,line_disc1_price,line_disc2_price,line_qty,line_netprice_amt,line_memo,mi.oid as itemoid, mu.mt_name as unitname
                                                             from txn_so_line tl 
                                                             JOIN mt_item mi ON tl.line_item_oid = mi.oid
+                                                            left join mt_unt mu 
+                                                            on mi.unt_oid = mu.oid
                                                             where tl.parent_oid = @parent_oid and tl.line_item_oid = @line_item_oid ORDER BY tl.line_seq LIMIT 1", conn);
                         com.Parameters.AddWithValue("@parent_oid", Guid.Parse(Request.QueryString["ggid"].ToString()));
                         com.Parameters.AddWithValue("@line_item_oid", itemoid);
@@ -990,6 +1000,7 @@ namespace BizErpBVN.Menu
                             txtPrice.Text = ds.Tables[0].Rows[0]["line_price"].ToString().Replace("&nbsp;", "0");
                             txtDisc1_price.Text = ds.Tables[0].Rows[0]["line_disc1_price"].ToString().Replace("&nbsp;", "0");
                             txtline_qty.Text = ds.Tables[0].Rows[0]["line_qty"].ToString().Replace("&nbsp;", "0");
+                            txtUnit.Text = ds.Tables[0].Rows[0]["unitname"].ToString().Replace("&nbsp;", "0");
                             txtNetprice_amt.Text = ds.Tables[0].Rows[0]["line_netprice_amt"].ToString().Replace("&nbsp;", "0");
                             txtMemo.Value = ds.Tables[0].Rows[0]["line_memo"].ToString().Replace("&nbsp;", "");
                             AddItem.Visible = false;

@@ -56,14 +56,16 @@ namespace BizErpBVN.Menu
             //line_netprice_amt
             //line_memo
             dt = new DataTable();
-            DataColumn dc1 = new DataColumn("mt_name");
-            DataColumn dc2 = new DataColumn("line_item_dest");
-            DataColumn dc3 = new DataColumn("line_price");
-            DataColumn dc4 = new DataColumn("line_disc1_price");
-            DataColumn dc5 = new DataColumn("line_disc2_price");
-            DataColumn dc6 = new DataColumn("line_qty");
+            DataColumn dc0 = new DataColumn("mt_name");
+            DataColumn dc1 = new DataColumn("line_item_dest");
+            DataColumn dc2 = new DataColumn("line_price");
+            DataColumn dc3 = new DataColumn("line_disc1_price");
+            DataColumn dc4 = new DataColumn("line_disc2_price");
+            DataColumn dc5 = new DataColumn("line_qty");
+            DataColumn dc6 = new DataColumn("unt_name");
             DataColumn dc7 = new DataColumn("line_netprice_amt");
             DataColumn dc8 = new DataColumn("line_memo");
+            dt.Columns.Add(dc0);
             dt.Columns.Add(dc1);
             dt.Columns.Add(dc2);
             dt.Columns.Add(dc3);
@@ -148,9 +150,10 @@ namespace BizErpBVN.Menu
                         temp.line_price = row.Cells[2].Text;
                         temp.line_disc1_price = row.Cells[3].Text;
                         temp.line_disc2_price = row.Cells[4].Text;
-                        temp.line_qty = row.Cells[5].Text;
-                        temp.line_netprice_amt = row.Cells[6].Text;
-                        temp.line_memo = row.Cells[7].Text;
+                        temp.unt_name = row.Cells[5].Text;
+                        temp.line_qty = row.Cells[6].Text;
+                        temp.line_netprice_amt = row.Cells[7].Text;
+                        temp.line_memo = row.Cells[8].Text;
 
                         lstModel.Add(temp);
                     }
@@ -406,6 +409,7 @@ namespace BizErpBVN.Menu
                 drNew["line_disc1_price"] = txtDisc1_price.Text;
                 drNew["line_disc2_price"] = en_saledelry_type.Text == "CUST" ? Session["Custdiscount"].ToString() : "0";
                 drNew["line_qty"] = txtline_qty.Text;
+                drNew["unt_name"] = txtUnit.Text;
                 drNew["line_netprice_amt"] = txtNetprice_amt.Text;
                 drNew["line_memo"] = txtMemo.Value;
                 table.Rows.Add(drNew);
@@ -451,6 +455,7 @@ namespace BizErpBVN.Menu
             public string line_disc1_price { get; set; }
             public string line_disc2_price { get; set; }
             public string line_qty { get; set; }
+            public string unt_name { get; set; }
             public string line_netprice_amt { get; set; }
             public string line_memo { get; set; }
         }
@@ -472,8 +477,8 @@ namespace BizErpBVN.Menu
                 //temp.line_netprice_amt = row.Cells[6].Text;
                 //temp.line_memo = row.Cells[7].Text;
                 //lstModel.Add(temp);
-                valdisc1_amt += (Convert.ToDouble(String.IsNullOrEmpty(row.Cells[3].Text) || row.Cells[3].Text == "&nbsp;" ? "0" : row.Cells[3].Text) + Convert.ToDouble(String.IsNullOrEmpty(row.Cells[4].Text) || row.Cells[4].Text == "&nbsp;" ? "0" : row.Cells[4].Text)) * Convert.ToDouble(String.IsNullOrEmpty(row.Cells[5].Text) || row.Cells[5].Text == "&nbsp;" ? "0" : row.Cells[5].Text);
-                valsum += Convert.ToDouble(String.IsNullOrEmpty(row.Cells[6].Text) || row.Cells[6].Text == "&nbsp;" ? "0" : row.Cells[6].Text);
+                valdisc1_amt += (Convert.ToDouble(String.IsNullOrEmpty(row.Cells[3].Text) || row.Cells[3].Text == "&nbsp;" ? "0" : row.Cells[3].Text) + Convert.ToDouble(String.IsNullOrEmpty(row.Cells[4].Text) || row.Cells[4].Text == "&nbsp;" ? "0" : row.Cells[4].Text)) * Convert.ToDouble(String.IsNullOrEmpty(row.Cells[6].Text) || row.Cells[6].Text == "&nbsp;" ? "0" : row.Cells[6].Text);
+                valsum += Convert.ToDouble(String.IsNullOrEmpty(row.Cells[7].Text) || row.Cells[7].Text == "&nbsp;" ? "0" : row.Cells[7].Text);
             }
 
             disc1_amt.Text = valdisc1_amt.ToString();
@@ -487,8 +492,8 @@ namespace BizErpBVN.Menu
             cbbItem.SelectedIndex = 0;
             txtItem_dest.Value = "";
             txtPrice.Text = "";
+            txtUnit.Text = "";
             txtDisc1_price.Text = "";
-            en_saledelry_type.SelectedIndex = 0;
             txtline_qty.Text = "";
             txtNetprice_amt.Text = "";
             txtMemo.Value = "";
@@ -624,30 +629,15 @@ namespace BizErpBVN.Menu
             }
         }
 
-
         public void GetItem()
         {
             try
             {
-
-                //NpgsqlCommand cmd = new NpgsqlCommand("select * from  txn_so_line tl inner join mt_item mi on tl.line_item_oid = mi.oid   where tl.parent_oid::text = @oid", conn);
-                //cmd.Parameters.AddWithValue("@oid", cbbItem.SelectedValue);
-                //NpgsqlDataAdapter da = new NpgsqlDataAdapter(cmd);
-                //DataSet ds = new DataSet();
-                //da.Fill(ds);
-                //txtItem_dest.Value = ds.Tables[0].Rows[0]["line_item_dest"].ToString();
-                //txtPrice.Text = ds.Tables[0].Rows[0]["line_price"].ToString();
-                //txtDisc1_price.Text = ds.Tables[0].Rows[0]["line_disc1_price"].ToString();
-                //txtUnt_oid.Text = ds.Tables[0].Columns["line_unt_oid"].ToString();
-                //txtNetprice_amt.Text = ds.Tables[0].Columns["mt_code"].ToString();
-                //txtMemo.Value = ds.Tables[0].Columns["line_memo"].ToString();
-
-
-
-
-
-                NpgsqlCommand cmd = new NpgsqlCommand(@"select mi.mt_name, cast(mi.saleprice1 as decimal(10,2)) AS saleprice1 ,cast(mi.disc1 as decimal(10,2)) AS disc1 
+                NpgsqlCommand cmd = new NpgsqlCommand(@"select mi.mt_name, cast(mi.saleprice1 as decimal(10,2)) AS saleprice1 ,cast(mi.disc1 as decimal(10,2)) 
+                                                        AS disc1, mu.mt_name as unitname
                                                         from mt_item mi
+                                                        left join mt_unt mu 
+                                                        on mi.unt_oid = mu.oid
                                                         where mi.mt_name = @mt_name", conn);
                 cmd.Parameters.AddWithValue("@mt_name", cbbItem.SelectedItem.ToString());
                 NpgsqlDataAdapter da = new NpgsqlDataAdapter(cmd);
@@ -660,6 +650,7 @@ namespace BizErpBVN.Menu
                     Session["Custdiscount"] = ds.Tables[0].Rows[0]["disc1"].ToString();
                     //txtDisc1_price.Text
                     txtNetprice_amt.Text = ds.Tables[0].Rows[0]["saleprice1"].ToString();
+                    txtUnit.Text = ds.Tables[0].Rows[0]["unitname"].ToString();
                     //txtMemo.Value = ds.Tables[0].Columns["line_memo"].ToString();
                 }
 
@@ -671,14 +662,10 @@ namespace BizErpBVN.Menu
             }
         }
 
-
         protected void cbbItem_SelectedIndexChanged(object sender, EventArgs e)
         {
             GetItem();
-
         }
-
-
 
         protected void LoadAddress()
         {
@@ -888,8 +875,8 @@ namespace BizErpBVN.Menu
                     GetItem();
                     //txtPrice.Text = row.Cells[2].Text;
                     txtDisc1_price.Text = row.Cells[3].Text.Replace("&nbsp;", "");
-                    txtline_qty.Text = row.Cells[5].Text.Replace("&nbsp;", "");
-                    txtMemo.Value = row.Cells[7].Text.Replace("&nbsp;", "");
+                    txtline_qty.Text = row.Cells[6].Text.Replace("&nbsp;", "");
+                    txtMemo.Value = row.Cells[8].Text.Replace("&nbsp;", "");
                     txtNetprice_amt.Text = ((Convert.ToDouble(String.IsNullOrEmpty(txtPrice.Text) || txtPrice.Text == "&nbsp;" ? "0" : txtPrice.Text) - Convert.ToDouble(String.IsNullOrEmpty(txtDisc1_price.Text) || txtDisc1_price.Text == "&nbsp;" ? "0" : txtDisc1_price.Text)) * Convert.ToDouble(String.IsNullOrEmpty(txtline_qty.Text) || txtline_qty.Text == "&nbsp;" ? "0" : txtline_qty.Text)).ToString();
                     AddItem.Visible = false;
                     UpdateItem.Visible = true;
@@ -912,6 +899,7 @@ namespace BizErpBVN.Menu
                 drNew["line_disc1_price"] = txtDisc1_price.Text;
                 drNew["line_disc2_price"] = en_saledelry_type.Text == "CUST" ? Session["Custdiscount"].ToString() : "0";
                 drNew["line_qty"] = txtline_qty.Text;
+                drNew["unt_name"] = txtUnit.Text;
                 drNew["line_netprice_amt"] = txtNetprice_amt.Text;
                 drNew["line_memo"] = txtMemo.Value;
                 table.AcceptChanges();
