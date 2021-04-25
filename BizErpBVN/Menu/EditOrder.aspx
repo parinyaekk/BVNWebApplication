@@ -2,10 +2,9 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <style>
-        .hidden
-         {
-             display:none;
-         }
+        .hidden {
+            display: none;
+        }
     </style>
     <script>
         function ConfirmCancel() {
@@ -32,17 +31,17 @@
                     <asp:LinkButton ID="ButtonAdd1" runat="server" OnClick="gotoOrder" class="btn btn-labeled alert-info">
                         <span class="btn-label"><i class="glyphicon glyphicon-plus-sign"></i></span>สร้างใหม่
                     </asp:LinkButton>
-                    <div style="display:none">
-                    <asp:LinkButton ID="ButtonEdit1" runat="server" OnClick="gotoHistory" class="btn btn-labeled btn-warning">
+                    <div style="display: none">
+                        <asp:LinkButton ID="ButtonEdit1" runat="server" OnClick="gotoHistory" class="btn btn-labeled btn-warning">
                         <span class="btn-label"><i class="glyphicon glyphicon-wrench"></i></span>แก้ไข
-                    </asp:LinkButton>
-                        </div>
-                                    <asp:LinkButton ID="LinkButton2" runat="server" OnClick="gotoHistory" class="btn btn-labeled btn-primary">
+                        </asp:LinkButton>
+                    </div>
+                    <asp:LinkButton ID="LinkButton2" runat="server" OnClick="gotoHistory" class="btn btn-labeled btn-primary">
                     <span class="btn-label"><i class="glyphicon glyphicon-circle-arrow-left"></i></span>กลับหน้าหลัก
-                </asp:LinkButton>
-                <asp:LinkButton ID="LinkButton3" runat="server" OnClick="SaveData" class="btn btn-labeled btn-success">
+                    </asp:LinkButton>
+                    <asp:LinkButton ID="LinkButton3" runat="server" OnClick="SaveData" class="btn btn-labeled btn-success">
                     <span class="btn-label"><i class="glyphicon glyphicon-floppy-save"></i></span>บันทึก
-                </asp:LinkButton>
+                    </asp:LinkButton>
                     <asp:LinkButton ID="ButtonCancel" runat="server" OnClick="Cancel" OnClientClick="ConfirmCancel()" class="btn btn-labeled btn-danger">
                         <span class="btn-label"><i class="glyphicon glyphicon-remove"></i></span>ยกเลิกรายการ
                     </asp:LinkButton>
@@ -59,7 +58,7 @@
             <div class="form-group">
                 <label for="title" class="col-md-2 control-label">เลขที่เอกสาร</label>
                 <div class="col-md-4">
-                    <asp:TextBox ID="txn_num" runat="server" class="form-control" Readonly="true"></asp:TextBox>
+                    <asp:TextBox ID="txn_num" runat="server" class="form-control" ReadOnly="true"></asp:TextBox>
                 </div>
                 <label for="title" class="col-md-2 control-label">สถานะ</label>
                 <div class="col-md-4">
@@ -77,13 +76,13 @@
                 <div class="col-md-4">
                     <div class="row">
                         <div class="col-sm-12">
-                            <asp:TextBox ID="txn_date" runat="server" class="form-control" Readonly="true"></asp:TextBox>
+                            <asp:TextBox ID="txn_date" runat="server" class="form-control" ReadOnly="true"></asp:TextBox>
                         </div>
                     </div>
                 </div>
                 <label for="title" class="col-md-2 control-label">เลขประจำตัวผู้เสียภาษี</label>
                 <div class="col-md-4">
-                    <asp:TextBox ID="tax_num" runat="server" class="form-control" Readonly="true"></asp:TextBox>
+                    <asp:TextBox ID="tax_num" runat="server" class="form-control" ReadOnly="true"></asp:TextBox>
                 </div>
             </div>
             <br />
@@ -186,7 +185,7 @@
             <br />
             <br />
             <hr />
-                        <hr />
+            <hr />
             <br />
             <br />
             <div class="form-group">
@@ -200,7 +199,7 @@
                         <div class="col-sm-12">
                             <asp:UpdatePanel ID="UpdatePanel3" runat="server">
                                 <ContentTemplate>
-                                    <textarea data-ng-model="tutorial.description" rows="1" id="txtItem_dest" runat="server" style="text-align: left"
+                                    <textarea data-ng-model="tutorial.description" rows="1" id="txtItem_dest" runat="server" style="text-align: left" readonly="readonly"
                                         name="description" class="form-control">
                         </textarea>
                                 </ContentTemplate>
@@ -226,7 +225,7 @@
                         <div class="col-sm-12">
                             <asp:UpdatePanel ID="UpdatePanel5" runat="server">
                                 <ContentTemplate>
-                                    <asp:TextBox ID="txtDisc1_price" runat="server" CssClass="form-control text-right" TextMode="Number" AutoPostBack="true" OnTextChanged="line_qty_Change"></asp:TextBox>
+                                    <asp:TextBox ID="txtDisc1_price" runat="server" CssClass="form-control text-right" TextMode="Number" AutoPostBack="true" OnTextChanged="line_qty_Change" ReadOnly="true"></asp:TextBox>
                                 </ContentTemplate>
                             </asp:UpdatePanel>
                         </div>
@@ -241,6 +240,28 @@
                     <asp:UpdatePanel ID="UpdatePanel6" runat="server">
                         <ContentTemplate>
                             <asp:TextBox ID="txtline_qty" runat="server" TextMode="Number" AutoPostBack="true" OnTextChanged="line_qty_Change" CssClass="form-control text-right"></asp:TextBox>
+                        </ContentTemplate>
+                    </asp:UpdatePanel>
+                </div>
+                <label for="description" class="col-md-2 control-label">จำนวน</label>
+                <div class="col-md-4">
+                    <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+                        <ContentTemplate>
+                            <asp:TextBox ID="TextBox1" runat="server" TextMode="Number" AutoPostBack="true" OnTextChanged="line_qty_Change" CssClass="form-control text-right"></asp:TextBox>
+                        </ContentTemplate>
+                    </asp:UpdatePanel>
+                </div>
+            </div>
+            <br />
+            <br />
+            <div class="form-group">
+                <label for="description" class="col-md-2 control-label">อธิบายเพิ่มเติม</label>
+                <div class="col-md-4">
+                    <asp:UpdatePanel ID="UpdatePanel8" runat="server">
+                        <ContentTemplate>
+                            <textarea data-ng-model="tutorial.description" rows="2" id="txtMemo" runat="server"
+                                name="description" class="form-control">
+                        </textarea>
                         </ContentTemplate>
                     </asp:UpdatePanel>
                 </div>
@@ -260,17 +281,10 @@
             <br />
             <br />
             <div class="form-group">
-                <label for="description" class="col-md-2 control-label">อธิบายเพิ่มเติม</label>
+                <label for="description" class="col-md-2 control-label"></label>
                 <div class="col-md-4">
-                    <asp:UpdatePanel ID="UpdatePanel8" runat="server">
-                        <ContentTemplate>
-                            <textarea data-ng-model="tutorial.description" rows="2" id="txtMemo" runat="server"
-                                name="description" class="form-control">
-                        </textarea>
-                        </ContentTemplate>
-                    </asp:UpdatePanel>
                 </div>
-                <label for="title" class="col-md-2 control-label"></label>
+                  <label for="description" class="col-md-2 control-label"></label>
                 <div class="col-md-4">
                     <div class="row">
                         <div class="col-sm-12">
@@ -286,25 +300,25 @@
             <br />
             <br />
             <asp:GridView ID="GridView6" runat="server" AutoGenerateColumns="false" AllowPaging="true" PageSize="10" HeaderStyle-HorizontalAlign="Center" CssClass="table table-bordered table-striped" Width="100%" ShowFooter="false" ShowHeader="true"
-                ShowHeaderWhenEmpty="true" GridLines="None" CellPadding="4" OnPageIndexChanging="GridView6_PageIndexChanged"  OnRowCommand="GridView6_RowCommand">
+                ShowHeaderWhenEmpty="true" GridLines="None" CellPadding="4" OnPageIndexChanging="GridView6_PageIndexChanged" OnRowCommand="GridView6_RowCommand">
                 <EmptyDataTemplate>ไม่พบข้อมูล</EmptyDataTemplate>
                 <Columns>
                     <asp:BoundField DataField="itemoid" HeaderText="idสินค้า" HeaderStyle-CssClass="hidden" ItemStyle-CssClass="hidden" />
                     <asp:BoundField DataField="lineoid" HeaderText="idline" HeaderStyle-CssClass="hidden" ItemStyle-CssClass="hidden" />
-                    <asp:BoundField DataField="mt_name" HeaderText="รายการสินค้า" />
-                    <asp:BoundField DataField="line_item_dest" HeaderText="รายละเอียดสินค้า" />
-                    <asp:BoundField DataField="line_price" HeaderText="ราคาต่อหน่วย" />
-                    <asp:BoundField DataField="line_disc1_price" HeaderText="ส่วนลดต่อหน่วย" />
-                    <asp:BoundField DataField="line_disc2_price" HeaderText="ส่วนลดต่อหน่วย - กรณีลูกค้ารับสินค้าเอง " />
-                    <asp:BoundField DataField="line_qty" HeaderText="หน่วยนับ" />
-                    <asp:BoundField DataField="line_netprice_amt" HeaderText="รวมมูลค่า" />
-                    <asp:BoundField DataField="line_memo" HeaderText="อธิบายเพิ่มเติม" />
+                    <asp:BoundField DataField="mt_name" HeaderText="รายการสินค้า" ItemStyle-Wrap="true" HeaderStyle-Wrap="true" />
+                    <asp:BoundField DataField="line_item_dest" HeaderText="รายละเอียดสินค้า" ItemStyle-Wrap="true" HeaderStyle-Wrap="true" />
+                    <asp:BoundField DataField="line_price" HeaderText="ราคาต่อหน่วย" ItemStyle-Wrap="true" HeaderStyle-Wrap="true" />
+                    <asp:BoundField DataField="line_disc1_price" HeaderText="ส่วนลดต่อหน่วย" ItemStyle-Wrap="true" HeaderStyle-Wrap="true" />
+                    <asp:BoundField DataField="line_disc2_price" HeaderText="ส่วนลดต่อหน่วย - กรณีลูกค้ารับสินค้าเอง " ItemStyle-Wrap="true" HeaderStyle-Wrap="true" />
+                    <asp:BoundField DataField="line_qty" HeaderText="หน่วยนับ" ItemStyle-Wrap="true" HeaderStyle-Wrap="true" />
+                    <asp:BoundField DataField="line_netprice_amt" HeaderText="รวมมูลค่า" ItemStyle-Wrap="true" HeaderStyle-Wrap="true" />
+                    <asp:BoundField DataField="line_memo" HeaderText="อธิบายเพิ่มเติม" ItemStyle-Wrap="true" HeaderStyle-Wrap="true" />
                     <asp:TemplateField ItemStyle-Width="24%" ItemStyle-HorizontalAlign="Center" ItemStyle-Font-Names="Tahoma">
                         <ItemTemplate>
                             <asp:LinkButton ID="btnEdit" runat="server" class="btn btn-labeled btn-warning" Width="95px" Height="38px" CommandArgument='<%# Eval("itemoid") %>' CommandName="edititem"><span class="btn-label"><i class="glyphicon glyphicon-wrench"></i></span>
                                 แก้ไข
                             </asp:LinkButton>
-                                    <asp:LinkButton ID="lnkSelect" runat="server" class="btn btn-labeled btn-danger"  Width="90px" Height="38px" OnClientClick="ConfirmCancel()" CommandArgument='<%# Eval("lineoid") %>' CommandName="deleteitem"><span class="btn-label"><i class="glyphicon glyphicon-trash"></i></span>
+                            <asp:LinkButton ID="lnkSelect" runat="server" class="btn btn-labeled btn-danger" Width="90px" Height="38px" OnClientClick="ConfirmCancel()" CommandArgument='<%# Eval("lineoid") %>' CommandName="deleteitem"><span class="btn-label"><i class="glyphicon glyphicon-trash"></i></span>
                                 ลบ
                             </asp:LinkButton>
                         </ItemTemplate>
@@ -338,31 +352,23 @@
             <div class="form-group">
                 <label for="title" class="col-md-2 control-label">จำนวนเงินมัดจำ</label>
                 <div class="col-md-4">
-                    <asp:TextBox ID="sodepos_amt" style="text-align: right" runat="server" class="form-control"></asp:TextBox>
+                    <asp:TextBox ID="sodepos_amt" Style="text-align: right" runat="server" class="form-control"></asp:TextBox>
                 </div>
-                <label />
-                <label />
-            </div>
-            <br />
-            <br />
-            <div class="form-group">
                 <label for="title" class="col-md-2 control-label">ยอดเงินที่รับชำระแล้ว</label>
                 <div class="col-md-4">
-                    <asp:TextBox ID="depos_amt" style="text-align: right" runat="server" class="form-control"></asp:TextBox>
+                    <asp:TextBox ID="depos_amt" Style="text-align: right" runat="server" class="form-control" ReadOnly="true"></asp:TextBox>
                 </div>
-                <label />
-                <label />
             </div>
             <br />
             <br />
             <div class="form-group">
                 <label for="title" class="col-md-2 control-label">ส่วนลดท้ายบิล</label>
                 <div class="col-md-4">
-                    <asp:TextBox ID="disc2_amt" runat="server" style="text-align: right" class="form-control" AutoPostBack="true" OnTextChanged="dist_price_Change"></asp:TextBox>
+                    <asp:TextBox ID="disc2_amt" runat="server" Style="text-align: right" class="form-control" AutoPostBack="true" OnTextChanged="dist_price_Change"></asp:TextBox>
                 </div>
                 <label for="title" class="col-md-2 control-label">ส่วนลด</label>
                 <div class="col-md-4">
-                    <asp:TextBox ID="disc1_amt" style="text-align: right" runat="server" class="form-control" Readonly="true"></asp:TextBox>
+                    <asp:TextBox ID="disc1_amt" Style="text-align: right" runat="server" class="form-control" ReadOnly="true"></asp:TextBox>
                 </div>
             </div>
             <br />
@@ -375,7 +381,7 @@
                 </div>
                 <label for="title" class="col-md-2 control-label">มูลค่าภาษี</label>
                 <div class="col-md-4">
-                    <asp:TextBox ID="tax_amt" style="text-align: right" runat="server" class="form-control" Readonly="true"></asp:TextBox>
+                    <asp:TextBox ID="tax_amt" Style="text-align: right" runat="server" class="form-control" ReadOnly="true"></asp:TextBox>
                 </div>
             </div>
             <br />
@@ -386,7 +392,7 @@
                 </div>
                 <label for="title" class="col-md-2 control-label">รวมทั้งสิ้น</label>
                 <div class="col-md-4">
-                    <asp:TextBox ID="txn_total" style="text-align: right" runat="server" class="form-control" Readonly="true"></asp:TextBox>
+                    <asp:TextBox ID="txn_total" Style="text-align: right" runat="server" class="form-control" ReadOnly="true"></asp:TextBox>
                 </div>
             </div>
             <br />

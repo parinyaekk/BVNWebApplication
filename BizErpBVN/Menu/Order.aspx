@@ -291,13 +291,13 @@
                         </ContentTemplate>
                     </asp:UpdatePanel>
                 </div>
-                <label for="title" class="col-md-2 control-label">รวมมูลค่า</label>
+                <label for="title" class="col-md-2 control-label">จำนวน</label>
                 <div class="col-md-4">
                     <div class="row">
                         <div class="col-sm-12">
-                            <asp:UpdatePanel ID="UpdatePanel7" runat="server">
+                            <asp:UpdatePanel ID="UpdatePanel10" runat="server">
                                 <ContentTemplate>
-                                    <asp:TextBox ID="txtNetprice_amt" runat="server" CssClass="form-control text-right" TextMode="Number" ReadOnly="true"></asp:TextBox>
+                                    <asp:TextBox ID="TextBox1" runat="server" CssClass="form-control text-right" TextMode="Number"></asp:TextBox>
                                 </ContentTemplate>
                             </asp:UpdatePanel>
                         </div>
@@ -317,7 +317,28 @@
                         </ContentTemplate>
                     </asp:UpdatePanel>
                 </div>
-                <label for="title" class="col-md-2 control-label"></label>
+                <label for="title" class="col-md-2 control-label">รวมมูลค่า</label>
+                <div class="col-md-4">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <asp:UpdatePanel ID="UpdatePanel7" runat="server">
+                                <ContentTemplate>
+                                    <asp:TextBox ID="txtNetprice_amt" runat="server" CssClass="form-control text-right" TextMode="Number" ReadOnly="true"></asp:TextBox>
+                                </ContentTemplate>
+                            </asp:UpdatePanel>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br />
+            <br />
+            <br />
+            <br />
+            <div class="form-group">
+                <label for="description" class="col-md-2 control-label"></label>
+                <div class="col-md-4">
+                </div>
+                <label for="description" class="col-md-2 control-label"></label>
                 <div class="col-md-4">
                     <div class="row">
                         <div class="col-sm-12">
@@ -329,7 +350,6 @@
                     </div>
                 </div>
             </div>
-            <br />
             <br />
             <br />
             <asp:GridView ID="GridView6" runat="server" AutoGenerateColumns="false" AllowPaging="true" PageSize="10" HeaderStyle-HorizontalAlign="Center" CssClass="table table-bordered table-striped" Width="100%" ShowFooter="false" ShowHeader="true" ShowHeaderWhenEmpty="true" GridLines="None" CellPadding="4" OnPageIndexChanging="GridView6_PageIndexChanged" OnRowCommand="GridView6_RowCommand">
@@ -345,12 +365,12 @@
                     <asp:BoundField DataField="line_memo" HeaderText="อธิบายเพิ่มเติม" />
                     <asp:TemplateField ItemStyle-Width="24%" ItemStyle-HorizontalAlign="Center" ItemStyle-Font-Names="Tahoma">
                         <ItemTemplate>
-                            <asp:LinkButton ID="btnEdit" runat="server" class="btn btn-labeled btn-warning" CommandArgument='<%# Container.DataItemIndex %>' CommandName="edititem"  Width="95px" Height="38px"><span class="btn-label"><i class="glyphicon glyphicon-wrench"></i></span>
+                            <asp:LinkButton ID="btnEdit" runat="server" class="btn btn-labeled btn-warning" CommandArgument='<%# Container.DataItemIndex %>' CommandName="edititem" Width="95px" Height="38px"><span class="btn-label"><i class="glyphicon glyphicon-wrench"></i></span>
                         แก้ไข
-                    </asp:LinkButton>
+                            </asp:LinkButton>
                             <asp:LinkButton ID="lnkSelect" runat="server" class="btn btn-labeled btn-danger" CommandName="deleteitem" CommandArgument='<%# Container.DataItemIndex %>' OnClientClick="ConfirmCancel()" Width="90px" Height="38px"><span class="btn-label"><i class="glyphicon glyphicon-trash"></i></span>
                         ลบ
-                    </asp:LinkButton>
+                            </asp:LinkButton>
                         </ItemTemplate>
                     </asp:TemplateField>
                 </Columns>
@@ -376,7 +396,7 @@
                 </div>
                 <label for="title" class="col-md-2 control-label">อธิบายรายการ</label>
                 <div class="col-md-4">
-                    <asp:TextBox ID="txn_memo" runat="server" TextMode="multiline" Columns="50" Rows="2" class="form-control"></asp:TextBox>
+                    <asp:TextBox ID="txn_memo" runat="server" TextMode="multiline" Columns="50" Rows="1" class="form-control"></asp:TextBox>
                 </div>
             </div>
             <br />

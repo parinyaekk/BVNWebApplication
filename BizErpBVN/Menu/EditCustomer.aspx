@@ -100,7 +100,7 @@
                     </div>
                 </div>
                 <label for="title" class="col-md-2 control-label">พนักงานขาย</label>
-                <div class="col-md-4">
+                <div id="SaveEnable" class="col-md-4" runat="server">
                     <asp:DropDownList ID="cbbSale" runat="server" class="form-control">
                     </asp:DropDownList>
                 </div>
