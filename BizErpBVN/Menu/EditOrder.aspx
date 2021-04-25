@@ -7,6 +7,7 @@
     }
 </style>
 <script>
+
     function SelectSingleRadiobutton(rdbtnid) {
         var rdBtn = document.getElementById(rdbtnid);
         var rdBtnList = document.getElementsByTagName("input");
@@ -102,7 +103,7 @@
                 <div class="col-md-4">
                     <div class="row">
                         <div class="col-sm-12">
-                            <asp:DropDownList ID="cbbCustgrp" runat="server" class="form-control"></asp:DropDownList>
+                       <asp:DropDownList ID="cbbCustgrp" runat="server" class="form-control" OnSelectedIndexChanged="cbbCustgrp_SelectedIndexChanged" AutoPostBack="true"></asp:DropDownList>
                         </div>
                     </div>
                 </div>
@@ -457,13 +458,13 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <asp:GridView ID="GvOrder" runat="server" AutoGenerateColumns="false" AllowPaging="true" PageSize="10" HeaderStyle-HorizontalAlign="Center" CssClass="table table-bordered table-striped text-center" Width="110%" ShowHeader="true"
+                    <asp:GridView ID="GvOrder2" runat="server" AutoGenerateColumns="false" AllowPaging="true" PageSize="10" HeaderStyle-HorizontalAlign="Center" CssClass="table table-bordered table-striped text-center" Width="110%" ShowHeader="true"
                         ShowHeaderWhenEmpty="true" GridLines="None" CellPadding="4">
                         <EmptyDataTemplate>ไม่พบข้อมูล</EmptyDataTemplate>
                         <Columns>
                             <asp:TemplateField ItemStyle-Width="10%" ItemStyle-HorizontalAlign="Center" ItemStyle-Font-Names="Tahoma">
                                 <ItemTemplate>
-                                    <asp:RadioButton ID="RadioButton1" name="rdGvOrder" runat="server" OnClick="javascript:SelectSingleRadiobutton(this.id)" ToolTip='<%# Eval("oid")%>' />
+                                    <asp:RadioButton ID="RadioButton3" name="rdGvOrder" runat="server" OnClick="javascript:SelectSingleRadiobutton(this.id)" ToolTip='<%# Eval("oid")%>' />
                                 </ItemTemplate>
                             </asp:TemplateField>
                             <asp:BoundField DataField="addr_text" HeaderText="ที่อยู่" />
@@ -493,13 +494,13 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <asp:GridView ID="GvOrder1" runat="server" AutoGenerateColumns="false" AllowPaging="true" PageSize="10" HeaderStyle-HorizontalAlign="Center" CssClass="table table-bordered table-striped text-center" Width="110%" ShowHeader="true"
+                    <asp:GridView ID="GvOrder3" runat="server" AutoGenerateColumns="false" AllowPaging="true" PageSize="10" HeaderStyle-HorizontalAlign="Center" CssClass="table table-bordered table-striped text-center" Width="110%" ShowHeader="true"
                         ShowHeaderWhenEmpty="true" GridLines="None" CellPadding="4">
                         <EmptyDataTemplate>ไม่พบข้อมูล</EmptyDataTemplate>
                         <Columns>
                             <asp:TemplateField ItemStyle-Width="10%" ItemStyle-HorizontalAlign="Center" ItemStyle-Font-Names="Tahoma">
                                 <ItemTemplate>
-                                    <asp:RadioButton ID="RadioButton2" name="rdGvOrder1" runat="server" OnClick="javascript:SelectSingleRadiobutton(this.id)" ToolTip='<%# Eval("oid") %>' />
+                                    <asp:RadioButton ID="RadioButton4" name="rdGvOrder1" runat="server" OnClick="javascript:SelectSingleRadiobutton(this.id)" ToolTip='<%# Eval("oid")%>' />
                                 </ItemTemplate>
                             </asp:TemplateField>
                             <asp:BoundField DataField="addr_text" HeaderText="ที่อยู่" />

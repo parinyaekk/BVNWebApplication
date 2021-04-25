@@ -701,7 +701,9 @@ namespace BizErpBVN.Menu
 
         protected void cbbCustgrp_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //cbbCustgrp.SelectedValue
+            txt_Addr1.Value = "";
+            txt_Addr2.Value = "";
+
             NpgsqlCommand cmd = new NpgsqlCommand("select * from mt_cust where oid = @oid", conn);
             cmd.Parameters.AddWithValue("@oid", Guid.Parse(cbbCustgrp.SelectedValue));
             NpgsqlDataAdapter da = new NpgsqlDataAdapter(cmd);

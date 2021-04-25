@@ -228,8 +228,8 @@ namespace BizErpBVN.Menu
                 DataSet ds1 = new DataSet();
 
                 sda.Fill(ds1);
-                GvOrder.DataSource = ds1;
-                GvOrder.DataBind();
+                GvOrder2.DataSource = ds1;
+                GvOrder2.DataBind();
                 //txt_Addr1.Value = ds1.Tables[0].Rows[0]["addr_text"].ToString();
 
 
@@ -239,8 +239,8 @@ namespace BizErpBVN.Menu
                 DataSet ds2 = new DataSet();
 
                 sda.Fill(ds2);
-                GvOrder1.DataSource = ds2;
-                GvOrder1.DataBind();
+                GvOrder3.DataSource = ds2;
+                GvOrder3.DataBind();
 
             }
             catch (Exception ex)
@@ -425,9 +425,9 @@ namespace BizErpBVN.Menu
             try
             {
 
-                foreach (GridViewRow gvr in GvOrder.Rows)
+                foreach (GridViewRow gvr in GvOrder2.Rows)
                 {
-                    RadioButton rd = (RadioButton)gvr.FindControl("RadioButton1");
+                    RadioButton rd = (RadioButton)gvr.FindControl("RadioButton3");
                     if (rd.Checked)
                     {
                         NpgsqlCommand cmd1 = new NpgsqlCommand("select addr_text, oid , phn1 , fax1 from mt_nameaddr where name_oid::text = @name_oid and oid::text = @oid", conn);
@@ -458,9 +458,9 @@ namespace BizErpBVN.Menu
         {
             try
             {
-                foreach (GridViewRow gvr in GvOrder1.Rows)
+                foreach (GridViewRow gvr in GvOrder3.Rows)
                 {
-                    RadioButton rd2 = (RadioButton)gvr.FindControl("RadioButton2");
+                    RadioButton rd2 = (RadioButton)gvr.FindControl("RadioButton4");
                     if (rd2.Checked)
                     {
 
@@ -503,7 +503,7 @@ namespace BizErpBVN.Menu
 
         protected void CustomerGroup()
         {
-            NpgsqlCommand com = new NpgsqlCommand("select mt_name,oid from mt_cust", conn);
+            NpgsqlCommand com = new NpgsqlCommand("select mt_name,oid from mt_cust where mt_name <>'' order by mt_name", conn);
             NpgsqlDataAdapter da = new NpgsqlDataAdapter(com);
             DataSet ds = new DataSet();
             da.Fill(ds);  // fill dataset  
@@ -1008,6 +1008,13 @@ namespace BizErpBVN.Menu
             {
 
             }
+        }
+
+        protected void cbbCustgrp_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            txt_Addr1.Value = "";
+            txt_Addr2.Value = "";
+            LoadAddress();
         }
     }
 }
