@@ -38,6 +38,7 @@ namespace BizErpBVN.Menu
                 this.LoadStatus();
                 getEditData(GGID);
                 this.LoadItem();
+                this.LoadAddress();
                 mt_emp.Enabled = false;
                 mt_emp.CssClass = "form-control";
             }
@@ -74,7 +75,6 @@ namespace BizErpBVN.Menu
             dt.Columns.Add(dc9);
             dt.Columns.Add(dc10);
         }
-
         protected void getEditData(Guid ggid)
         {
             try
@@ -127,16 +127,16 @@ namespace BizErpBVN.Menu
                     en_sodepos_type.Text = ds.Tables[0].Rows[0]["sodepos_type"].ToString();
                     sodepos_amt.Text = ds.Tables[0].Rows[0]["sodepos_amt"].ToString();
 
-                    NpgsqlCommand com3 = new NpgsqlCommand("select mt_code from mt_cust where oid = @oid", conn);
-                    com3.Parameters.AddWithValue("@oid", Guid.Parse(ds.Tables[0].Rows[0]["cust_oid"].ToString()));
-                    NpgsqlDataAdapter da3 = new NpgsqlDataAdapter(com3);
-                    DataSet ds3 = new DataSet();
-                    da3.Fill(ds3);
-                    if (ds3.Tables[0].Rows.Count > 0)
-                    {
-                        cbbCustgrp.Text = ds3.Tables[0].Rows[0]["mt_code"].ToString();
-                    }
-
+                    //NpgsqlCommand com3 = new NpgsqlCommand("select mt_code from mt_cust where oid = @oid", conn);
+                    //com3.Parameters.AddWithValue("@oid", Guid.Parse(ds.Tables[0].Rows[0]["cust_oid"].ToString()));
+                    //NpgsqlDataAdapter da3 = new NpgsqlDataAdapter(com3);
+                    //DataSet ds3 = new DataSet();
+                    //da3.Fill(ds3);
+                    //if (ds3.Tables[0].Rows.Count > 0)
+                    //{
+                    //    cbbCustgrp.Text = ds3.Tables[0].Rows[0]["mt_code"].ToString();
+                    //}
+                    cbbCustgrp.Text = ds.Tables[0].Rows[0]["cust_oid"].ToString();
 
                     en_saledelry_type.SelectedValue = ds.Tables[0].Rows[0]["saledelry_type"].ToString();
 
@@ -150,8 +150,8 @@ namespace BizErpBVN.Menu
                         mt_emp.Text = ds4.Tables[0].Rows[0]["mt_code"].ToString();
                     }
 
-                    addr_text.Text = ds.Tables[0].Rows[0]["addr_text"].ToString();
-                    ship_addr_text.Text = ds.Tables[0].Rows[0]["ship_addr_text"].ToString();
+                    txt_Addr1.Value = ds.Tables[0].Rows[0]["addr_text"].ToString();
+                    txt_Addr2.Value = ds.Tables[0].Rows[0]["ship_addr_text"].ToString();
 
                     NpgsqlCommand com5 = new NpgsqlCommand(@"select mi.mt_name,line_item_dest,line_price,line_disc1_price,line_disc2_price,line_qty,line_netprice_amt,line_memo,mi.oid as itemoid, tl.oid as lineoid
                                                             from txn_so_line tl 
@@ -211,7 +211,38 @@ namespace BizErpBVN.Menu
             }
             dt.AcceptChanges();
         }
+        protected void LoadAddress()
+        {
+            try
+            {
 
+                NpgsqlCommand cmd1 = new NpgsqlCommand("select addr_text,oid from mt_nameaddr where name_oid::text = @oid order by seq", conn);
+                cmd1.Parameters.AddWithValue("@oid", cbbCustgrp.SelectedValue);
+                NpgsqlDataAdapter sda = new NpgsqlDataAdapter(cmd1);
+                DataSet ds1 = new DataSet();
+
+                sda.Fill(ds1);
+                GvOrder.DataSource = ds1;
+                GvOrder.DataBind();
+                //txt_Addr1.Value = ds1.Tables[0].Rows[0]["addr_text"].ToString();
+
+
+                NpgsqlCommand cmd2 = new NpgsqlCommand("select addr_text,oid from mt_nameaddr where name_oid::text = @oid and seq<> 0 order by seq", conn);
+                cmd2.Parameters.AddWithValue("@oid", cbbCustgrp.SelectedValue);
+                NpgsqlDataAdapter sda1 = new NpgsqlDataAdapter(cmd2);
+                DataSet ds2 = new DataSet();
+
+                sda.Fill(ds2);
+                GvOrder1.DataSource = ds2;
+                GvOrder1.DataBind();
+
+            }
+            catch (Exception ex)
+            {
+
+                Response.Write(ex.Message);
+            }
+        }
         protected void gotoHistory(Object sender, EventArgs e)
         {
             Response.Redirect("HistoryOrder.aspx");
@@ -285,8 +316,8 @@ namespace BizErpBVN.Menu
                     conn.Close();
 
                     string valmt_pymt = mt_pymt.Text; //oid
-                    string valaddr_text = addr_text.Text;
-                    string valship_addr_text = ship_addr_text.Text;
+                    string valaddr_text = txt_Addr1.Value;
+                    string valship_addr_text = txt_Addr2.Value;
                     string valen_sodepos_type = en_sodepos_type.Text;
                     string valtxn_memo = txn_memo.Text;
                     string valsodepos_amt = sodepos_amt.Text;
@@ -383,6 +414,77 @@ namespace BizErpBVN.Menu
             en_sodepos_type.DataBind();
             en_sodepos_type.Items.Insert(0, "----------เลือก----------");
         }
+        protected void Button1_Click(object sender, EventArgs e)
+        {
+            try
+            {
+
+                foreach (GridViewRow gvr in GvOrder.Rows)
+                {
+                    RadioButton rd = (RadioButton)gvr.FindControl("RadioButton1");
+                    if (rd.Checked)
+                    {
+
+                        NpgsqlCommand cmd1 = new NpgsqlCommand("select addr_text, oid , phn1 , fax1 from mt_nameaddr where name_oid::text = @name_oid and oid::text = @oid", conn);
+                        cmd1.Parameters.AddWithValue("@name_oid", cbbCustgrp.SelectedValue);
+                        cmd1.Parameters.AddWithValue("@oid", rd.ToolTip);
+                        NpgsqlDataAdapter sda = new NpgsqlDataAdapter(cmd1);
+                        DataSet ds1 = new DataSet();
+
+                        sda.Fill(ds1);
+                        if (ds1.Tables[0].Rows.Count > 0)
+                        {
+                            txt_Addr1.Value = ds1.Tables[0].Rows[0]["addr_text"].ToString();
+                            Session["btn_addr1"] = rd.ToolTip;
+                        }
+
+                    }
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+                Response.Write(ex.Message);
+            }
+        }
+        protected void Button2_Click(object sender, EventArgs e)
+        {
+            try
+            {
+
+                foreach (GridViewRow gvr in GvOrder1.Rows)
+                {
+                    RadioButton rd2 = (RadioButton)gvr.FindControl("RadioButton2");
+                    if (rd2.Checked)
+                    {
+
+                        NpgsqlCommand cmd1 = new NpgsqlCommand("select addr_text,oid, phn1 , fax1 from mt_nameaddr where name_oid::text = @name_oid and seq<> 0 and oid::text = @oid order by seq", conn);
+                        cmd1.Parameters.AddWithValue("@name_oid", cbbCustgrp.SelectedValue);
+                        cmd1.Parameters.AddWithValue("@oid", rd2.ToolTip);
+                        NpgsqlDataAdapter sda = new NpgsqlDataAdapter(cmd1);
+                        DataSet ds2 = new DataSet();
+
+                        sda.Fill(ds2);
+                        if (ds2.Tables[0].Rows.Count > 0)
+                        {
+                            txt_Addr2.Value = ds2.Tables[0].Rows[0]["addr_text"].ToString();
+                            Session["btn_addr2"] = rd2.ToolTip;
+                        }
+
+                    }
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+                Response.Write(ex.Message);
+            }
+
+        }
 
         protected void LoadDepartMent()
         {
@@ -400,13 +502,13 @@ namespace BizErpBVN.Menu
 
         protected void CustomerGroup()
         {
-            NpgsqlCommand com = new NpgsqlCommand("select mt_name,mt_code from mt_cust", conn);
+            NpgsqlCommand com = new NpgsqlCommand("select mt_name,oid from mt_cust", conn);
             NpgsqlDataAdapter da = new NpgsqlDataAdapter(com);
             DataSet ds = new DataSet();
             da.Fill(ds);  // fill dataset  
 
             cbbCustgrp.DataTextField = ds.Tables[0].Columns["mt_name"].ToString();
-            cbbCustgrp.DataValueField = ds.Tables[0].Columns["mt_code"].ToString();
+            cbbCustgrp.DataValueField = ds.Tables[0].Columns["oid"].ToString();
             cbbCustgrp.DataSource = ds.Tables[0];
             cbbCustgrp.DataBind();
             cbbCustgrp.Items.Insert(0, "----------เลือก----------");
