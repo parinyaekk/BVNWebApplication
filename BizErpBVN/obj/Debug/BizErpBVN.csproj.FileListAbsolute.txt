@@ -327,6 +327,5 @@ D:\BVNWebApplication-master\BVNWebApplication\BizErpBVN\bin\Microsoft.AI.Depende
 D:\BVNWebApplication-master\BVNWebApplication\BizErpBVN\bin\Microsoft.AI.ServerTelemetryChannel.xml
 D:\BVNWebApplication-master\BVNWebApplication\BizErpBVN\bin\Microsoft.AI.WindowsServer.xml
 D:\BVNWebApplication-master\BVNWebApplication\BizErpBVN\bin\Microsoft.AI.Web.xml
-D:\BVNWebApplication-master\BVNWebApplication\BizErpBVN\obj\Debug\BizErpBVN.csprojResolveAssemblyReference.cache
 D:\BVNWebApplication-master\BVNWebApplication\BizErpBVN\obj\Debug\BizErpBVN.dll
 D:\BVNWebApplication-master\BVNWebApplication\BizErpBVN\obj\Debug\BizErpBVN.pdb

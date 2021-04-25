@@ -574,6 +574,7 @@ namespace BizErpBVN.Menu
         {
             try
             {
+                
                 NpgsqlCommand sqCommand = new NpgsqlCommand("SELECT * FROM mt_cust WHERE oid = @oid", conn);
                 sqCommand.Parameters.AddWithValue("@oid", ggid);
                 NpgsqlDataAdapter da = new NpgsqlDataAdapter(sqCommand);
@@ -601,6 +602,7 @@ namespace BizErpBVN.Menu
                 da2.Fill(ds2);
                 if (ds2.Tables[0].Rows.Count > 0)
                 {
+         
                     cbbSale.Text = ds2.Tables[0].Rows[0]["mt_code"].ToString();
                 }
 
