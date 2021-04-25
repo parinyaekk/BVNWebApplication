@@ -285,19 +285,21 @@
             <div class="form-group">
                 <label for="description" class="col-md-2 control-label">หน่วยนับ</label>
                 <div class="col-md-4">
-                    <asp:UpdatePanel ID="UpdatePanel6" runat="server">
+                    <asp:UpdatePanel ID="UpdatePanel10" runat="server">
                         <ContentTemplate>
-                            <asp:TextBox ID="txtline_qty" runat="server" TextMode="Number" AutoPostBack="true" OnTextChanged="line_qty_Change" CssClass="form-control text-right"></asp:TextBox>
+                            <asp:TextBox ID="TextBox1" runat="server" CssClass="form-control text-right" TextMode="Number"></asp:TextBox>
                         </ContentTemplate>
                     </asp:UpdatePanel>
+
                 </div>
                 <label for="title" class="col-md-2 control-label">จำนวน</label>
                 <div class="col-md-4">
                     <div class="row">
                         <div class="col-sm-12">
-                            <asp:UpdatePanel ID="UpdatePanel10" runat="server">
+
+                            <asp:UpdatePanel ID="UpdatePanel6" runat="server">
                                 <ContentTemplate>
-                                    <asp:TextBox ID="TextBox1" runat="server" CssClass="form-control text-right" TextMode="Number"></asp:TextBox>
+                                    <asp:TextBox ID="txtline_qty" runat="server" TextMode="Number" AutoPostBack="true" OnTextChanged="line_qty_Change" CssClass="form-control text-right"></asp:TextBox>
                                 </ContentTemplate>
                             </asp:UpdatePanel>
                         </div>

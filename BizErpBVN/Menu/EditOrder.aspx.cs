@@ -674,10 +674,15 @@ namespace BizErpBVN.Menu
             double? total = Convert.ToDouble(Session["Total"].ToString());
             double discnt = Convert.ToDouble(String.IsNullOrEmpty(disc2_amt.Text) ? "0" : disc2_amt.Text);
             double tax = Convert.ToDouble(String.IsNullOrEmpty(tax_amt.Text) ? "0" : tax_amt.Text);
+            double price = Convert.ToDouble(String.IsNullOrEmpty(txtDisc1_price.Text) ? "0" : txtDisc1_price.Text);
+            double line_qty = Convert.ToDouble(String.IsNullOrEmpty(txtline_qty.Text) ? "0" : txtline_qty.Text);
+
             double sum = Convert.ToDouble(total == null ? 0 : total);
             sum = sum - discnt;
             tax_amt.Text = ((sum * 7) / 107).ToString("F2");
             txn_total.Text = (sum).ToString();
+            disc1_amt.Text = (price * line_qty).ToString("F2");
+
         }
 
         public void ClearOtherField()

@@ -237,17 +237,17 @@
             <div class="form-group">
                 <label for="description" class="col-md-2 control-label">หน่วยนับ</label>
                 <div class="col-md-4">
-                    <asp:UpdatePanel ID="UpdatePanel6" runat="server">
+                    <asp:UpdatePanel ID="UpdatePanel1" runat="server">
                         <ContentTemplate>
-                            <asp:TextBox ID="txtline_qty" runat="server" TextMode="Number" AutoPostBack="true" OnTextChanged="line_qty_Change" CssClass="form-control text-right"></asp:TextBox>
+                            <asp:TextBox ID="TextBox1" runat="server" TextMode="Number" AutoPostBack="true" CssClass="form-control text-right"></asp:TextBox>
                         </ContentTemplate>
                     </asp:UpdatePanel>
                 </div>
                 <label for="description" class="col-md-2 control-label">จำนวน</label>
                 <div class="col-md-4">
-                    <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+                    <asp:UpdatePanel ID="UpdatePanel6" runat="server">
                         <ContentTemplate>
-                            <asp:TextBox ID="TextBox1" runat="server" TextMode="Number" AutoPostBack="true" OnTextChanged="line_qty_Change" CssClass="form-control text-right"></asp:TextBox>
+                            <asp:TextBox ID="txtline_qty" runat="server" TextMode="Number" AutoPostBack="true" OnTextChanged="line_qty_Change" CssClass="form-control text-right"></asp:TextBox>
                         </ContentTemplate>
                     </asp:UpdatePanel>
                 </div>
@@ -284,7 +284,7 @@
                 <label for="description" class="col-md-2 control-label"></label>
                 <div class="col-md-4">
                 </div>
-                  <label for="description" class="col-md-2 control-label"></label>
+                <label for="description" class="col-md-2 control-label"></label>
                 <div class="col-md-4">
                     <div class="row">
                         <div class="col-sm-12">
@@ -368,9 +368,10 @@
                 </div>
                 <label for="title" class="col-md-2 control-label">ส่วนลด</label>
                 <div class="col-md-4">
-                    <asp:TextBox ID="disc1_amt" Style="text-align: right" runat="server" class="form-control" ReadOnly="true"></asp:TextBox>
+                            <asp:TextBox ID="disc1_amt" Style="text-align: right" runat="server" class="form-control" ReadOnly="true"></asp:TextBox>
                 </div>
             </div>
+          </div>
             <br />
             <br />
             <div class="form-group">
@@ -398,7 +399,6 @@
             <br />
             <br />
         </div>
-    </div>
     <div id="tab2_page2" class="col-md-12 text-center" style="padding-left: 10%; display: none">
         <div class="form-group" style="padding-left: 10%">
             <div class="col-md-12">
