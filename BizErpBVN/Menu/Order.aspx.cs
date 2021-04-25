@@ -807,7 +807,7 @@ namespace BizErpBVN.Menu
                     if (rd2.Checked)
                     {
 
-                        NpgsqlCommand cmd1 = new NpgsqlCommand("select addr_text,oid, phn1 , fax1 from mt_nameaddr where name_oid::text = @name_oid and seq<> 0 and oid::text = @oid order by seq", conn);
+                        NpgsqlCommand cmd1 = new NpgsqlCommand("select addr_text,oid, phn1 , fax1 from mt_nameaddr where name_oid::text = @name_oid and oid::text = @oid order by seq", conn);
                         cmd1.Parameters.AddWithValue("@name_oid", cbbCustgrp.SelectedValue);
                         cmd1.Parameters.AddWithValue("@oid", rd2.ToolTip);
                         NpgsqlDataAdapter sda = new NpgsqlDataAdapter(cmd1);

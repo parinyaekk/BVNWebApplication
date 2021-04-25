@@ -430,7 +430,6 @@ namespace BizErpBVN.Menu
                     RadioButton rd = (RadioButton)gvr.FindControl("RadioButton1");
                     if (rd.Checked)
                     {
-
                         NpgsqlCommand cmd1 = new NpgsqlCommand("select addr_text, oid , phn1 , fax1 from mt_nameaddr where name_oid::text = @name_oid and oid::text = @oid", conn);
                         cmd1.Parameters.AddWithValue("@name_oid", cbbCustgrp.SelectedValue);
                         cmd1.Parameters.AddWithValue("@oid", rd.ToolTip);
@@ -459,14 +458,13 @@ namespace BizErpBVN.Menu
         {
             try
             {
-
                 foreach (GridViewRow gvr in GvOrder1.Rows)
                 {
                     RadioButton rd2 = (RadioButton)gvr.FindControl("RadioButton2");
                     if (rd2.Checked)
                     {
 
-                        NpgsqlCommand cmd1 = new NpgsqlCommand("select addr_text,oid, phn1 , fax1 from mt_nameaddr where name_oid::text = @name_oid and seq<> 0 and oid::text = @oid order by seq", conn);
+                        NpgsqlCommand cmd1 = new NpgsqlCommand("select addr_text,oid, phn1 , fax1 from mt_nameaddr where name_oid::text = @name_oid and oid::text = @oid order by seq", conn);
                         cmd1.Parameters.AddWithValue("@name_oid", cbbCustgrp.SelectedValue);
                         cmd1.Parameters.AddWithValue("@oid", rd2.ToolTip);
                         NpgsqlDataAdapter sda = new NpgsqlDataAdapter(cmd1);
@@ -478,11 +476,8 @@ namespace BizErpBVN.Menu
                             txt_Addr2.Value = ds2.Tables[0].Rows[0]["addr_text"].ToString();
                             Session["btn_addr2"] = rd2.ToolTip;
                         }
-
                     }
-
                 }
-
             }
             catch (Exception ex)
             {
@@ -838,7 +833,7 @@ namespace BizErpBVN.Menu
                 //temp.line_memo = row.Cells[7].Text;
                 //lstModel.Add(temp);
                 valdisc1_amt += (Convert.ToDouble(String.IsNullOrEmpty(row.Cells[5].Text) || row.Cells[5].Text == "&nbsp;" ? "0" : row.Cells[5].Text) + Convert.ToDouble(String.IsNullOrEmpty(row.Cells[6].Text) || row.Cells[6].Text == "&nbsp;" ? "0" : row.Cells[6].Text)) * Convert.ToDouble(String.IsNullOrEmpty(row.Cells[7].Text) || row.Cells[7].Text == "&nbsp;" ? "0" : row.Cells[7].Text);
-                valsum += Convert.ToDouble(String.IsNullOrEmpty(row.Cells[8].Text) || row.Cells[8].Text == "&nbsp;" ? "0" : row.Cells[8].Text);
+                valsum += Convert.ToDouble(String.IsNullOrEmpty(row.Cells[9].Text) || row.Cells[9].Text == "&nbsp;" ? "0" : row.Cells[9].Text);
                 }
 
             disc1_amt.Text = valdisc1_amt.ToString();

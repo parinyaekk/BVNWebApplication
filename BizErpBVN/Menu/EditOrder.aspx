@@ -1,34 +1,35 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Menu/MainMenu.Master" AutoEventWireup="true" CodeBehind="EditOrder.aspx.cs" Inherits="BizErpBVN.Menu.EditOrder" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-    <style>
-        .hidden {
-            display: none;
-        }
-    </style>
-    <script>
-        function SelectSingleRadiobutton(rdbtnid) {
-            var rdBtn = document.getElementById(rdbtnid);
-            var rdBtnList = document.getElementsByTagName("input");
-            for (i = 0; i < rdBtnList.length; i++) {
-                if (rdBtnList[i].type == "radio" && rdBtnList[i].id != rdBtn.id) {
-                    rdBtnList[i].checked = false;
-                }
+<style>
+    .hidden {
+        display: none;
+    }
+</style>
+<script>
+    function SelectSingleRadiobutton(rdbtnid) {
+        var rdBtn = document.getElementById(rdbtnid);
+        var rdBtnList = document.getElementsByTagName("input");
+        for (i = 0; i < rdBtnList.length; i++) {
+            if (rdBtnList[i].type == "radio" && rdBtnList[i].id != rdBtn.id) {
+                rdBtnList[i].checked = false;
             }
+        }
+    };
 
-        function ConfirmCancel() {
-            var confirm_value = document.createElement("INPUT");
-            confirm_value.type = "hidden";
-            confirm_value.name = "confirm_value";
-            if (confirm("คุณต้องการยกเลิกรายการใช่หรือไม่ ?")) {
-                confirm_value.value = "Yes";
-            }
-            else {
-                confirm_value.value = "No";
-            }
-            document.forms[0].appendChild(confirm_value);
+    function ConfirmCancel() {
+        var confirm_value = document.createElement("INPUT");
+        confirm_value.type = "hidden";
+        confirm_value.name = "confirm_value";
+        if (confirm("คุณต้องการยกเลิกรายการใช่หรือไม่ ?")) {
+            confirm_value.value = "Yes";
         }
-    </script>
+        else {
+            confirm_value.value = "No";
+        }
+        document.forms[0].appendChild(confirm_value);
+    };
+</script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <asp:ScriptManager ID="ScriptManager1" runat="server">
@@ -402,37 +403,37 @@
                 </div>
                 <label for="title" class="col-md-2 control-label">ส่วนลด</label>
                 <div class="col-md-4">
-                            <asp:TextBox ID="disc1_amt" Style="text-align: right" runat="server" class="form-control" ReadOnly="true"></asp:TextBox>
+                    <asp:TextBox ID="disc1_amt" Style="text-align: right" runat="server" class="form-control" ReadOnly="true"></asp:TextBox>
                 </div>
             </div>
-          </div>
-            <br />
-            <br />
-            <div class="form-group">
-                <label for="title" class="col-md-2 control-label">อัตราภาษี</label>
-                <div class="col-md-4">
-                    <input type="number" style="text-align: right" class="form-control" id="tax_rate"
-                        name="price" min="0" value="7" step="0.01" readonly />
-                </div>
-                <label for="title" class="col-md-2 control-label">มูลค่าภาษี</label>
-                <div class="col-md-4">
-                    <asp:TextBox ID="tax_amt" Style="text-align: right" runat="server" class="form-control" ReadOnly="true"></asp:TextBox>
-                </div>
-            </div>
-            <br />
-            <br />
-            <div class="form-group">
-                <label for="title" class="col-md-2 control-label"></label>
-                <div class="col-md-4">
-                </div>
-                <label for="title" class="col-md-2 control-label">รวมทั้งสิ้น</label>
-                <div class="col-md-4">
-                    <asp:TextBox ID="txn_total" Style="text-align: right" runat="server" class="form-control" ReadOnly="true"></asp:TextBox>
-                </div>
-            </div>
-            <br />
-            <br />
         </div>
+        <br />
+        <br />
+        <div class="form-group">
+            <label for="title" class="col-md-2 control-label">อัตราภาษี</label>
+            <div class="col-md-4">
+                <input type="number" style="text-align: right" class="form-control" id="tax_rate"
+                    name="price" min="0" value="7" step="0.01" readonly />
+            </div>
+            <label for="title" class="col-md-2 control-label">มูลค่าภาษี</label>
+            <div class="col-md-4">
+                <asp:TextBox ID="tax_amt" Style="text-align: right" runat="server" class="form-control" ReadOnly="true"></asp:TextBox>
+            </div>
+        </div>
+        <br />
+        <br />
+        <div class="form-group">
+            <label for="title" class="col-md-2 control-label"></label>
+            <div class="col-md-4">
+            </div>
+            <label for="title" class="col-md-2 control-label">รวมทั้งสิ้น</label>
+            <div class="col-md-4">
+                <asp:TextBox ID="txn_total" Style="text-align: right" runat="server" class="form-control" ReadOnly="true"></asp:TextBox>
+            </div>
+        </div>
+        <br />
+        <br />
+    </div>
     <div id="tab2_page2" class="col-md-12 text-center" style="padding-left: 10%; display: none">
         <div class="form-group" style="padding-left: 10%">
             <div class="col-md-12">
@@ -462,7 +463,7 @@
                         <Columns>
                             <asp:TemplateField ItemStyle-Width="10%" ItemStyle-HorizontalAlign="Center" ItemStyle-Font-Names="Tahoma">
                                 <ItemTemplate>
-                                    <asp:RadioButton ID="RadioButton1" runat="server" OnClick="javascript:SelectSingleRadiobutton(this.id)" ToolTip='<%# Eval("oid")%>' />
+                                    <asp:RadioButton ID="RadioButton1" name="rdGvOrder" runat="server" OnClick="javascript:SelectSingleRadiobutton(this.id)" ToolTip='<%# Eval("oid")%>' />
                                 </ItemTemplate>
                             </asp:TemplateField>
                             <asp:BoundField DataField="addr_text" HeaderText="ที่อยู่" />
@@ -498,7 +499,7 @@
                         <Columns>
                             <asp:TemplateField ItemStyle-Width="10%" ItemStyle-HorizontalAlign="Center" ItemStyle-Font-Names="Tahoma">
                                 <ItemTemplate>
-                                    <asp:RadioButton ID="RadioButton2" runat="server" OnClick="javascript:SelectSingleRadiobutton(this.id)" ToolTip='<%# Eval("oid") %>' />
+                                    <asp:RadioButton ID="RadioButton2" name="rdGvOrder1" runat="server" OnClick="javascript:SelectSingleRadiobutton(this.id)" ToolTip='<%# Eval("oid") %>' />
                                 </ItemTemplate>
                             </asp:TemplateField>
                             <asp:BoundField DataField="addr_text" HeaderText="ที่อยู่" />
