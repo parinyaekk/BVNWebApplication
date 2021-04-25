@@ -344,7 +344,7 @@
                 </div>
                 <label for="title" class="col-md-2 control-label">อธิบายรายการ</label>
                 <div class="col-md-4">
-                    <asp:TextBox ID="txn_memo" runat="server" TextMode="multiline" Columns="50" Rows="2" class="form-control"></asp:TextBox>
+                    <asp:TextBox ID="txn_memo" runat="server" TextMode="multiline" Columns="50" Rows="1" class="form-control"></asp:TextBox>
                 </div>
             </div>
             <br />
