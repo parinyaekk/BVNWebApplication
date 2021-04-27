@@ -189,7 +189,7 @@
                 <div class="col-md-1">
                     <asp:UpdatePanel ID="UpdatePanel1" runat="server">
                         <ContentTemplate>
-                            <img src="../Images/edit.png" style="width: 25px; height: 25px" data-toggle="modal" data-target="#exampleModalCenter1" />
+                            <img src="Images/edit.png" style="width: 25px; height: 25px" data-toggle="modal" data-target="#exampleModalCenter1" />
                         </ContentTemplate>
                     </asp:UpdatePanel>
                 </div>
@@ -218,7 +218,7 @@
                 <div class="col-md-1">
                     <asp:UpdatePanel ID="UpdatePanel4" runat="server">
                         <ContentTemplate>
-                            <img src="../Images/edit.png" style="width: 25px; height: 25px" data-toggle="modal" data-target="#exampleModalCenter" />
+                            <img src="Images/edit.png" style="width: 25px; height: 25px" data-toggle="modal" data-target="#exampleModalCenter" />
                         </ContentTemplate>
                     </asp:UpdatePanel>
                 </div>

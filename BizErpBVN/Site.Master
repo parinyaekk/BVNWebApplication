@@ -24,7 +24,7 @@
         }
 
         .banner-sec {
-            background: url(../Images/bg.jpeg) no-repeat left bottom;
+            background: url(/Images/bg.jpeg) no-repeat left bottom;
             background-size: cover;
             min-height: 500px;
             border-radius: 0 10px 10px 0;
@@ -178,7 +178,7 @@
                         </ol>
                         <div class="carousel-inner" role="listbox">
                             <div class="carousel-item active">
-                                <asp:Image runat="server" src="../Images/bg.jpeg" class="responsive"></asp:Image>
+                                <asp:Image runat="server" src="Images/bg.jpeg" class="responsive"></asp:Image>
                                 <div class="carousel-caption d-none d-md-block">
                                     <div class="banner-text">
                                         <h2>Boon Vanit International Co., Ltd.</h2>

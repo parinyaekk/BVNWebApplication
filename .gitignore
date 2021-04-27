@@ -5,3 +5,4 @@
 /BizErpBVN/obj/Release/.NETFramework,Version=v4.6.1.AssemblyAttributes.cs
 .vs/BizErpBVN*
 obj*
+/BizErpBVN/bin/app.publish
